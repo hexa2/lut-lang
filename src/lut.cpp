@@ -13,20 +13,24 @@ int main(int argc, char* argv[]) {
   bool printEnabled = false;
   bool staticEnabled = false;
   bool execEnabled = false;
-  char* fileName = NULL;
+  string* fileName = NULL;
 
   for(int i = 1; i < argc; i++) {
     string* arg = new string(argv[i]);
     if(arg->compare(OPT_TRANSFORM) == 0) {
       transformEnabled = true;
+      delete arg;
     } else if(arg->compare(OPT_PRINT) == 0) {
       printEnabled = true;
+      delete arg;
     } else if(arg->compare(OPT_STATIC) == 0) {
       staticEnabled = true;
+      delete arg;
     } else if(arg->compare(OPT_EXEC) == 0) {
       execEnabled = true;
+      delete arg;
     } else {
-      fileName = argv[i];
+      fileName = arg;
     }
   }
 
