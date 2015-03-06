@@ -24,4 +24,4 @@ Usage
   -e # Execute/interpret code
 ```
 
-That's all, folks & guys !
+That's all, folks and guys !
