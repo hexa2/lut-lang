@@ -19,6 +19,9 @@ all: build
 clean:
 	rm -rf bin/ objects/
 
+test:
+	cd tests; sh mktest.sh
+
 build: $(BIN_OBJ)
 
 # patterns

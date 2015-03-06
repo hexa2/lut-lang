@@ -27,3 +27,5 @@
 *.out
 *.app
 bin/
+
+tests/results.csv
