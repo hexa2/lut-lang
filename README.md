@@ -1,6 +1,8 @@
 lut-lang
 ========
 
+[![Circle CI](https://circleci.com/gh/hexa2/lut-lang/tree/master.svg?style=svg)](https://circleci.com/gh/hexa2/lut-lang/tree/master)
+
 Lutin Language Interpreter
 
 Installation
