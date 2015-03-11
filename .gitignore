@@ -17,7 +17,7 @@
 *.mod
 
 # Compiled Static libraries
-*.lai
+*.laiSZ
 *.la
 *.a
 *.lib
