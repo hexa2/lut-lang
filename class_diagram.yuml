@@ -1,0 +1,9 @@
+// Cool Class Diagram
+//Class
+[Automaton|analyze()]-stackTokens*>[Tokens]
+[Tokens]
+[Lexer]
+
+//Transitions
+[Order]++-0..*>[LineItem]
+[Order]-[note:Aggregate root{bg:wheat}]
