@@ -10,32 +10,37 @@
 #define SRC_LEXER_H_
 
 #include <stdio.h>
-#include <iostream>
-#include <stack>
+#include <regex>
 #include <string>
-#include "ASTTerminalSymbol.h"
+#include "ASTTokenNode.h"
 
 using std::string;
-using std::stringstream;
 
 class Lexer {
  public:
   // Sets the input source to be a stream
-  // If shift is set, it will automatically shift once upon construction
-  explicit Lexer(stringstream * inStream);
+  explicit Lexer(string inString);
 
   // Returns true if there is something else to read with next(&type)
-  bool has_next() const;
+  bool has_next();
 
-  // Returns the next token **without** moving to the next token
-  ASTTerminalSymbol top();
+  // Returns the next token
+  ASTTokenNode* top();
 
   // Moves to the next token
   void shift();
 
+
  protected :
-  stringstream *inputStream;
-  void analyze();
+  std::string inputString;
+  std::string currentToken;
+  std::string currentTokenValue;
+
+  bool analyze(string s, std::smatch &m);
+  inline std::string& ltrim(std::string& s, const char* t = " \t\n\r\f\v") {
+    s.erase(0, s.find_first_not_of(t));
+    return s;
+  }
 };
 
 #endif  // SRC_LEXER_H_
