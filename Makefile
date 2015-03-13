@@ -5,7 +5,7 @@ LNFLAGS =
 
 # src
 BIN_SRC = lut.cpp
-SRC = lexer.cpp
+SRC = lexer.cpp ASTTokenNode.cpp
 
 # obj
 BIN_OBJ = $(BIN_SRC:%.cpp=bin/%)
