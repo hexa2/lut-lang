@@ -33,7 +33,7 @@ class Lexer {
 
  protected :
   std::string inputString;
-  std::string currentToken;
+  ASTTokenNode currentToken;
   std::string currentTokenValue;
 
   bool analyze(string s, std::smatch &m);
