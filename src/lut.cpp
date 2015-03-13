@@ -39,14 +39,14 @@ int main(int argc, char* argv[]) {
   }
 
   if (fileName == NULL) {
-      string errorMessage = "Erreur, veuillez specifier des arguments\n\
-  Utilisation :\n\
-    ../lut [-p] [-a] [-e] [-o] source.lt\n\
-      [-p] affiche le code source reconnu\n\
-      [-a] analyse le programme de maniere statique\n\
-      [-e] execute interactivement le programme\n\
-      [-o] optimise les expressions et instructions\n";
-      
+    string errorMessage = "Erreur, veuillez specifier des arguments\n"
+    "  Utilisation :\n"
+    "    ../lut [-p] [-a] [-e] [-o] source.lt\n"
+    "      [-p] affiche le code source reconnu\n"
+    "      [-a] analyse le programme de maniere statique\n"
+    "      [-e] execute interactivement le programme\n"
+    "      [-o] optimise les expressions et instructions\n";
+
     cerr << errorMessage << endl;
     return 1;
   }
