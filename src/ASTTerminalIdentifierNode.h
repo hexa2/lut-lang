@@ -12,7 +12,10 @@ class ASTTerminalIdentifierNode : public ASTNode {
   string matchedRegex;
   string symbol;
  public:
+  ASTTerminalIdentifierNode(string matchedRegex, string symbol);
   bool analyze(/* TODO: define the data-struct to pass */);
   void exec(/* TODO: define the data-struct to pass */);
+  string getMatchedRegex();
+  string getSymbol();
 };
 #endif  // SRC_ASTTERMINALIDENTIFIERNODE_H_
