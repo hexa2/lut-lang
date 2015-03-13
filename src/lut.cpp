@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
       [-o] optimise les expressions et instructions\n";
       
     cerr << errorMessage << endl;
-    return 0;
+    return 1;
   }
 
   // LEXER
