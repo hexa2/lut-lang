@@ -10,7 +10,7 @@
 
 Automaton::Automaton() {
     transitions[State::E0][Token::P] = new ActionAccept();
-    transitions[State::E1][Token::] = new ActionAccept();
+    transitions[State::E1][Token::P] = new ActionAccept();
 }
 
 bool Automaton::Exists(State s, Token t) {
@@ -23,7 +23,7 @@ bool Automaton::Accepts(Lexer * lexer) {
     bool epsilon = true;
     while (!stackStates.empty()) {
         State s = stackStates.pop();
-        Token t = lexer->top();
+        Token t = lexer->pop();
         if (!this->Exists(s, t)) {
             return false;
         }

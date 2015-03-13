@@ -14,4 +14,22 @@ class Action {
     virtual ~Action();
 };
 
+class ActionAccept : public Action{
+ public:
+    transition(const Transitions & transitions,
+            Stack<State> stackStates, bool * epsilon);
+};
+
+class ActionShift : public Action{
+ public:
+    transition(const Transitions & transitions,
+            Stack<State> stackStates, bool * epsilon);
+};
+
+class ActionReduce : public Action{
+ public:
+    transition(const Transitions & transitions,
+            Stack<State> stackStates, bool * epsilon);
+};
+
 #endif  // SRC_ACTION_H_
