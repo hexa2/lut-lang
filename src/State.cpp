@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 //
 
-#include "src/state.h"
+#include "src/State.h"
 
 
 State::operator State::StateName() {
