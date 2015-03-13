@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 //
 #include <map>
-#include "src/State.h"
-#include "src/Token.h"
+#include "State.h"
+#include "AstTokenNode.h"
 
 
 #ifndef SRC_AUTOMATON_H_
@@ -15,16 +15,16 @@
 
 
 #include <stack>
-typedef std::map<State, map<Token, Action *> Transitions;
+typedef std::map<State, map<AstTokenNode, Action *> Transitions;
 
 class Automaton {
  public:
     Automaton();
-    bool Exists(Transitions * transitions, State s, Token t);
-    bool Accepts(Lexer * lexer, State s, Token t);
+    bool Exists(Transitions * transitions, State s, AstTokenNode t);
+    bool Accepts(Lexer * lexer, State s, AstTokenNode t);
  protected:
     Transitions transitions;
-    stack<Token> * stackTokens;
+    stack<AstTokenNode> * stackAstTokenNodes;
     stack<State> * stackStates;
 };
 

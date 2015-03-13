@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 //
 #include <stack>
-#include "src/Action.h"
+#include "Action.h"
 
 ActionAccept::ActionAccept() { }
 
