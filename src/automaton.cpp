@@ -7,4 +7,28 @@
 //
 
 #include "src/automaton.h"
+#include <stack>
+
+Automaton::Automaton() {
+    transitions[State::E0][Token::P] = new ActionAccept();
+}
+
+bool Automaton::Exists(State s, Token t) {
+    return transitions.find(s) != transition.end() && transitions[s].find(t) != transition.end();
+};
+
+bool Automaton::Accepts(Lexer * lexer) {
+    stackStates.push(State::E0);
+    bool epsilon = true;
+    while(!stackStates.empty()) {
+        State s = stackStates.pop(){};
+        Token t = lexer->top();
+        if(!this->Exists(s,t)) {
+            return false
+        }
+        transitions[s][t]->transition(transition, & stackStates, &epsilon);
+    }
+
+
+}
 

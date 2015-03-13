@@ -8,3 +8,7 @@
 
 #include "src/state.h"
 
+
+State::operator State::StateName() {
+    return m_name;
+}
