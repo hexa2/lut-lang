@@ -6,14 +6,13 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 //
 
-#ifndef __lut_lang__ASTTerminalSymbol__
-#define __lut_lang__ASTTerminalSymbol__
+#ifndef SRC_ASTTERMINALSYMBOL_H_
+#define SRC_ASTTERMINALSYMBOL_H_
 
 #include <stdio.h>
 
 class ASTTerminalSymbol {
-    
-public:
-    
+ public:
+  ASTTerminalSymbol();
 };
-#endif /* defined(__lut_lang__ASTTerminalSymbol__) */
+#endif  // SRC_ASTTERMINALSYMBOL_H_

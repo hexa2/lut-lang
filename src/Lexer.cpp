@@ -7,3 +7,8 @@
 //
 
 #include "Lexer.h"
+#include <string>
+
+Lexer::Lexer(stringstream * inStream) : inputStream(inStream) {
+}
+
