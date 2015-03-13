@@ -10,6 +10,22 @@
 #define __lut_lang__Lexer__
 
 #include <stdio.h>
-
+#include "ASTTerminalSymbol.h"
+#include <stack>
+#include <string>
+class Lexer {
+public:
+    Lexer(std::string *inputString);
+    
+    ASTTerminalSymbol peak();
+    ASTTerminalSymbol pop();
+    bool hasNext();
+    
+    
+protected :
+    std::string *inputString;
+    std::stack<ASTTerminalSymbol> *stackSymbols;
+    
+};
 
 #endif /* defined(__lut_lang__Lexer__) */
