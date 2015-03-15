@@ -28,6 +28,7 @@ Usage
 ```
 
 Terminal symbols
+-------
 
  + `var` : variable
  + `const` : constant
@@ -52,28 +53,28 @@ Non terminal symbols
 Grammar Rules
 -------
 
-1: `P -> D I`
-2: `D -> D var id L1 ;`
-3: `D -> D const id = val L2 ;`
-4: `D -> eps`
-5: `L1 -> L1 , id`
-6: `L1 -> eps`
-7: `L2 -> L2 , id`
-8: `L2 -> eps`
-9: `I -> I = E ;`
-10: `I -> I li id ;`
-11: `I id := E ;`
-12: `I -> eps`
-13: `E -> E opA T`
-14: `E -> T`
-15: `T -> T opM F`
-16: `T -> F`
-17: `F -> id`
-18: `F -> val`
-19: `F -> ( E )`
-20: `opA -> +`
-21: `opA -> -`
-22: `opM -> *`
-23: `opM -> /`
+ + 1: `P -> D I`
+ + 2: `D -> D var id L1 ;`
+ + 3: `D -> D const id = val L2 ;`
+ + 4: `D -> eps`
+ + 5: `L1 -> L1 , id`
+ + 6: `L1 -> eps`
+ + 7: `L2 -> L2 , id`
+ + 8: `L2 -> eps`
+ + 9: `I -> I = E ;`
+ + 10: `I -> I li id ;`
+ + 11: `I id := E ;`
+ + 12: `I -> eps`
+ + 13: `E -> E opA T`
+ + 14: `E -> T`
+ + 15: `T -> T opM F`
+ + 16: `T -> F`
+ + 17: `F -> id`
+ + 18: `F -> val`
+ + 19: `F -> ( E )`
+ + 20: `opA -> +`
+ + 21: `opA -> -`
+ + 22: `opM -> *`
+ + 23: `opM -> /`
 
 That's all, folks and guys !
