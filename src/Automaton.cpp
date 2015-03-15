@@ -9,26 +9,28 @@
 #include "Automaton.h"
 
 Automaton::Automaton() {
-    transitions[State::E0][AsttokenNode::P] = new ActionAccept();
-    transitions[State::E1][AsttokenNode::P] = new ActionAccept();
+    // transitions[State::E1][ASTTokenNode] = new ActionAccept();
+    // transitions[State::E0][ASTTokenNode] = new ActionAccept();
 }
 
-bool Automaton::Exists(State s, AsttokenNode t) {
-    return transitions.find(s) != transition.end()
-            && transitions[s].find(t) != transition.end();
+bool Automaton::Exists(State::Id s, ASTTokenNode t) {
+    // return transitions.find(s) != transition.end()
+    // && transitions[s].find(t) != transition.end();
+    return true;
 }
 
 bool Automaton::Accepts(Lexer * lexer) {
-    stackStates.push(State::E0);
-    bool epsilon = true;
-    while (!stackStates.empty()) {
-        State s = stackStates.pop();
-        AsttokenNode t = lexer->pop();
-        if (!this->Exists(s, t)) {
-            return false;
-        }
-        transitions[s][t]->transition(transition, & stackStates, &epsilon);
-        if (epsilon) { }
-    }
+    // stackStates->push(State::E0);
+    // bool epsilon = true;
+    // while (!stackStates->empty()) {
+    //     State s = stackStates->pop();
+    //     ASTTokenNode t = lexer->pop();
+    //     if (!this->Exists(s, t)) {
+    //        return false;
+    //     }
+    // transitions[s][t]->transition(& transition,
+    // & stackStates, &epsilon);
+    //     if (epsilon) { }
+    // }
     return true;
 }

@@ -3,3 +3,6 @@
 #define SRC_LEXER_H_
 
 #endif  // SRC_LEXER_H_
+
+class Lexer  {
+};

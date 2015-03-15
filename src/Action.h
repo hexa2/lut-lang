@@ -9,27 +9,39 @@
 #ifndef SRC_ACTION_H_
 #define SRC_ACTION_H_
 
+#include <stack>
+#include <map>
+#include "State.h"
+#include "ASTTokenNode.h"
+// #include "Types.h"
+using std::map;
+using std::stack;
+
 class Action {
  public:
-    virtual ~Action();
+    typedef map<State::Id, map<ASTTokenNode, Action *> > Transitions;
+    virtual ~Action() {}
 };
 
 class ActionAccept : public Action{
  public:
-    transition(const Transitions & transitions,
-            Stack<State> stackStates, bool * epsilon);
+    ActionAccept();
+    bool transition(const Transitions & transitions,
+            stack<State::Id> stackStates, bool * epsilon);
 };
 
 class ActionShift : public Action{
  public:
-    transition(const Transitions & transitions,
-            Stack<State> stackStates, bool * epsilon);
+    ActionShift();
+    bool transition(const Transitions & transitions,
+            stack<State::Id> stackStates, bool * epsilon);
 };
 
 class ActionReduce : public Action{
  public:
-    transition(const Transitions & transitions,
-            Stack<State> stackStates, bool * epsilon);
+    ActionReduce();
+    bool transition(const Transitions & transitions,
+            stack<State::Id> stackStates, bool * epsilon);
 };
 
 #endif  // SRC_ACTION_H_

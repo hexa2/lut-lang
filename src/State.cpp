@@ -8,7 +8,6 @@
 
 #include "State.h"
 
-
-State::operator State::StateName() {
-    return m_name;
+State::operator const State::Id() {
+    return m_id;
 }
