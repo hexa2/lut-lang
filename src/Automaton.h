@@ -14,24 +14,23 @@
 #include <map>
 #include <stack>
 #include <string>
-#include "State.h"
 #include "ASTTokenNode.h"
-// #include "Types.h"
 #include "Lexer.h"
+#include "State.h"
 
 using std::map;
 using std::stack;
 
 
 class Automaton {
- public:
-    explicit Automaton(std::string filepath);
-    bool Exists(State *s, ASTTokenNode t);
-    bool Accepts();
- protected:
+public:
+  explicit Automaton(std::string filepath);
+  bool Exists(State *s, ASTTokenNode *t);
+  bool Accepts();
+protected:
  	Lexer * lexer;
-    stack<ASTTokenNode> * stackASTTokenNodes;
-    stack<State> * stackStates;
+  stack<ASTTokenNode> * stackASTTokenNodes;
+  stack<State*> * stackStates;
 };
 
 #endif  // SRC_AUTOMATON_H_

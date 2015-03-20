@@ -9,14 +9,14 @@
 #ifndef SRC_STATES_E0_H_
 #define SRC_STATES_E0_H_
 
-#include "../state.h"
+#include "../State.h"
 #include "../ASTTokenNode.h"
 #include "../Automaton.h"
 
 class E0 : public State {
-  public:
-    E0();
-    bool transition(Automaton & automaton, ASTTokenNode * t);
+public:
+  E0();
+  bool transition(Automaton *automaton, ASTTokenNode *t);
 };
 
 #endif // SRC_STATES_E0_H_

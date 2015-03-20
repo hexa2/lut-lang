@@ -10,14 +10,14 @@
 
 E0::E0 () : State() { };
 
-bool E0::transition (Automaton & automaton, ASTTokenNode * t) {
-
+bool E0::transition (Automaton *automaton, ASTTokenNode *t) {
+  
   // switch(*t) {
-    // case D :
-      // automaton.setState(t, new E1());
-      // break;
-    // case I :
-      // automaton.setState(t, new E1());
+  // case D :
+  // automaton.setState(t, new E1());
+  // break;
+  // case I :
+  // automaton.setState(t, new E1());
   //     break;
   //   default :
   //     break;
