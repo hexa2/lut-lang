@@ -56,3 +56,10 @@ ASTEnumDeclNode* ASTDeclarationBlockNode::getEnumConsts() {
 ASTDeclarationBlockNode* ASTDeclarationBlockNode::getNext() {
   return this->next;
 }
+
+bool ASTDeclarationBlockNode::analyze() {
+  return true;
+}
+
+void ASTDeclarationBlockNode::exec() {
+}
