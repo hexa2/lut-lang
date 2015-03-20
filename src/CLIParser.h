@@ -21,14 +21,49 @@ using std::ifstream;
 using std::cerr;
 using std::endl;
 
+/**
+ * @class
+ * CLI parser and file reader
+ */
 class CLIParser {
  public:
+  /**
+   * @constructor
+   * @param argc Arguments count
+   * @param argv Arguments values
+   */
   CLIParser(int argc, char* argv[]);
+
+  /**
+   * @return Returns input file content in a string if file exists
+   *
+   */
   string getInputFile();
+
+  /**
+   * @return Returns true if transform option is enabled
+   *
+   */
   bool transformIsEnabled();
+
+  /**
+   * @return Returns true if print option is enabled
+   *
+   */
   bool printIsEnabled();
+
+  /**
+   * @return Returns true if static option is enabled
+   *
+   */
   bool staticIsEnabled();
+
+  /**
+   * @return Returns true if exec option is enabled
+   *
+   */
   bool execIsEnabled();
+
  protected:
   string readFile(string fileName);
   bool transformEnabled;
