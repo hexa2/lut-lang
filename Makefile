@@ -5,7 +5,7 @@ LNFLAGS =
 
 # src
 BIN_SRC = lut.cpp
-SRC = lexer.cpp ASTTokenNode.cpp ASTEnumDeclNode.cpp Automaton.cpp Action.cpp State.cpp
+SRC = Lexer.cpp ASTTokenNode.cpp ASTEnumDeclNode.cpp Automaton.cpp Action.cpp State.cpp
 
 # obj
 BIN_OBJ = $(BIN_SRC:%.cpp=bin/%)
@@ -32,3 +32,4 @@ bin/%: objects/%.o $(OBJ)
 objects/%.o: src/%.cpp
 	mkdir -p `dirname $@`
 	$(CC) -c $(CFLAGS) -o $@ $<
+
