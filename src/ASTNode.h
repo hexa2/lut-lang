@@ -13,7 +13,7 @@ class ASTNode {
    * @todo define the data-struct to pass
    */
   virtual bool analyze() = 0;
-  
+
   /**
    * Executes the program
    * @todo define the data-struct to pass

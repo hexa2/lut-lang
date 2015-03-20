@@ -3,11 +3,6 @@
 #include "ASTEnumDeclNode.h"
 
 ASTEnumDeclNode::ASTEnumDeclNode(ASTTokenNode* varName,
-                                 ASTTokenNode* identifier) {
-  ASTEnumDeclNode(varName, identifier, NULL);
-}
-
-ASTEnumDeclNode::ASTEnumDeclNode(ASTTokenNode* varName,
                                  ASTTokenNode* identifier,
                                  ASTEnumDeclNode* next) {
   this->varName = varName;
@@ -32,5 +27,4 @@ bool ASTEnumDeclNode::analyze() {
 }
 
 void ASTEnumDeclNode::exec() {
-
 }

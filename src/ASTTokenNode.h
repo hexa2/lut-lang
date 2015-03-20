@@ -19,17 +19,17 @@ class ASTTokenNode : public ASTNode {
    * @param symbol The symbol returned by the lexer
    */
   explicit ASTTokenNode(string matchedRegex  = "", string symbol = "");
-  
+
   /**
    * @return The regex that matched the token
    */
   string getMatchedRegex();
-  
+
   /**
    * @return symbol The symbol returned by the lexer
    */
   string getSymbol();
-  
+
   virtual bool analyze();
   virtual void exec();
 
