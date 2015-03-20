@@ -10,8 +10,8 @@
 
 ASTDeclarationBlockNode::ASTDeclarationBlockNode(
     ASTTokenNode* varIdentifier,
-    ASTEnumDeclNode* enumVars = NULL,
-    ASTDeclarationBlockNode* next = NULL) {
+    ASTEnumDeclNode* enumVars,
+    ASTDeclarationBlockNode* next) {
   this->varIdentifier = varIdentifier;
   this->enumVars = enumVars;
   this->constIdentifier = NULL;
@@ -23,8 +23,8 @@ ASTDeclarationBlockNode::ASTDeclarationBlockNode(
 ASTDeclarationBlockNode::ASTDeclarationBlockNode(
     ASTTokenNode* constIdentifier,
     ASTTokenNode* constValue,
-    ASTEnumDeclNode* enumConsts = NULL,
-    ASTDeclarationBlockNode* next = NULL) {
+    ASTEnumDeclNode* enumConsts,
+    ASTDeclarationBlockNode* next) {
   this->varIdentifier = NULL;
   this->enumVars = NULL;
   this->constIdentifier = constIdentifier;
@@ -37,7 +37,7 @@ ASTTokenNode* ASTDeclarationBlockNode::getVarIdentifier() {
   return this->varIdentifier;
 }
 
-ASTTokenNode* ASTDeclarationBlockNode::getEnumVars() {
+ASTEnumDeclNode* ASTDeclarationBlockNode::getEnumVars() {
   return this->enumVars;
 }
 
@@ -49,10 +49,10 @@ ASTTokenNode* ASTDeclarationBlockNode::getConstValue() {
   return this->constValue;
 }
 
-ASTTokenNode* ASTDeclarationBlockNode::getEnumConsts() {
+ASTEnumDeclNode* ASTDeclarationBlockNode::getEnumConsts() {
   return this->enumConsts;
 }
 
-ASTTokenNode* ASTDeclarationBlockNode::getNext() {
+ASTDeclarationBlockNode* ASTDeclarationBlockNode::getNext() {
   return this->next;
 }
