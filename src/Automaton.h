@@ -13,6 +13,7 @@
 
 #include <map>
 #include <stack>
+#include <string>
 #include "State.h"
 #include "ASTTokenNode.h"
 #include "Action.h"
@@ -25,7 +26,8 @@ using std::stack;
 
 class Automaton {
  public:
-    Automaton();
+    Automaton::Automaton();
+    explicit Automaton(std::string filepath) : m_lexer(new Lexer(filepath)) {}
     bool Exists(State::Id s, ASTTokenNode t);
     bool Accepts(Lexer * lexer);
  protected:

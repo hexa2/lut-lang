@@ -10,24 +10,21 @@
 
 ActionAccept::ActionAccept() { }
 
-bool ActionAccept::transition(const Transitions &  transitions,
-       std::stack<State::Id> stackStates, bool * epsilon) {
+bool ActionAccept::transition(Automaton * automaton, bool * epsilon) {
     *epsilon = false;
     return true;
 }
 
 ActionShift::ActionShift() { }
 
-bool ActionShift::transition(const Transitions &  transitions,
-       std::stack<State::Id> stackStates, bool * epsilon) {
+bool ActionShift::transition(Automaton * automaton, bool * epsilon) {
     *epsilon = false;
     return true;
 }
 
 ActionReduce::ActionReduce() { }
 
-bool ActionReduce::transition(const Transitions &  transitions,
-       std::stack<State::Id> stackStates, bool * epsilon) {
+bool ActionReduce::transition(Automaton * automaton, bool * epsilon) {
     *epsilon = false;
     return true;
 }

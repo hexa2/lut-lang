@@ -12,11 +12,15 @@
 #include <stack>
 #include <map>
 #include "State.h"
+#include "Automaton.h"
 #include "ASTTokenNode.h"
 // #include "Types.h"
 using std::map;
 using std::stack;
 
+
+class Automaton;
+	
 class Action {
  public:
     typedef map<State::Id, map<ASTTokenNode, Action *> > Transitions;
@@ -26,22 +30,19 @@ class Action {
 class ActionAccept : public Action{
  public:
     ActionAccept();
-    bool transition(const Transitions & transitions,
-            stack<State::Id> stackStates, bool * epsilon);
+    bool transition(Automaton * automaton, bool * epsilon);
 };
 
 class ActionShift : public Action{
  public:
     ActionShift();
-    bool transition(const Transitions & transitions,
-            stack<State::Id> stackStates, bool * epsilon);
+    bool transition(Automaton * automaton, bool * epsilon);
 };
 
 class ActionReduce : public Action{
  public:
     ActionReduce();
-    bool transition(const Transitions & transitions,
-            stack<State::Id> stackStates, bool * epsilon);
+    bool transition(Automaton * automaton, bool * epsilon);
 };
 
 #endif  // SRC_ACTION_H_

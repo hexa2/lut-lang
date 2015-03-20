@@ -20,17 +20,17 @@ bool Automaton::Exists(State::Id s, ASTTokenNode t) {
 }
 
 bool Automaton::Accepts(Lexer * lexer) {
-    // stackStates->push(State::E0);
-    // bool epsilon = true;
-    // while (!stackStates->empty()) {
-    //     State s = stackStates->pop();
-    //     ASTTokenNode t = lexer->pop();
-    //     if (!this->Exists(s, t)) {
-    //        return false;
-    //     }
-    // transitions[s][t]->transition(& transition,
-    // & stackStates, &epsilon);
-    //     if (epsilon) { }
-    // }
+    / stackStates->push(State::E0);
+     bool epsilon = true;
+     while (!stackStates->empty()) {
+         State s = stackStates->pop();
+         ASTTokenNode t = lexer->pop();
+         if (!this->Exists(s, t)) {
+            return false;
+         }
+     s->transition(& stackStates, & epsilon);
+         if (epsilon) {             
+         }
+     }
     return true;
 }
