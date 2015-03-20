@@ -14,20 +14,14 @@ class ASTEnumDeclNode : public ASTNode {
  public:
   /**
    * @constructor
-   * @param varName The variable name token
-   * @param identifier The variable assigned identifier
+   * @param identifier The variable identifier
    * @param next The next declaration in the enum
    */
-  ASTEnumDeclNode(ASTTokenNode* varName, ASTTokenNode* identifier,
-                  ASTEnumDeclNode* next = NULL);
+  explicit ASTEnumDeclNode(ASTTokenNode* identifier,
+                           ASTEnumDeclNode* next = NULL);
 
   /**
-   * @return The variable name token
-   */
-  ASTTokenNode* getVarName();
-
-  /**
-   * @return The variable assigned identifier
+   * @return The variable identifier
    */
   ASTTokenNode* getIdentifier();
 
@@ -40,7 +34,6 @@ class ASTEnumDeclNode : public ASTNode {
   virtual void exec();
 
  private:
-  ASTTokenNode* varName;
   ASTTokenNode* identifier;
   ASTEnumDeclNode* next;
 };
