@@ -12,6 +12,7 @@ int main(int argc, char* argv[])
   string inputFile = cliParser->getInputFile();
   
   if (cliParser->transformIsEnabled()) {
+
     cout << "Transform (optimize) input" << endl;
     // TRANSFORM
   }
