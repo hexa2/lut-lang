@@ -1,11 +1,11 @@
 # gcc settings
 CC = g++
-CFLAGS = -DDEBUG -g -Wall -O3
+CFLAGS = -DDEBUG -g -Wall -O3 -std=c++0x
 LNFLAGS =
 
 # src
 BIN_SRC = lut.cpp
-SRC = lexer.cpp ASTTokenNode.cpp ASTEnumDeclNode.cpp
+SRC = lexer.cpp ASTTokenNode.cpp ASTEnumDeclNode.cpp Automaton.cpp Action.cpp State.cpp
 
 # obj
 BIN_OBJ = $(BIN_SRC:%.cpp=bin/%)

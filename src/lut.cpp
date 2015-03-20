@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
   bool execEnabled = false;
   string* fileName = NULL;
 
+
   for (int i = 1; i < argc; i++) {
     string* arg = new string(argv[i]);
     if (arg->compare(OPT_TRANSFORM) == 0) {

@@ -18,7 +18,7 @@ class ASTTokenNode : public ASTNode {
    * @param matchedRegex The regex that matched the token
    * @param symbol The symbol returned by the lexer
    */
-  ASTTokenNode(string matchedRegex, string symbol);
+  explicit ASTTokenNode(string matchedRegex  = "", string symbol = "");
   
   /**
    * @return The regex that matched the token
