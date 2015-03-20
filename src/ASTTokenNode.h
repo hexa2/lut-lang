@@ -7,15 +7,34 @@
 
 using std::string;
 
+/**
+ * @class
+ * A token returned by the Lexer
+ */
 class ASTTokenNode : public ASTNode {
+ public:
+  /**
+   * @constructor
+   * @param matchedRegex The regex that matched the token
+   * @param symbol The symbol returned by the lexer
+   */
+  ASTTokenNode(string matchedRegex, string symbol);
+  
+  /**
+   * @return The regex that matched the token
+   */
+  string getMatchedRegex();
+  
+  /**
+   * @return symbol The symbol returned by the lexer
+   */
+  string getSymbol();
+  
+  virtual bool analyze();
+  virtual void exec();
+
  private:
   string matchedRegex;
   string symbol;
- public:
-  ASTTokenNode(string matchedRegex, string symbol);
-  virtual bool analyze(/* TODO: define the data-struct to pass */);
-  virtual void exec(/* TODO: define the data-struct to pass */);
-  string getMatchedRegex();
-  string getSymbol();
 };
 #endif  // SRC_ASTTOKENNODE_H_
