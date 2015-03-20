@@ -34,3 +34,6 @@ tests/results.csv
 *.ipr
 *.iws
 .idea/
+
+# XCode
+*/*.xcproj/

@@ -13,8 +13,8 @@ class ASTTokenNode : public ASTNode {
   string symbol;
  public:
   ASTTokenNode(string matchedRegex, string symbol);
-  bool analyze(/* TODO: define the data-struct to pass */);
-  void exec(/* TODO: define the data-struct to pass */);
+  virtual bool analyze(/* TODO: define the data-struct to pass */);
+  virtual void exec(/* TODO: define the data-struct to pass */);
   string getMatchedRegex();
   string getSymbol();
 };
