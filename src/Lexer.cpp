@@ -86,7 +86,7 @@ bool Lexer::analyze(string s, smatch &m) {
     }
   } else if ( std::regex_search(inputString, m, identifier) ) {
     currentTokenValue = m.str();
-    currentToken = ASTTokenNode(identifier_str , "id");
+    currentToken = ASTTokenNode(identifier_str , currentTokenValue);
   } else if ( std::regex_search(inputString, m, number) ) {
     currentTokenValue = m.str();
     currentToken = ASTTokenNode(number_str , currentTokenValue);
