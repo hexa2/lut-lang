@@ -4,15 +4,14 @@
 
 #include "CLIParser.h"
 
-using namespace std;
+using std::cout;
+using std::endl;
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
   CLIParser* cliParser = new CLIParser(argc, argv);
   string inputFile = cliParser->getInputFile();
-  
-  if (cliParser->transformIsEnabled()) {
 
+  if (cliParser->transformIsEnabled()) {
     cout << "Transform (optimize) input" << endl;
     // TRANSFORM
   }
@@ -28,6 +27,6 @@ int main(int argc, char* argv[])
     cout << "Execute" << endl;
     // EXEC
   }
-  
+
   return 0;
 }

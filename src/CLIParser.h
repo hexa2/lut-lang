@@ -6,15 +6,20 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 //
 
-#ifndef CLIPARSER_H_
-#define CLIPARSER_H_
+#ifndef SRC_CLIPARSER_H_
+#define SRC_CLIPARSER_H_
 
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <sstream>
 
-using namespace std;
+using std::string;
+using std::fstream;
+using std::stringstream;
+using std::ifstream;
+using std::cerr;
+using std::endl;
 
 class CLIParser {
  public:
@@ -32,4 +37,4 @@ class CLIParser {
   bool execEnabled;
   string* fileName;
 };
-#endif  // CLIPARSER_H_
+#endif  // SRC_CLIPARSER_H_

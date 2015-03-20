@@ -1,3 +1,12 @@
+//
+//  CLIParser.cpp
+//  lut-lang
+//
+//  Created by Karim Benhmida on 06/03/2015.
+//  Copyright (c) 2015 H4314. All rights reserved.
+//
+
+#include <string>
 #include "CLIParser.h"
 
 #define OPT_TRANSFORM "-o"
@@ -15,14 +24,13 @@
 
 #define ERR_READFILE "Erreur a l'ouverture du fichier "
 
-CLIParser::CLIParser(int argc, char* argv[])
-{
+CLIParser::CLIParser(int argc, char* argv[]) {
   transformEnabled = false;
   printEnabled = false;
   staticEnabled = false;
   execEnabled = false;
   fileName = NULL;
-  
+
   for (int i = 1; i < argc; i++) {
     string* arg = new string(argv[i]);
     if (arg->compare(OPT_TRANSFORM) == 0) {
@@ -48,46 +56,41 @@ string CLIParser::getInputFile() {
     cerr << ERR_NOARGS << endl;
     exit(1);
   }
-  
+
   string inputFile = readFile(*fileName);
-  
+
   if (inputFile.empty()) {
     exit(1);
   }
-  
+
   return inputFile;
 }
 
-string CLIParser::readFile(string fileName)
-{
+string CLIParser::readFile(string fileName) {
   ifstream fileStream(fileName.c_str());
   if (fileStream.fail()) {
     cerr << ERR_READFILE << fileName << endl;
     exit(1);
   }
-  
+
   stringstream buffer;
   buffer << fileStream.rdbuf();
-  
+
   return buffer.str();
 }
 
-bool CLIParser::transformIsEnabled()
-{
+bool CLIParser::transformIsEnabled() {
   return transformEnabled;
 }
 
-bool CLIParser::printIsEnabled()
-{
-  return  printEnabled;
+bool CLIParser::printIsEnabled() {
+  return printEnabled;
 }
 
-bool CLIParser::staticIsEnabled()
-{
+bool CLIParser::staticIsEnabled() {
   return staticEnabled;
 }
 
-bool CLIParser::execIsEnabled()
-{
+bool CLIParser::execIsEnabled() {
   return execEnabled;
 }
