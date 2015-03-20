@@ -8,19 +8,20 @@
 #include <stack>
 #include "Automaton.h"
 
-Automaton::Automaton() {
-    // transitions[State::E1][ASTTokenNode] = new ActionAccept();
-    // transitions[State::E0][ASTTokenNode] = new ActionAccept();
-}
+Automaton::Automaton(std::string filepath) {
+    lexer = new Lexer(filepath);
+    stackStates = new stack<State>; 
+};
 
-bool Automaton::Exists(State::Id s, ASTTokenNode t) {
+
+bool Automaton::Exists(State *s, ASTTokenNode t) {
     // return transitions.find(s) != transition.end()
     // && transitions[s].find(t) != transition.end();
     return true;
 }
 
-bool Automaton::Accepts(Lexer * lexer) {
-    / stackStates->push(State::E0);
+bool Automaton::Accepts() {
+     stackStates->push(new E0()));
      bool epsilon = true;
      while (!stackStates->empty()) {
          State s = stackStates->pop();
@@ -28,7 +29,7 @@ bool Automaton::Accepts(Lexer * lexer) {
          if (!this->Exists(s, t)) {
             return false;
          }
-     s->transition(& stackStates, & epsilon);
+        s->transition(& this, & epsilon);
          if (epsilon) {             
          }
      }

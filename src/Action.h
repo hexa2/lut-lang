@@ -23,7 +23,7 @@ class Automaton;
 	
 class Action {
  public:
-    typedef map<State::Id, map<ASTTokenNode, Action *> > Transitions;
+    // typedef map<State, map<ASTTokenNode, Action *> > Transitions;
     virtual ~Action() {}
 };
 

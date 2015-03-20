@@ -16,7 +16,6 @@
 #include <string>
 #include "State.h"
 #include "ASTTokenNode.h"
-#include "Action.h"
 // #include "Types.h"
 #include "Lexer.h"
 
@@ -26,14 +25,13 @@ using std::stack;
 
 class Automaton {
  public:
-    Automaton::Automaton();
-    explicit Automaton(std::string filepath) : m_lexer(new Lexer(filepath)) {}
-    bool Exists(State::Id s, ASTTokenNode t);
-    bool Accepts(Lexer * lexer);
+    explicit Automaton(std::string filepath);
+    bool Exists(State *s, ASTTokenNode t);
+    bool Accepts();
  protected:
-    Action::Transitions transitions;
+ 	Lexer * lexer;
     stack<ASTTokenNode> * stackASTTokenNodes;
-    stack<State::Id> * stackStates;
+    stack<State> * stackStates;
 };
 
 #endif  // SRC_AUTOMATON_H_
