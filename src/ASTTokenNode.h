@@ -4,18 +4,19 @@
 
 #include <string>
 #include "ASTNode.h"
-
+#include "TokenType.h"
 using std::string;
 
 class ASTTokenNode : public ASTNode {
  private:
-  string matchedRegex;
-  string symbol;
+  TokenType type;
+  string value;
  public:
-  explicit ASTTokenNode(string matchedRegex = "", string symbol = "");
+  explicit ASTTokenNode(TokenType type, string value = "");
+  
   bool analyze(/* TODO: define the data-struct to pass */);
   void exec(/* TODO: define the data-struct to pass */);
-  string getMatchedRegex();
-  string getSymbol();
+  TokenType getTokenType();
+  string getValue();
 };
 #endif  // SRC_ASTTOKENNODE_H_

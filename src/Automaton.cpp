@@ -10,11 +10,12 @@
 
 Automaton::Automaton(std::string filepath) {
   lexer = new Lexer(filepath);
+  lexer->shift();
   stackStates.push(new E0());
 };
 
 
-void Automaton::shift(ASTTokenNode* t, State* s) {
+void Automaton::decalage(ASTTokenNode* t, State* s) {
   stackStates.push(s);
   stackASTTokenNodes.push(t);
 }
@@ -29,15 +30,17 @@ void Automaton::reduce(int i) {
 
 
 bool Automaton::accepts() {
-  bool epsilon = true;
-  while (!stackStates.empty()) {
-    State *s = stackStates.top();
-    stackStates.pop();
-    
-    ASTTokenNode *t = lexer->top();
-    s->transition(this, t);
-    if (epsilon) {
-    }
+  
+  
+  while( lexer->top()->getTokenType() != TokenType::ENDOFFILE )
+  {
+    if( stackStates.empty() ) return false;
+    ASTTokenNode *t = lexer->top() ;
+    if ( t == NULL ) return false;  //Mauvais symbole
+    if( !stackStates.top()->transition(this, t) ) return false;
+    lexer->shift();
   }
-  return true;
+  
+  if(stackStates.empty()) return false;
+  return stackStates.top()->stateNumber() == 2 ;
 }

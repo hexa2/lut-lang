@@ -27,12 +27,13 @@ public:
   explicit Automaton(std::string filepath);
   bool accepts();
   
-  void shift(ASTTokenNode* t, State* s);
+  void decalage(ASTTokenNode* t, State* s);
   void reduce(int i);
-protected:
- 	Lexer * lexer;
   stack<ASTTokenNode*> stackASTTokenNodes;
   stack<State*> stackStates;
+protected:
+ 	Lexer * lexer;
+
 };
 
 #endif  // SRC_AUTOMATON_H_

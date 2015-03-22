@@ -8,24 +8,35 @@
 #include "E0.h"
 #include "E1.h"
 #include "../state.h"
+#include "TokenType.h"
 
 E0::E0 () : State() { };
 
 bool E0::transition (Automaton *automaton, ASTTokenNode *t) {
-
-  if( t->getSymbol().compare("Declaration") == 0)
-  {
-    automaton->shift(t, new E1());
+  
+  ASTTokenNode token = ASTTokenNode(TokenType::D);
+  
+  switch ( t->getTokenType() ) {
+    case TokenType::D:
+      automaton->decalage(t, new E1());
+      return true;
+      break;
+    case TokenType::WRITE:
+    case TokenType::READ :
+    case TokenType::VAR:
+    case TokenType::CONST:
+    case TokenType::ID:
+    case TokenType::ENDOFFILE :
+      //Reduction
+      token = ASTTokenNode(TokenType::D);
+      automaton->stackStates.top()->transition(automaton, &token);
+      return true;
+      break;
+    default:
+      return false;
+      break;
   }
-  // switch(*t) {
-  // case D :
-  // automaton.setState(t, new E1());
-  // break;
-  // case I :
-  // automaton.setState(t, new E1());
-  //     break;
-  //   default :
-  //     break;
-  // }
+
+  
   return false;
 }

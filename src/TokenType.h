@@ -9,7 +9,7 @@
 #ifndef lut_lang_TokenType_h
 #define lut_lang_TokenType_h
 
-enum class SymbolType {
+enum class TokenType {
   
   //Non Terminal Symbols
   P,
@@ -41,8 +41,9 @@ enum class SymbolType {
   WRITE,
   READ,
   
-  //End
-  $
+  
+  ENDOFFILE,
+  INVALID_SYMBOL
 };
 
 #endif

@@ -3,9 +3,10 @@
 
 #include <string>
 
-ASTTokenNode::ASTTokenNode(string matchedRegex, string symbol) {
-  this->matchedRegex = matchedRegex;
-  this->symbol = symbol;
+
+ASTTokenNode::ASTTokenNode(TokenType type, string value ) {
+  this->type = type;
+  this->value = value;
 }
 
 bool ASTTokenNode::analyze() {
@@ -16,10 +17,10 @@ void ASTTokenNode::exec() {
   // noop
 }
 
-string ASTTokenNode::getMatchedRegex() {
-  return this->matchedRegex;
+TokenType ASTTokenNode::getTokenType() {
+  return this->type;
 }
 
-string ASTTokenNode::getSymbol() {
-  return this->symbol;
+string ASTTokenNode::getValue() {
+  return this->value;
 }

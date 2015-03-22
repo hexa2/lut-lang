@@ -11,11 +11,6 @@
 E1::E1 () : State() { };
 
 bool E1::transition (Automaton *automaton, ASTTokenNode *t) {
-  
-  if( t->getSymbol().compare("Declaration") == 0)
-  {
-    automaton->shift(t, new E1());
-  }
   // switch(*t) {
   // case D :
   // automaton.setState(t, new E1());

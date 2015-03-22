@@ -10,7 +10,7 @@
 #include <string>
 #include <regex>
 #include <iostream>
-
+#include "TokenType.h"
 using std::cout;
 using std::endl;
 using std::smatch;
@@ -32,7 +32,7 @@ const std::regex single_operators(single_operators_str);
 const std::regex affectation(affectation_str);
 
 
-Lexer::Lexer(string inString) : inputString(inString) {
+Lexer::Lexer(string inString) : inputString(inString), currentToken(TokenType::INVALID_SYMBOL) {
 }
 
 bool Lexer::has_next() {
@@ -43,7 +43,7 @@ bool Lexer::has_next() {
 }
 
 ASTTokenNode* Lexer::top() {
-  if ( currentToken.getSymbol().length() > 0 ) {
+  if ( currentToken.getTokenType() != TokenType::INVALID_SYMBOL ) {
     return &currentToken;
   }
   return NULL;
@@ -56,8 +56,7 @@ void Lexer::shift() {
   std::smatch m;
   if ( !analyze(inputString, m) ) {
     cout <<"cant shift" <<endl;
-    currentToken = ASTTokenNode();
-    currentTokenValue = "";
+    currentToken = ASTTokenNode(TokenType::INVALID_SYMBOL);
     inputString.erase(0, 1);    // not sure
     return;
   }
@@ -67,65 +66,64 @@ void Lexer::shift() {
 
 bool Lexer::analyze(string s, smatch &m) {
   if ( std::regex_search(inputString, m, keyword) ) {
-    currentTokenValue = m.str();
+    std::string currentTokenValue = m.str();
     switch (currentTokenValue[0]) {
       case 'c':
-        currentToken = ASTTokenNode(keyword_str , "const");
+        currentToken = ASTTokenNode(TokenType::CONST); 
         break;
       case 'v':
-        currentToken = ASTTokenNode(keyword_str , "var");
+        currentToken = ASTTokenNode(TokenType::VAR);
         break;
       case 'e':
-        currentToken = ASTTokenNode(keyword_str , "ecrire");
+        currentToken = ASTTokenNode(TokenType::WRITE);
         break;
       case 'l':
-        currentToken = ASTTokenNode(keyword_str , "lire");
+        currentToken = ASTTokenNode(TokenType::READ);
         break;
       default:
         return false;
     }
   } else if ( std::regex_search(inputString, m, identifier) ) {
-    currentTokenValue = m.str();
-    currentToken = ASTTokenNode(identifier_str , currentTokenValue);
+    std::string currentTokenValue = m.str();
+    currentToken = ASTTokenNode(TokenType::ID, currentTokenValue);
   } else if ( std::regex_search(inputString, m, number) ) {
-    currentTokenValue = m.str();
-    currentToken = ASTTokenNode(number_str , currentTokenValue);
+    std::string currentTokenValue = m.str();
+    currentToken = ASTTokenNode(TokenType::VAL, currentTokenValue);
   } else if ( std::regex_search(inputString, m, single_operators) ) {
-    currentTokenValue = m.str();
+    std::string currentTokenValue = m.str();
     switch (currentTokenValue[0]) {
       case '+':
-        currentToken = ASTTokenNode(single_operators_str , "+");
+        currentToken = ASTTokenNode(TokenType::ADD);
         break;
       case '-':
-        currentToken = ASTTokenNode(single_operators_str , "-");
+        currentToken = ASTTokenNode(TokenType::SUB);
         break;
       case '*':
-        currentToken = ASTTokenNode(single_operators_str , "*");
+        currentToken = ASTTokenNode(TokenType::MUL);
         break;
       case '/':
-        currentToken = ASTTokenNode(single_operators_str , "/");
+        currentToken = ASTTokenNode(TokenType::DIV);
         break;
       case '(':
-        currentToken = ASTTokenNode(single_operators_str , "(");
+        currentToken = ASTTokenNode(TokenType::PO);
         break;
       case ')':
-        currentToken = ASTTokenNode(single_operators_str , ")");
+        currentToken = ASTTokenNode(TokenType::PF);
         break;
       case ';':
-        currentToken = ASTTokenNode(single_operators_str , ";");
+        currentToken = ASTTokenNode(TokenType::PV);
         break;
       case '=':
-        currentToken = ASTTokenNode(single_operators_str , "=");
+        currentToken = ASTTokenNode(TokenType::EQ);
         break;
       case ',':
-        currentToken = ASTTokenNode(single_operators_str , ",");
+        currentToken = ASTTokenNode(TokenType::V);
         break;
       default:
         return false;
     }
   } else if ( std::regex_search(inputString, m, affectation) ) {
-    currentTokenValue = m.str();
-    currentToken = ASTTokenNode(affectation_str , ":=");
+    currentToken = ASTTokenNode(TokenType::AFF);
   } else {
     return false;
   }
@@ -140,7 +138,7 @@ void test() {
   while ( a.has_next() ) {
     a.shift();
     if ( a.top() ) {
-      cout<< "top is " << a.top()->getSymbol() << endl;
+      cout<<"something";
     }
   }
 }

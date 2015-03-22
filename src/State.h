@@ -17,6 +17,7 @@ class State {
 public:
   State() { }
   virtual bool transition(Automaton *automaton, ASTTokenNode * t) = 0;
+  virtual inline int stateNumber() = 0 ;
 };
 
 
