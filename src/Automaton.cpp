@@ -10,27 +10,31 @@
 
 Automaton::Automaton(std::string filepath) {
   lexer = new Lexer(filepath);
-  stackStates = new stack<State*>;
+  stackStates.push(new E0());
 };
 
 
-bool Automaton::Exists(State *s, ASTTokenNode *t) {
-  // return transitions.find(s) != transition.end()
-  // && transitions[s].find(t) != transition.end();
-  return true;
+void Automaton::shift(ASTTokenNode* t, State* s) {
+  stackStates.push(s);
+  stackASTTokenNodes.push(t);
 }
 
-bool Automaton::Accepts() {
-  stackStates->push( new E0() );
+
+void Automaton::reduce(int i) {
+  for(int j = 0; j < i ; j++) {
+    stackStates.pop();
+    stackASTTokenNodes.pop();
+  }
+}
+
+
+bool Automaton::accepts() {
   bool epsilon = true;
-  while (!stackStates->empty()) {
-    State *s = stackStates->top();
-    stackStates->pop();
+  while (!stackStates.empty()) {
+    State *s = stackStates.top();
+    stackStates.pop();
     
     ASTTokenNode *t = lexer->top();
-    if (!this->Exists(s, t)) {
-      return false;
-    }
     s->transition(this, t);
     if (epsilon) {
     }

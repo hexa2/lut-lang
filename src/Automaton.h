@@ -25,12 +25,14 @@ using std::stack;
 class Automaton {
 public:
   explicit Automaton(std::string filepath);
-  bool Exists(State *s, ASTTokenNode *t);
-  bool Accepts();
+  bool accepts();
+  
+  void shift(ASTTokenNode* t, State* s);
+  void reduce(int i);
 protected:
  	Lexer * lexer;
-  stack<ASTTokenNode> * stackASTTokenNodes;
-  stack<State*> * stackStates;
+  stack<ASTTokenNode*> stackASTTokenNodes;
+  stack<State*> stackStates;
 };
 
 #endif  // SRC_AUTOMATON_H_
