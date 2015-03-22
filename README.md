@@ -63,7 +63,7 @@ Grammar Rules
  + 8: `L2 -> eps`
  + 9: `I -> I = E ;`
  + 10: `I -> I li id ;`
- + 11: `I id := E ;`
+ + 11: `I -> id := E ;`
  + 12: `I -> eps`
  + 13: `E -> E opA T`
  + 14: `E -> T`
