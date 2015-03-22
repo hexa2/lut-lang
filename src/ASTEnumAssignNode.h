@@ -18,7 +18,7 @@
  * Defines an enumeration of const assignments
  */
 class ASTEnumAssignNode : public ASTNode {
-public:
+ public:
   /**
    * @constructor
    * @param identifier The const identifier
@@ -28,27 +28,26 @@ public:
   explicit ASTEnumAssignNode(ASTTokenNode* identifier,
                              ASTTokenNode* value,
                              ASTEnumAssignNode* next = NULL);
-  
+
   /**
    * @return The variable identifier
    */
   ASTTokenNode* getIdentifier();
-  
+
   /**
    * @return The assigned value
    */
   ASTTokenNode* getValue();
 
-  
   /**
    * @return Next enum element or Null
    */
   ASTEnumAssignNode* getNext();
-  
+
   virtual bool analyze();
   virtual void exec();
-  
-private:
+
+ private:
   ASTTokenNode* identifier;
   ASTTokenNode* value;
   ASTEnumAssignNode* next;
