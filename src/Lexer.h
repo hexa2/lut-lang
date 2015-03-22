@@ -36,7 +36,7 @@ class Lexer {
   ASTTokenNode currentToken;
 
   bool analyze(string s, std::smatch &m);
-  inline std::string& ltrim(std::string& s, const char* t = " \t\n\r\f\v") {
+  inline string& ltrim(string& s, const char* t = " \t\n\r\f\v") {
     s.erase(0, s.find_first_not_of(t));
     return s;
   }
