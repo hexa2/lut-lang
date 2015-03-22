@@ -12,6 +12,7 @@
 #include "ASTNode.h"
 #include "ASTTokenNode.h"
 #include "ASTEnumDeclNode.h"
+#include "ASTEnumAssignNode.h"
 
 /**
  * @class
@@ -38,7 +39,7 @@ class ASTDeclarationBlockNode : public ASTNode {
    */
   explicit ASTDeclarationBlockNode(ASTTokenNode* constIdentifier,
                                    ASTTokenNode* constValue,
-                                   ASTEnumDeclNode* enumConsts = NULL,
+                                   ASTEnumAssignNode* enumConsts = NULL,
                                    ASTDeclarationBlockNode* next = NULL);
 
   /**
@@ -64,7 +65,7 @@ class ASTDeclarationBlockNode : public ASTNode {
   /**
    * @return The next consts to enum or Null
    */
-  ASTEnumDeclNode* getEnumConsts();
+  ASTEnumAssignNode* getEnumConsts();
 
   /**
    * @return Next enum element or Null
@@ -79,7 +80,7 @@ class ASTDeclarationBlockNode : public ASTNode {
   ASTEnumDeclNode* enumVars;
   ASTTokenNode* constIdentifier;
   ASTTokenNode* constValue;
-  ASTEnumDeclNode* enumConsts;
+  ASTEnumAssignNode* enumConsts;
   ASTDeclarationBlockNode* next;
 };
 

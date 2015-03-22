@@ -23,7 +23,7 @@ ASTDeclarationBlockNode::ASTDeclarationBlockNode(
 ASTDeclarationBlockNode::ASTDeclarationBlockNode(
     ASTTokenNode* constIdentifier,
     ASTTokenNode* constValue,
-    ASTEnumDeclNode* enumConsts,
+    ASTEnumAssignNode* enumConsts,
     ASTDeclarationBlockNode* next) {
   this->varIdentifier = NULL;
   this->enumVars = NULL;
@@ -49,7 +49,7 @@ ASTTokenNode* ASTDeclarationBlockNode::getConstValue() {
   return this->constValue;
 }
 
-ASTEnumDeclNode* ASTDeclarationBlockNode::getEnumConsts() {
+ASTEnumAssignNode* ASTDeclarationBlockNode::getEnumConsts() {
   return this->enumConsts;
 }
 
