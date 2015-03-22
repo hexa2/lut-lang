@@ -8,14 +8,6 @@ ASTTokenNode::ASTTokenNode(string matchedRegex, string symbol) {
   this->symbol = symbol;
 }
 
-bool ASTTokenNode::analyze() {
-  return true;  // noop
-}
-
-void ASTTokenNode::exec() {
-  // noop
-}
-
 string ASTTokenNode::getMatchedRegex() {
   return this->matchedRegex;
 }

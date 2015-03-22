@@ -3,7 +3,6 @@
 #define SRC_ASTTOKENNODE_H_
 
 #include <string>
-#include "ASTNode.h"
 
 using std::string;
 
@@ -11,7 +10,7 @@ using std::string;
  * @class
  * A token returned by the Lexer
  */
-class ASTTokenNode : public ASTNode {
+class ASTTokenNode {
  public:
   /**
    * @constructor
@@ -29,9 +28,6 @@ class ASTTokenNode : public ASTNode {
    * @return symbol The symbol returned by the lexer
    */
   string getSymbol();
-
-  virtual bool analyze();
-  virtual void exec();
 
  private:
   string matchedRegex;
