@@ -5,7 +5,7 @@ LNFLAGS =
 
 # src
 BIN_SRC = lut.cpp
-SRC = Lexer.cpp ASTTokenNode.cpp ASTEnumDeclNode.cpp ASTEnumAssignNode.cpp ASTDeclarationBlockNode.cpp ASTMultiplicativeOperation.cpp ASTAdditiveOperation.cpp ASTFirstLevelExpressionNode.cpp ASTSecondLevelExpressionNode.cpp ASTThirdLevelExpressionNode.cpp ASTInstructionBlockNode.cpp ASTProgramNode.cpp Automaton.cpp Action.cpp State.cpp
+SRC = Lexer.cpp ASTTokenNode.cpp ASTEnumDeclNode.cpp ASTEnumAssignNode.cpp ASTDeclarationBlockNode.cpp ASTMultiplicativeOperation.cpp ASTAdditiveOperation.cpp ASTFirstLevelExpressionNode.cpp ASTSecondLevelExpressionNode.cpp ASTThirdLevelExpressionNode.cpp ASTInstructionBlockNode.cpp ASTProgramNode.cpp Automaton.cpp Action.cpp State.cpp CLIParser.cpp
 
 # obj
 BIN_OBJ = $(BIN_SRC:%.cpp=bin/%)
