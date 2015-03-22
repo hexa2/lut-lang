@@ -31,8 +31,7 @@ void Automaton::reduce(int i) {
 
 bool Automaton::accepts() {
   
-  
-  while( lexer->top()->getTokenType() != TokenType::ENDOFFILE )
+  while( lexer->has_next() )
   {
     if( stackStates.empty() ) return false;
     ASTTokenNode *t = lexer->top() ;
