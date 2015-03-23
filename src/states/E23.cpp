@@ -1,4 +1,5 @@
 //
+<<<<<<< HEAD
             //  automaton.cpp
 //  lut-lang
 //
@@ -8,10 +9,23 @@
 #include "E23.h"
 #include "../State.h"
 #include "../TokenType.h"
+=======
+//  automaton.cpp
+//  lut-lang
+//
+//  Created by Mehdi Kitane on 23/03/2015.
+//  Copyright (c) 2015 H4314. All rights reserved.
+
+#include "../State.h"
+#include "../TokenType.h"
+#include "E23.h"
+#include "E24.h"
+>>>>>>> 9b0624d56118d69be55a91f187e56db1948ef7b7
 
 E23::E23() : State() { }
 
 bool E23::transition(Automaton *automaton, ASTTokenNode *t) {
+<<<<<<< HEAD
     ASTTokenNode token = ASTTokenNode(TokenType::D);
     switch ( t->getTokenType() ) {
         case TokenType::D:
@@ -53,4 +67,19 @@ bool E23::transition(Automaton *automaton, ASTTokenNode *t) {
             return false;
     }
     return false;
+=======
+  ASTTokenNode token = ASTTokenNode(TokenType::D);
+  switch ( t->getTokenType() ) {
+    case TokenType::V:
+      //automaton->decalage(t, new E25());
+      return true;
+    case TokenType::PV:
+      //  Reduce
+      automaton->decalage(t, new E24());
+      return true;
+    default:
+      return false;
+  }
+  return false;
+>>>>>>> 9b0624d56118d69be55a91f187e56db1948ef7b7
 }

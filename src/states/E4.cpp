@@ -6,48 +6,38 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 
 #include "E4.h"
+#include "E5.h"
+#include "E15.h"
+#include "E14.h"
+#include "E11.h"
+#include "E12.h"
+#include "E13.h"
 #include "../State.h"
 #include "../TokenType.h"
 
 E4::E4() : State() { }
 
 bool E4::transition(Automaton *automaton, ASTTokenNode *t) {
-    ASTTokenNode token = ASTTokenNode(TokenType::D);
     switch ( t->getTokenType() ) {
         case TokenType::D:
-            // automaton->decalage(t, new E1());
             return true;
-        case TokenType::P:
-        case TokenType::L1:
-        case TokenType::L2:
-        case TokenType::I:
         case TokenType::E:
+          automaton->decalage(t, new E5());
+            return true;
         case TokenType::T:
+          automaton->decalage(t, new E15());
+            return true;
         case TokenType::F:
-        case TokenType::opA:
-        case TokenType::opM:
-
-        case TokenType::VAR:
-        case TokenType::CONST:
+          automaton->decalage(t, new E14());
+            return true;
         case TokenType::ID:
+          automaton->decalage(t, new E11());
+            return true;
         case TokenType::VAL:
-        case TokenType::PV:
-        case TokenType::V:
-        case TokenType::AFF:
-        case TokenType::EQ:
-        case TokenType::ADD:
-        case TokenType::SUB:
-        case TokenType::MUL:
-        case TokenType::DIV:
+          automaton->decalage(t, new E12());
+            return true;
         case TokenType::PO:
-        case TokenType::PF:
-        case TokenType::WRITE:
-        case TokenType::READ :
-        case TokenType::INVALID_SYMBOL:
-        case TokenType::ENDOFFILE :
-            //  Reduce
-            token = ASTTokenNode(TokenType::D);
-            automaton->stackStates.top()->transition(automaton, &token);
+          automaton->decalage(t, new E13());
             return true;
         default:
             return false;

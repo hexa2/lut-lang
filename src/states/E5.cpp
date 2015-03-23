@@ -6,6 +6,10 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 
 #include "E5.h"
+#include "E7.h"
+#include "E6.h"
+#include "E41.h"
+#include "E42.h"
 #include "../State.h"
 #include "../TokenType.h"
 
