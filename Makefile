@@ -1,6 +1,6 @@
 # gcc settings
 CC = g++
-CFLAGS = -DDEBUG -g -Wall -O3 -std=c++11
+CFLAGS = -DDEBUG -g -Wall -O3 -std=c++0x
 LNFLAGS =
 
 # src
