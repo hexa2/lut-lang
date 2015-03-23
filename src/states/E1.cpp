@@ -8,7 +8,8 @@
 #include "../State.h"
 #include "E1.h"
 #include "E21.h"
-#include "E27.h"
+#include "E2.h"
+//#include "E27.h"
 
 E1::E1() : State() { }
 
@@ -24,14 +25,14 @@ bool E1::transition(Automaton *automaton, ASTTokenNode *t ) {
       return true;
       break;
     case TokenType::CONST:
-      automaton->decalage(t, new E27());
+      //automaton->decalage(t, new E27());
       return true;
       break;
     case TokenType::ID:
     case TokenType::VAL:
     case TokenType::V:
     case TokenType::PV:
-    case TokenType::AF:
+    case TokenType::AFF:
     case TokenType::EQ:
     case TokenType::ENDOFFILE:
     case TokenType::WRITE:
