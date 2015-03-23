@@ -9,14 +9,13 @@
 #include "../State.h"
 #include "../TokenType.h"
 
-E40::E40 () : State() { };
+E40::E40() : State() { }
 
-bool E40::transition (Automaton *automaton, ASTTokenNode *t) {
-    
+bool E40::transition(Automaton *automaton, ASTTokenNode *t) {
     ASTTokenNode token = ASTTokenNode(TokenType::D);
     switch ( t->getTokenType() ) {
         case TokenType::D:
-            //automaton->decalage(t, new E1());
+            // automaton->decalage(t, new E1());
             return true;
         case TokenType::P:
         case TokenType::L1:
@@ -27,7 +26,7 @@ bool E40::transition (Automaton *automaton, ASTTokenNode *t) {
         case TokenType::F:
         case TokenType::opA:
         case TokenType::opM:
-        
+
         case TokenType::VAR:
         case TokenType::CONST:
         case TokenType::ID:
