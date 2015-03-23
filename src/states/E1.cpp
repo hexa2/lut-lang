@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 
 #include "../State.h"
+#include "../TokenType.h"
 #include "E1.h"
 #include "E21.h"
 #include "E2.h"
@@ -19,15 +20,12 @@ bool E1::transition(Automaton *automaton, ASTTokenNode *t ) {
     case TokenType::I:
       automaton->decalage(t, new E2());
       return true;
-      break;
     case TokenType::VAR:
       automaton->decalage(t, new E21());
       return true;
-      break;
     case TokenType::CONST:
       //automaton->decalage(t, new E27());
       return true;
-      break;
     case TokenType::ID:
     case TokenType::VAL:
     case TokenType::V:
@@ -37,13 +35,13 @@ bool E1::transition(Automaton *automaton, ASTTokenNode *t ) {
     case TokenType::ENDOFFILE:
     case TokenType::WRITE:
     case TokenType::READ:
+      //Reduce
       token = ASTTokenNode(TokenType::I);
-      automaton->stackStates.top()->transition(automaton, &token);
+      if (!automaton->getStackStates()->top()->transition(automaton, &token)) return false;
+      if (!automaton->getStackStates()->top()->transition(automaton, t)) return false;
       return true;
-      break;
     default:
       return false;
-      break;
   }
   return false;
 }

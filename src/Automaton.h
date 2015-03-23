@@ -27,19 +27,25 @@ class Automaton {
  public:
    /**
    * @constructor
-   * @param string filepath path to the program file to analyze
+   * @param string String representing the file 
    */
-    explicit Automaton(string filepath);
-    bool accepts();
+    explicit Automaton(string inputString);
+    bool analyze();
    /**
    * @param ASTTokenNode t push t in Automaton stackToken
    * @param State s push s in Automaton stackState
    */
     void decalage(ASTTokenNode* t, State* s);
-    stack<ASTTokenNode*> stackASTTokenNodes;
-    stack<State*> stackStates;
- protected:
-    Lexer * lexer;
+  
+    stack<ASTTokenNode*> *getStackASTTokenNodes();
+    stack<State*> *getStackStates();
+    void setAccepted(bool acc);
+  
+protected:
+  stack<ASTTokenNode*> stackASTTokenNodes;
+  stack<State*> stackStates;
+  bool accepted;
+  Lexer * lexer;
 };
 
 #endif  // SRC_AUTOMATON_H_

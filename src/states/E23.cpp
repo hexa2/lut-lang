@@ -5,10 +5,10 @@
 //  Created by Mehdi Kitane on 23/03/2015.
 //  Copyright (c) 2015 H4314. All rights reserved.
 
-#include "E23.h"
-#include "E24.h"
 #include "../State.h"
 #include "../TokenType.h"
+#include "E23.h"
+#include "E24.h"
 
 E23::E23() : State() { }
 

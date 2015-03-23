@@ -5,10 +5,10 @@
 //  Created by Mehdi Kitane on 23/03/2015.
 //  Copyright (c) 2015 H4314. All rights reserved.
 
-#include "E22.h"
-#include "E23.h"
 #include "../State.h"
 #include "../TokenType.h"
+#include "E22.h"
+#include "E23.h"
 
 E22::E22() : State() { }
 
@@ -38,7 +38,8 @@ bool E22::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::WRITE :
       //  Reduce
       token = ASTTokenNode(TokenType::L1);
-      automaton->stackStates.top()->transition(automaton, &token);
+      if (!automaton->getStackStates()->top()->transition(automaton, &token)) return false;
+      if (!automaton->getStackStates()->top()->transition(automaton, t)) return false;
       return true;
     default:
       return false;

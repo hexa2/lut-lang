@@ -40,14 +40,16 @@ bool Lexer::has_next() {
   // remove spaces before analyzing
   // we remove left spaces and not right to handle cases like "const "
   ltrim(inputString);
-  return inputString.length() > 0;
+  if( inputString.length() <= 0)
+  {
+    currentToken = ASTTokenNode(TokenType::ENDOFFILE);
+    return false;
+  }
+  return true;
 }
 
 ASTTokenNode* Lexer::top() {
-  if ( currentToken.getTokenType() != TokenType::INVALID_SYMBOL ) {
-    return &currentToken;
-  }
-  return NULL;
+  return &currentToken;
 }
 
 void Lexer::shift() {
