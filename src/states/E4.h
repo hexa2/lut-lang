@@ -16,7 +16,7 @@ class E4 : public State {
     public:
         E4();
         bool transition(Automaton *automaton, ASTTokenNode *t);
-        inline int stateNumber(){return 0;}
+        inline int stateNumber(){return 4;}
 };
     
 #endif  // SRC_STATES_E4_H_

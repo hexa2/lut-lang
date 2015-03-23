@@ -16,7 +16,7 @@ class E13 : public State {
     public:
         E13();
         bool transition(Automaton *automaton, ASTTokenNode *t);
-        inline int stateNumber(){return 0;}
+        inline int stateNumber(){return 13;}
 };
     
 #endif  // SRC_STATES_E13_H_

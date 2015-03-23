@@ -16,11 +16,9 @@ bool E40::transition (Automaton *automaton, ASTTokenNode *t) {
     ASTTokenNode token = ASTTokenNode(TokenType::D);
     switch ( t->getTokenType() ) {
         case TokenType::D:
-            automaton->decalage(t, new E1());
+            //automaton->decalage(t, new E1());
             return true;
-        
         case TokenType::P:
-        case TokenType::D:
         case TokenType::L1:
         case TokenType::L2:
         case TokenType::I:

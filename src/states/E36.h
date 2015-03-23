@@ -16,7 +16,7 @@ class E36 : public State {
     public:
         E36();
         bool transition(Automaton *automaton, ASTTokenNode *t);
-        inline int stateNumber(){return 0;}
+        inline int stateNumber(){return 36;}
 };
     
 #endif  // SRC_STATES_E36_H_

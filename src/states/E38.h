@@ -16,7 +16,7 @@ class E38 : public State {
     public:
         E38();
         bool transition(Automaton *automaton, ASTTokenNode *t);
-        inline int stateNumber(){return 0;}
+        inline int stateNumber(){return 38;}
 };
     
 #endif  // SRC_STATES_E38_H_

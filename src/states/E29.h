@@ -16,7 +16,7 @@ class E29 : public State {
     public:
         E29();
         bool transition(Automaton *automaton, ASTTokenNode *t);
-        inline int stateNumber(){return 0;}
+        inline int stateNumber(){return 29;}
 };
     
 #endif  // SRC_STATES_E29_H_
