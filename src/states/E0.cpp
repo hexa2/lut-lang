@@ -20,7 +20,6 @@ bool E0::transition (Automaton *automaton, ASTTokenNode *t) {
     case TokenType::D:
       automaton->decalage(t, new E1());
       return true;
-      break;
     case TokenType::WRITE:
     case TokenType::READ :
     case TokenType::VAR:
@@ -31,10 +30,8 @@ bool E0::transition (Automaton *automaton, ASTTokenNode *t) {
       token = ASTTokenNode(TokenType::D);
       automaton->stackStates.top()->transition(automaton, &token);
       return true;
-      break;
     default:
       return false;
-      break;
   }
 
   
