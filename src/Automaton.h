@@ -28,7 +28,6 @@ class Automaton {
     explicit Automaton(string filepath);
     bool accepts();
     void decalage(ASTTokenNode* t, State* s);
-    void reduce(int i);
     stack<ASTTokenNode*> stackASTTokenNodes;
     stack<State*> stackStates;
  protected:
