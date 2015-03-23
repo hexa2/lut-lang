@@ -7,12 +7,13 @@
 //
 #include "Automaton.h"
 #include "states/E0.h"
+using std::string;
 
-Automaton::Automaton(std::string filepath) {
+Automaton::Automaton(string filepath) {
   lexer = new Lexer(filepath);
   lexer->shift();
   stackStates.push(new E0());
-};
+}
 
 
 void Automaton::decalage(ASTTokenNode* t, State* s) {
@@ -21,25 +22,14 @@ void Automaton::decalage(ASTTokenNode* t, State* s) {
 }
 
 
-void Automaton::reduce(int i) {
-  for(int j = 0; j < i ; j++) {
-    stackStates.pop();
-    stackASTTokenNodes.pop();
-  }
-}
-
-
 bool Automaton::accepts() {
-  
-  while( lexer->has_next() )
-  {
-    if( stackStates.empty() ) return false;
-    ASTTokenNode *t = lexer->top() ;
-    if ( t == NULL ) return false;  //Mauvais symbole
-    if( !stackStates.top()->transition(this, t) ) return false;
+  while ( lexer->has_next() ) {
+    if ( stackStates.empty() ) return false;
+    ASTTokenNode *t = lexer->top();
+    if ( t == NULL ) return false;  //  wrong token case
+    if ( !stackStates.top()->transition(this, t) ) return false;
     lexer->shift();
   }
-  
-  if(stackStates.empty()) return false;
-  return stackStates.top()->stateNumber() == 2 ;
+  if ( stackStates.empty() ) return false;
+  return stackStates.top()->stateNumber() == 2;
 }

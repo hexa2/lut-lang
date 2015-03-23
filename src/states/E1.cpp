@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 
 #include "E1.h"
-#include "../state.h"
+#include "../State.h"
 
-E1::E1 () : State() { };
+E1::E1() : State() { }
 
-bool E1::transition (Automaton *automaton, ASTTokenNode *t) {
+bool E1::transition(Automaton *automaton, ASTTokenNode *t ) {
   // switch(*t) {
   // case D :
   // automaton.setState(t, new E1());

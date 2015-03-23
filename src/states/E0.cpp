@@ -7,15 +7,13 @@
 
 #include "E0.h"
 #include "E1.h"
-#include "../state.h"
-#include "TokenType.h"
+#include "../State.h"
+#include "../TokenType.h"
 
-E0::E0 () : State() { };
+E0::E0() : State() { }
 
-bool E0::transition (Automaton *automaton, ASTTokenNode *t) {
-  
+bool E0::transition(Automaton *automaton, ASTTokenNode *t) {
   ASTTokenNode token = ASTTokenNode(TokenType::D);
-  
   switch ( t->getTokenType() ) {
     case TokenType::D:
       automaton->decalage(t, new E1());
@@ -26,14 +24,12 @@ bool E0::transition (Automaton *automaton, ASTTokenNode *t) {
     case TokenType::CONST:
     case TokenType::ID:
     case TokenType::ENDOFFILE :
-      //Reduction
+      //  Reduce
       token = ASTTokenNode(TokenType::D);
       automaton->stackStates.top()->transition(automaton, &token);
       return true;
     default:
       return false;
   }
-
-  
   return false;
 }

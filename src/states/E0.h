@@ -14,10 +14,10 @@
 #include "../Automaton.h"
 
 class E0 : public State {
-public:
-  E0();
-  bool transition(Automaton *automaton, ASTTokenNode *t);
-  inline int stateNumber(){return 0;};
+ public:
+    E0();
+    bool transition(Automaton *automaton, ASTTokenNode *t);
+    inline int stateNumber(){return 0;}
 };
 
-#endif // SRC_STATES_E0_H_
+#endif  // SRC_STATES_E0_H_

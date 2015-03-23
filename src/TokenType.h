@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 //
 
-#ifndef lut_lang_TokenType_h
-#define lut_lang_TokenType_h
+#ifndef SRC_TOKENTYPE_H_
+#define SRC_TOKENTYPE_H_
 
 enum class TokenType {
-  
-  //Non Terminal Symbols
+// -------Non Terminal Symbols-----
+
   P,
   D,
   L1,
@@ -22,28 +22,31 @@ enum class TokenType {
   F,
   opA,
   opM,
-  
-  //Terminal Symbols
+
+// -----Terminal Symbols-----
+
   VAR,
   CONST,
   ID,
   VAL,
-  PV, //Semi Colon
-  V, //Comma
+  // PV = Semi Colon
+  PV,
+  // V = Comma
+  V,
   AFF,
   EQ,
   ADD,
   SUB,
   MUL,
   DIV,
-  PO, //Open With (
-  PF, //Close with )
+  // Open With (
+  PO,
+  // Close with )
+  PF,
   WRITE,
   READ,
-  
-  
   ENDOFFILE,
   INVALID_SYMBOL
 };
 
-#endif
+#endif  //  SRC_TOKENTYPE_H_

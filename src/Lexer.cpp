@@ -32,7 +32,8 @@ const std::regex single_operators(single_operators_str);
 const std::regex affectation(affectation_str);
 
 
-Lexer::Lexer(string inString) : inputString(inString), currentToken(TokenType::INVALID_SYMBOL) {
+Lexer::Lexer(string inString) : inputString(inString),
+currentToken(TokenType::INVALID_SYMBOL) {
 }
 
 bool Lexer::has_next() {
@@ -127,18 +128,15 @@ bool Lexer::analyze(string s, smatch &m) {
   } else {
     return false;
   }
-
   return true;
 }
 
 
 void test() {
   Lexer a = Lexer("const a = 5.34  ; \n const b = -2.5 ; ç const b = 5");
-
   while ( a.has_next() ) {
     a.shift();
     if ( a.top() ) {
-      cout<<"something";
     }
   }
 }

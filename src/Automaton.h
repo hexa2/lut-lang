@@ -20,20 +20,19 @@
 
 using std::map;
 using std::stack;
+using std::string;
 
 
 class Automaton {
-public:
-  explicit Automaton(std::string filepath);
-  bool accepts();
-  
-  void decalage(ASTTokenNode* t, State* s);
-  void reduce(int i);
-  stack<ASTTokenNode*> stackASTTokenNodes;
-  stack<State*> stackStates;
-protected:
- 	Lexer * lexer;
-
+ public:
+    explicit Automaton(string filepath);
+    bool accepts();
+    void decalage(ASTTokenNode* t, State* s);
+    void reduce(int i);
+    stack<ASTTokenNode*> stackASTTokenNodes;
+    stack<State*> stackStates;
+ protected:
+    Lexer * lexer;
 };
 
 #endif  // SRC_AUTOMATON_H_
