@@ -25,8 +25,16 @@ using std::string;
 
 class Automaton {
  public:
+   /**
+   * @constructor
+   * @param string filepath path to the program file to analyze
+   */
     explicit Automaton(string filepath);
     bool accepts();
+   /**
+   * @param ASTTokenNode t push t in Automaton stackToken
+   * @param State s push s in Automaton stackState
+   */
     void decalage(ASTTokenNode* t, State* s);
     stack<ASTTokenNode*> stackASTTokenNodes;
     stack<State*> stackStates;
