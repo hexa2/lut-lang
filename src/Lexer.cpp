@@ -40,8 +40,7 @@ bool Lexer::has_next() {
   // remove spaces before analyzing
   // we remove left spaces and not right to handle cases like "const "
   ltrim(inputString);
-  if( inputString.length() <= 0)
-  {
+  if ( inputString.length() <= 0 ) {
     currentToken = ASTTokenNode(TokenType::ENDOFFILE);
     return false;
   }
@@ -72,7 +71,7 @@ bool Lexer::analyze(string s, smatch &m) {
     std::string currentTokenValue = m.str();
     switch (currentTokenValue[0]) {
       case 'c':
-        currentToken = ASTTokenNode(TokenType::CONST); 
+        currentToken = ASTTokenNode(TokenType::CONST);
         break;
       case 'v':
         currentToken = ASTTokenNode(TokenType::VAR);

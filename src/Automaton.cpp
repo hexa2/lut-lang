@@ -5,6 +5,8 @@
 //  Created by Kevin Antoine on 06/03/2015.
 //  Copyright (c) 2015 H4314. All rights reserved.
 //
+#include <string>
+#include <stack>
 #include "Automaton.h"
 #include "states/E0.h"
 using std::string;
@@ -23,20 +25,20 @@ void Automaton::decalage(ASTTokenNode* t, State* s) {
 
 
 bool Automaton::analyze() {
-   while ( lexer->top()->getTokenType() != TokenType::ENDOFFILE ) {
+  while ( lexer->top()->getTokenType() != TokenType::ENDOFFILE ) {
     lexer->shift();
     if ( stackStates.empty() ) return false;
     ASTTokenNode *t = lexer->top();
     if ( t == NULL ) return false;  //  wrong token case
     if ( !stackStates.top()->transition(this, t) ) return false;
-  };
+  }
   if ( stackStates.empty() ) return false;
 
   return accepted;
 }
 
 
-stack<State*> *Automaton::getStackStates(){
+stack<State*> *Automaton::getStackStates() {
   return &this->stackStates;
 }
 

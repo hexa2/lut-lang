@@ -36,12 +36,12 @@ class Automaton {
    * @param State s push s in Automaton stackState
    */
     void decalage(ASTTokenNode* t, State* s);
-  
+
     stack<ASTTokenNode*> *getStackASTTokenNodes();
     stack<State*> *getStackStates();
     void setAccepted(bool acc);
-  
-protected:
+
+ protected:
   stack<ASTTokenNode*> stackASTTokenNodes;
   stack<State*> stackStates;
   bool accepted;
