@@ -8,9 +8,9 @@
 #include "../State.h"
 #include "../TokenType.h"
 #include "E2.h"
-//#include "E37.h"
-//#include "E18.h"
-//#include "E4.h"
+//  #include "E37.h"
+//  #include "E18.h"
+//  #include "E4.h"
 
 E2::E2() : State() { }
 
@@ -21,19 +21,21 @@ bool E2::transition(Automaton *automaton, ASTTokenNode *t ) {
       automaton->setAccepted(true);
       return true;
     case TokenType::ID:
-      //automaton->decalage(t, new E37());
+      //  automaton->decalage(t, new E37());
       return true;
     case TokenType::VAL:
-      //Reduce
+      //  Reduce
       token = ASTTokenNode(TokenType::P);
-      if (!automaton->getStackStates()->top()->transition(automaton, &token)) return false;
-      if (!automaton->getStackStates()->top()->transition(automaton, t)) return false;
+      if (!automaton->getStackStates()->top()->transition(
+        automaton, &token)) return false;
+      if (!automaton->getStackStates()->top()->transition(
+        automaton, t)) return false;
       return true;
     case TokenType::WRITE:
-      //automaton->decalage(t, new E18());
+      //  automaton->decalage(t, new E18());
       return true;
     case TokenType::READ:
-      //automaton->decalage(t, new E4());
+      //  automaton->decalage(t, new E4());
       return true;
     default:
       return false;

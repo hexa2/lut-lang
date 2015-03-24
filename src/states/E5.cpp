@@ -29,9 +29,9 @@ bool E5::transition(Automaton *automaton, ASTTokenNode *t) {
       return true;
     case TokenType::SUB:
       automaton->decalage(t, new E42());
-      return true;    
+      return true;
     default:
       return false;
   }
-return false;
+  return false;
 }

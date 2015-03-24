@@ -10,7 +10,7 @@
 #include "E1.h"
 #include "E21.h"
 #include "E2.h"
-//#include "E27.h"
+//  #include "E27.h"
 
 E1::E1() : State() { }
 
@@ -24,7 +24,7 @@ bool E1::transition(Automaton *automaton, ASTTokenNode *t ) {
       automaton->decalage(t, new E21());
       return true;
     case TokenType::CONST:
-      //automaton->decalage(t, new E27());
+      //  automaton->decalage(t, new E27());
       return true;
     case TokenType::ID:
     case TokenType::VAL:
@@ -35,10 +35,12 @@ bool E1::transition(Automaton *automaton, ASTTokenNode *t ) {
     case TokenType::ENDOFFILE:
     case TokenType::WRITE:
     case TokenType::READ:
-      //Reduce
+      //  Reduction N°12 - 0 Level Pop - "I->."
       token = ASTTokenNode(TokenType::I);
-      if (!automaton->getStackStates()->top()->transition(automaton, &token)) return false;
-      if (!automaton->getStackStates()->top()->transition(automaton, t)) return false;
+      if (!automaton->getStackStates()->top()->transition(
+        automaton, &token)) return false;
+      if (!automaton->getStackStates()->top()->transition(
+        automaton, t)) return false;
       return true;
     default:
       return false;

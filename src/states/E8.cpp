@@ -29,14 +29,15 @@ bool E8::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::READ :
     case TokenType::ENDOFFILE :
       //  Reduction N°13 - 3 Level pop
-      for(int i=0; i<3; i++)
-      {
+      for ( int i = 0 ; i < 3 ; i++ ) {
         automaton->getStackASTTokenNodes()->pop();
         automaton->getStackStates()->pop();
       }
       token = ASTTokenNode(TokenType::E);
-      if (!automaton->getStackStates()->top()->transition(automaton, &token)) return false;
-      if (!automaton->getStackStates()->top()->transition(automaton, t)) return false;
+      if (!automaton->getStackStates()->top()->transition(
+        automaton, &token)) return false;
+      if (!automaton->getStackStates()->top()->transition(
+        automaton, t)) return false;
       return true;
     case TokenType::opM:
       automaton->decalage(t, new E9());
