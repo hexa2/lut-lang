@@ -6,51 +6,32 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 
 #include "E5.h"
+#include "E7.h"
+#include "E6.h"
+#include "E41.h"
+#include "E42.h"
 #include "../State.h"
 #include "../TokenType.h"
 
 E5::E5() : State() { }
 
 bool E5::transition(Automaton *automaton, ASTTokenNode *t) {
-    ASTTokenNode token = ASTTokenNode(TokenType::D);
-    switch ( t->getTokenType() ) {
-        case TokenType::D:
-            // automaton->decalage(t, new E1());
-            return true;
-        case TokenType::P:
-        case TokenType::L1:
-        case TokenType::L2:
-        case TokenType::I:
-        case TokenType::E:
-        case TokenType::T:
-        case TokenType::F:
-        case TokenType::opA:
-        case TokenType::opM:
-
-        case TokenType::VAR:
-        case TokenType::CONST:
-        case TokenType::ID:
-        case TokenType::VAL:
-        case TokenType::PV:
-        case TokenType::V:
-        case TokenType::AFF:
-        case TokenType::EQ:
-        case TokenType::ADD:
-        case TokenType::SUB:
-        case TokenType::MUL:
-        case TokenType::DIV:
-        case TokenType::PO:
-        case TokenType::PF:
-        case TokenType::WRITE:
-        case TokenType::READ :
-        case TokenType::INVALID_SYMBOL:
-        case TokenType::ENDOFFILE :
-            //  Reduce
-            token = ASTTokenNode(TokenType::D);
-            automaton->stackStates.top()->transition(automaton, &token);
-            return true;
-        default:
-            return false;
-    }
-    return false;
+  ASTTokenNode token = ASTTokenNode(TokenType::D);
+  switch ( t->getTokenType() ) {
+    case TokenType::opA:
+      automaton->decalage(t, new E7());
+      return true;
+    case TokenType::PV:
+      automaton->decalage(t, new E6());
+      return true;
+    case TokenType::ADD:
+      automaton->decalage(t, new E41());
+      return true;
+    case TokenType::SUB:
+      automaton->decalage(t, new E42());
+      return true;
+    default:
+      return false;
+  }
+  return false;
 }

@@ -2,9 +2,10 @@
 //  action.h
 //  lut-lang
 //
-//  Created by Valentin Comte on 23/03/2015.
+//  Created by Kevin Antoine on 15/03/2015.
 //  Copyright (c) 2015 H4314. All rights reserved.
 //
+
 #ifndef SRC_STATES_E22_H_
 #define SRC_STATES_E22_H_
 

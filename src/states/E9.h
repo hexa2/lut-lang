@@ -11,6 +11,7 @@
 #include "../State.h"
 #include "../ASTTokenNode.h"
 #include "../Automaton.h"
+#include "../TokenType.h"
 
 class E9 : public State {
  public :

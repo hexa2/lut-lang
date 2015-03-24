@@ -25,14 +25,27 @@ using std::string;
 
 class Automaton {
  public:
-    explicit Automaton(string filepath);
-    bool accepts();
+   /**
+   * @constructor
+   * @param string String representing the file 
+   */
+    explicit Automaton(string inputString);
+    bool analyze();
+   /**
+   * @param ASTTokenNode t push t in Automaton stackToken
+   * @param State s push s in Automaton stackState
+   */
     void decalage(ASTTokenNode* t, State* s);
-    void reduce(int i);
-    stack<ASTTokenNode*> stackASTTokenNodes;
-    stack<State*> stackStates;
- protected:
-    Lexer * lexer;
+  
+    stack<ASTTokenNode*> *getStackASTTokenNodes();
+    stack<State*> *getStackStates();
+    void setAccepted(bool acc);
+  
+protected:
+  stack<ASTTokenNode*> stackASTTokenNodes;
+  stack<State*> stackStates;
+  bool accepted;
+  Lexer * lexer;
 };
 
 #endif  // SRC_AUTOMATON_H_
