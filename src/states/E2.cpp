@@ -28,7 +28,6 @@ bool E2::transition(Automaton *automaton, ASTTokenNode *t ) {
     case TokenType::PV:
     case TokenType::AFF:
     case TokenType::EQ:
-    case TokenType::ENDOFFILE:
     case TokenType::PO:
     case TokenType::PF:
       //  Reduction N°1 - 2 Level Pop - "P->DI"
