@@ -32,7 +32,7 @@ bool E10::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::READ :
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
-      //  Reduction N°15 - 3 Level pop
+      //  Reduction N°15 - 3 Level pop - "T->T opM F"
       for ( int i = 0 ; i < 3 ; i++ ) {
         automaton->getStackASTTokenNodes()->pop();
         automaton->getStackStates()->pop();

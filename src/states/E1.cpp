@@ -5,12 +5,11 @@
 //  Created by Kevin Antoine on 06/03/2015.
 //  Copyright (c) 2015 H4314. All rights reserved.
 
-#include "../State.h"
 #include "../TokenType.h"
 #include "E1.h"
 #include "E21.h"
+#include "E27.h"
 #include "E2.h"
-//  #include "E27.h"
 
 E1::E1() : State() { }
 
@@ -24,7 +23,7 @@ bool E1::transition(Automaton *automaton, ASTTokenNode *t ) {
       automaton->decalage(t, new E21());
       return true;
     case TokenType::CONST:
-      //  automaton->decalage(t, new E27());
+      automaton->decalage(t, new E27());
       return true;
     case TokenType::ID:
     case TokenType::VAL:

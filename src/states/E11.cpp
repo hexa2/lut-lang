@@ -1,5 +1,5 @@
 //
-            //  automaton.cpp
+//  automaton.cpp
 //  lut-lang
 //
 //  Created by Valentin Comte on 23/03/2015.
@@ -32,12 +32,12 @@ bool E11::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::READ :
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
-      //  Reduction N°17 - 1 Level pop
-      for ( int i = 0 ; i < 3 ; i++ ) {
+      //  Reduction N°17 - 1 Level pop - "F->id"
+      for ( int i = 0 ; i < 1 ; i++ ) {
         automaton->getStackASTTokenNodes()->pop();
         automaton->getStackStates()->pop();
       }
-      token = ASTTokenNode(TokenType::D);
+      token = ASTTokenNode(TokenType::F);
       if ( !automaton->getStackStates()->top()->transition(
         automaton, &token)) return false;
       if ( !automaton->getStackStates()->top()->transition(

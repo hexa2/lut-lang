@@ -32,7 +32,7 @@ bool E6::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::READ :
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
-      //  Reduction N°9 - 4 Level pop
+      //  Reduction N°9 - 4 Level pop - "I->IeEpv"
       for ( int i = 0 ; i < 4 ; i++ ) {
         automaton->getStackASTTokenNodes()->pop();
         automaton->getStackStates()->pop();

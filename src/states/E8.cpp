@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 
 #include "E8.h"
-#include "../State.h"
-#include "../TokenType.h"
+#include "E9.h"
+#include "E43.h"
+#include "E44.h"
 
 E8::E8() : State() { }
 
@@ -28,7 +29,7 @@ bool E8::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::WRITE:
     case TokenType::READ :
     case TokenType::ENDOFFILE :
-      //  Reduction N°13 - 3 Level pop
+      //  Reduction N°13 - 3 Level pop - "E->E opA T"
       for ( int i = 0 ; i < 3 ; i++ ) {
         automaton->getStackASTTokenNodes()->pop();
         automaton->getStackStates()->pop();

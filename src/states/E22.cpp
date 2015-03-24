@@ -5,7 +5,6 @@
 //  Created by Mehdi Kitane on 23/03/2015.
 //  Copyright (c) 2015 H4314. All rights reserved.
 
-#include "../State.h"
 #include "../TokenType.h"
 #include "E22.h"
 #include "E23.h"
@@ -35,7 +34,7 @@ bool E22::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::PF :
     case TokenType::READ :
     case TokenType::WRITE :
-      //  Reduction N°6 - 0 Level Pop
+      //  Reduction N°6 - 0 Level Pop - "L1->."
       token = ASTTokenNode(TokenType::L1);
       if (!automaton->getStackStates()->top()->transition(
         automaton, &token)) return false;

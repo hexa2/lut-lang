@@ -6,6 +6,7 @@
 
 #include "E23.h"
 #include "E24.h"
+#include "E25.h"
 
 E23::E23() : State() { }
 
@@ -13,10 +14,9 @@ bool E23::transition(Automaton *automaton, ASTTokenNode *t) {
   ASTTokenNode token = ASTTokenNode(TokenType::D);
   switch ( t->getTokenType() ) {
   case TokenType::V:
-    //  automaton->decalage(t, new E25());
+    automaton->decalage(t, new E25());
     return true;
   case TokenType::PV:
-    //  Reduce
     automaton->decalage(t, new E24());
     return true;
   default:
