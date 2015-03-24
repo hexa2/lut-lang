@@ -34,7 +34,7 @@ bool E8::transition(Automaton *automaton, ASTTokenNode *t) {
         automaton->getStackASTTokenNodes()->pop();
         automaton->getStackStates()->pop();
       }
-      token = ASTTokenNode(TokenType::D);
+      token = ASTTokenNode(TokenType::E);
       if (!automaton->getStackStates()->top()->transition(automaton, &token)) return false;
       if (!automaton->getStackStates()->top()->transition(automaton, t)) return false;
       return true;
