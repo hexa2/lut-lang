@@ -3,19 +3,34 @@
 #define SRC_ASTTOKENNODE_H_
 
 #include <string>
-#include "ASTNode.h"
 
 using std::string;
 
-class ASTTokenNode : public ASTNode {
+/**
+ * @class
+ * A token returned by the Lexer
+ */
+class ASTTokenNode {
+ public:
+  /**
+   * @constructor
+   * @param matchedRegex The regex that matched the token
+   * @param symbol The symbol returned by the lexer
+   */
+  explicit ASTTokenNode(string matchedRegex  = "", string symbol = "");
+
+  /**
+   * @return The regex that matched the token
+   */
+  string getMatchedRegex();
+
+  /**
+   * @return symbol The symbol returned by the lexer
+   */
+  string getSymbol();
+
  private:
   string matchedRegex;
   string symbol;
- public:
-  explicit ASTTokenNode(string matchedRegex = "", string symbol = "");
-  bool analyze(/* TODO: define the data-struct to pass */);
-  void exec(/* TODO: define the data-struct to pass */);
-  string getMatchedRegex();
-  string getSymbol();
 };
 #endif  // SRC_ASTTOKENNODE_H_
