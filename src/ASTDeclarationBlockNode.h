@@ -23,24 +23,24 @@ class ASTDeclarationBlockNode : public ASTNode {
   /**
    * @constructor
    * @param varIdentifier The variable identifier
-   * @param enumVars The next variables to enum
-   * @param next The next declaration in the block
+   * @param enumVars The prev variables to enum
+   * @param prev The prev declaration in the block
    */
   explicit ASTDeclarationBlockNode(ASTTokenNode* varIdentifier,
                                    ASTEnumDeclNode* enumVars = NULL,
-                                   ASTDeclarationBlockNode* next = NULL);
+                                   ASTDeclarationBlockNode* prev = NULL);
 
   /**
    * @constructor
    * @param constIdentifier The constant identifier
    * @param constValue The constant value
-   * @param enumConsts The next constants to enum
-   * @param next The next declaration in the block
+   * @param enumConsts The prev constants to enum
+   * @param prev The prev declaration in the block
    */
   explicit ASTDeclarationBlockNode(ASTTokenNode* constIdentifier,
                                    ASTTokenNode* constValue,
                                    ASTEnumAssignNode* enumConsts = NULL,
-                                   ASTDeclarationBlockNode* next = NULL);
+                                   ASTDeclarationBlockNode* prev = NULL);
 
   /**
    * @return The variable identifier or Null
@@ -48,7 +48,7 @@ class ASTDeclarationBlockNode : public ASTNode {
   ASTTokenNode* getVarIdentifier();
 
   /**
-   * @return The next variables to enum or Null
+   * @return The prev variables to enum or Null
    */
   ASTEnumDeclNode* getEnumVars();
 
@@ -63,14 +63,14 @@ class ASTDeclarationBlockNode : public ASTNode {
   ASTTokenNode* getConstValue();
 
   /**
-   * @return The next consts to enum or Null
+   * @return The prev consts to enum or Null
    */
   ASTEnumAssignNode* getEnumConsts();
 
   /**
-   * @return Next enum element or Null
+   * @return prev enum element or Null
    */
-  ASTDeclarationBlockNode* getNext();
+  ASTDeclarationBlockNode* getPrev();
 
   virtual bool analyze();
   virtual void exec();
@@ -81,7 +81,7 @@ class ASTDeclarationBlockNode : public ASTNode {
   ASTTokenNode* constIdentifier;
   ASTTokenNode* constValue;
   ASTEnumAssignNode* enumConsts;
-  ASTDeclarationBlockNode* next;
+  ASTDeclarationBlockNode* prev;
 };
 
 

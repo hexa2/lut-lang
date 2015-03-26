@@ -10,27 +10,27 @@
 
 ASTInstructionBlockNode::ASTInstructionBlockNode(
     ASTFirstLevelExpressionNode* expression,
-    ASTInstructionBlockNode* next) {
+    ASTInstructionBlockNode* prev) {
   this->expression = expression;
   this->identifier = NULL;
-  this->next = next;
+  this->prev = prev;
 }
 
 ASTInstructionBlockNode::ASTInstructionBlockNode(
     ASTTokenNode* identifier,
-    ASTInstructionBlockNode* next) {
+    ASTInstructionBlockNode* prev) {
   this->expression = NULL;
   this->identifier = identifier;
-  this->next = next;
+  this->prev = prev;
 }
 
 ASTInstructionBlockNode::ASTInstructionBlockNode(
     ASTFirstLevelExpressionNode* expression,
     ASTTokenNode* identifier,
-    ASTInstructionBlockNode* next) {
+    ASTInstructionBlockNode* prev) {
   this->expression = expression;
   this->identifier = identifier;
-  this->next = next;
+  this->prev = prev;
 }
 
 ASTFirstLevelExpressionNode* ASTInstructionBlockNode::getExpression() {
@@ -41,8 +41,8 @@ ASTTokenNode* ASTInstructionBlockNode::getIdentifier() {
   return this->identifier;
 }
 
-ASTInstructionBlockNode* ASTInstructionBlockNode::getNext() {
-  return this->next;
+ASTInstructionBlockNode* ASTInstructionBlockNode::getPrev() {
+  return this->prev;
 }
 
 bool ASTInstructionBlockNode::analyze() {

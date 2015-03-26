@@ -10,10 +10,10 @@
 
 ASTEnumAssignNode::ASTEnumAssignNode(ASTTokenNode* identifier,
                                      ASTTokenNode* value,
-                                     ASTEnumAssignNode* next) {
+                                     ASTEnumAssignNode* prev) {
   this->identifier = identifier;
   this->value = value;
-  this->next = next;
+  this->prev = prev;
 }
 
 ASTTokenNode* ASTEnumAssignNode::getIdentifier() {
@@ -24,8 +24,8 @@ ASTTokenNode* ASTEnumAssignNode::getValue() {
   return this->identifier;
 }
 
-ASTEnumAssignNode* ASTEnumAssignNode::getNext() {
-  return this->next;
+ASTEnumAssignNode* ASTEnumAssignNode::getPrev() {
+  return this->prev;
 }
 
 bool ASTEnumAssignNode::analyze() {

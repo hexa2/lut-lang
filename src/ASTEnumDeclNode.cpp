@@ -3,17 +3,17 @@
 #include "ASTEnumDeclNode.h"
 
 ASTEnumDeclNode::ASTEnumDeclNode(ASTTokenNode* identifier,
-                                 ASTEnumDeclNode* next) {
+                                 ASTEnumDeclNode* prev) {
   this->identifier = identifier;
-  this->next = next;
+  this->prev = prev;
 }
 
 ASTTokenNode* ASTEnumDeclNode::getIdentifier() {
   return this->identifier;
 }
 
-ASTEnumDeclNode* ASTEnumDeclNode::getNext() {
-  return this->next;
+ASTEnumDeclNode* ASTEnumDeclNode::getPrev() {
+  return this->prev;
 }
 
 bool ASTEnumDeclNode::analyze() {
