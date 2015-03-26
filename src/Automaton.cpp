@@ -49,18 +49,11 @@ stack<ASTTokenNode*> *Automaton::getStackASTTokenNodes() {
   return &this->stackASTTokenNodes;
 }
 
-State * Automaton::popStackStates() {
-  return &this->stackStates->pop();
-}
-
-State * Automaton::popStackTokens() {
-  return &this->stackTokens->pop();
-}
 
 void Automaton::reduce( ASTTokenNode tokenToReduce, int redNb) {
       for ( int i = 0 ; i < 1 ; i++ ) {
-        automaton->getStackASTTokenNodes()->pop();
-        automaton->getStackStates()->pop();
+        this->getStackASTTokenNodes()->pop();
+        this->getStackStates()->pop();
       }
 }
 

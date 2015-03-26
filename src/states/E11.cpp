@@ -34,8 +34,9 @@ bool E11::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::ENDOFFILE :
       //  Reduction N°17 - 1 Level pop - "F->id"
       token = ASTTokenNode(TokenType::F);
-      int i = 1;
-      automaton->reduce(token,i);
+
+      automaton->reduce(token,1);
+      
       if ( !automaton->getStackStates()->top()->transition(
         automaton, &token)) return false;
       if ( !automaton->getStackStates()->top()->transition(

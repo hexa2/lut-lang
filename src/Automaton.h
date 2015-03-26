@@ -43,18 +43,10 @@ class Automaton {
     stack<ASTTokenNode*> *getStackASTTokenNodes();
 
    stack<State*> *getStackStates();
-    
-   /**
-   * @return pop ASTTokenNode from top of the stack
-   */
-   ASTTokenNode * popStackTokens();
-  
-   /**
-   * @return pop State from top of the stack
-   */
-   State * popStackStates();
    
    void setAccepted(bool acc);
+  
+   void reduce( ASTTokenNode tokenToReduce, int redNb);
 
  protected:
   stack<ASTTokenNode*> stackASTTokenNodes;
