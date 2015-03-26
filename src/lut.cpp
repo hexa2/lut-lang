@@ -95,6 +95,7 @@ void test()
 }
 int main(int argc, char* argv[]) {
 
+  test();
   CLIParser* cliParser = new CLIParser(argc, argv);
   string inputFile = cliParser->getInputFile();
 
