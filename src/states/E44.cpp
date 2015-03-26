@@ -31,12 +31,12 @@ bool E44::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::READ :
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
-      //  Reduction N°23 - 1 Level Pop - "opA->DIV"
+      //  Reduction N°23 - 1 Level Pop - "opM->DIV"
       for ( int i = 0 ; i < 1 ; i++ ) {
         automaton->getStackASTTokenNodes()->pop();
         automaton->getStackStates()->pop();
       }
-      token = ASTTokenNode(TokenType::opA);
+      token = ASTTokenNode(TokenType::opM);
       if ( !automaton->getStackStates()->top()->transition(
         automaton, &token)) return false;
       if ( !automaton->getStackStates()->top()->transition(

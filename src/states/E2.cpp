@@ -42,10 +42,10 @@ bool E2::transition(Automaton *automaton, ASTTokenNode *t ) {
         automaton, t)) return false;
       return true;
     case TokenType::WRITE:
-      automaton->decalage(t, new E18());
+      automaton->decalage(t, new E4());
       return true;
     case TokenType::READ:
-      automaton->decalage(t, new E4());
+      automaton->decalage(t, new E18());
       return true;
     default:
       return false;
