@@ -37,3 +37,6 @@ tests/results.csv
 
 # XCode
 */*.xcodeproj/
+
+# Linker
+tests/lut

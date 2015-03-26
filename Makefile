@@ -19,7 +19,12 @@ all: build
 clean:
 	rm -rf bin/ objects/
 
-test:
+tests/lut: bin/lut
+	rm -f ./tests/lut
+	ln -s ../bin/lut ./tests/lut
+	chmod +x tests/lut
+
+test: tests/lut
 	cd tests; sh mktest.sh
 
 build: $(BIN_OBJ)
