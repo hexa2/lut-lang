@@ -13,25 +13,54 @@
 
 #include <map>
 #include <stack>
-#include "State.h"
+#include <string>
 #include "ASTTokenNode.h"
-#include "Action.h"
-// #include "Types.h"
 #include "Lexer.h"
+#include "State.h"
 
 using std::map;
 using std::stack;
+using std::string;
 
-
+/**
+ * @class
+ * Defines an enumeration of variable declarations
+ */
 class Automaton {
  public:
-    Automaton();
-    bool Exists(State::Id s, ASTTokenNode t);
-    bool Accepts(Lexer * lexer);
+   /**
+   * @constructor
+   * @param string String representing the file 
+   */
+    explicit Automaton(string inputString);
+    bool analyze();
+   /**
+   * @param ASTTokenNode t push t in Automaton stackToken
+   * @param State s push s in Automaton stackState
+   */
+    void decalage(ASTTokenNode* t, State* s);
+
+    stack<ASTTokenNode*> *getStackASTTokenNodes();
+
+   stack<State*> *getStackStates();
+    
+   /**
+   * @return pop ASTTokenNode from top of the stack
+   */
+   ASTTokenNode * popStackTokens();
+  
+   /**
+   * @return pop State from top of the stack
+   */
+   State * popStackStates();
+   
+   void setAccepted(bool acc);
+
  protected:
-    Action::Transitions transitions;
-    stack<ASTTokenNode> * stackASTTokenNodes;
-    stack<State::Id> * stackStates;
+  stack<ASTTokenNode*> stackASTTokenNodes;
+  stack<State*> stackStates;
+  bool accepted;
+  Lexer * lexer;
 };
 
 #endif  // SRC_AUTOMATON_H_

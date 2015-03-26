@@ -20,17 +20,18 @@ class ASTTokenNode {
   explicit ASTTokenNode(string matchedRegex  = "", string symbol = "");
 
   /**
-   * @return The regex that matched the token
+   * @return The Token Type that matched the token
    */
-  string getMatchedRegex();
+  TokenType getTokenType();
 
   /**
    * @return symbol The symbol returned by the lexer
    */
-  string getSymbol();
+  string getValue();
 
  private:
-  string matchedRegex;
-  string symbol;
+  TokenType type;
+  string value;
 };
+
 #endif  // SRC_ASTTOKENNODE_H_
