@@ -9,6 +9,9 @@
 #ifndef SRC_ASTDECLARATIONBLOCKNODE_H_
 #define SRC_ASTDECLARATIONBLOCKNODE_H_
 
+#include <cstdint>
+using std::int64_t;
+
 #include "ASTNode.h"
 #include "ASTTokenNode.h"
 #include "ASTEnumDeclNode.h"
@@ -72,8 +75,9 @@ class ASTDeclarationBlockNode : public ASTNode {
    */
   ASTDeclarationBlockNode* getPrev();
 
-  virtual bool analyze();
-  virtual void exec();
+  virtual bool analyze(analyze_table* table);
+  virtual int64_t exec(exec_table* table);
+  virtual void print();
 
  private:
   ASTTokenNode* varIdentifier;

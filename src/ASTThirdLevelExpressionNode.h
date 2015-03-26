@@ -40,8 +40,9 @@ class ASTThirdLevelExpressionNode : public ASTNode {
    */
   ASTFirstLevelExpressionNode* getExpression();
 
-  virtual bool analyze();
-  virtual void exec();
+  virtual bool analyze(analyze_table* table);
+  virtual int64_t exec(exec_table* table);
+  virtual void print();
 
  private:
   ASTTokenNode* identifierOrValue;

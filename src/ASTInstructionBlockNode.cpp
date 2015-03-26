@@ -45,9 +45,13 @@ ASTInstructionBlockNode* ASTInstructionBlockNode::getPrev() {
   return this->prev;
 }
 
-bool ASTInstructionBlockNode::analyze() {
+bool ASTInstructionBlockNode::analyze(analyze_table* table) {
   return true;
 }
 
-void ASTInstructionBlockNode::exec() {
+int64_t ASTInstructionBlockNode::exec(exec_table* table) {
+  return 0;
+}
+
+void ASTInstructionBlockNode::print() {
 }

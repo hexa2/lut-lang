@@ -28,9 +28,13 @@ ASTEnumAssignNode* ASTEnumAssignNode::getPrev() {
   return this->prev;
 }
 
-bool ASTEnumAssignNode::analyze() {
+bool ASTEnumAssignNode::analyze(analyze_table* table) {
   return true;
 }
 
-void ASTEnumAssignNode::exec() {
+int64_t ASTEnumAssignNode::exec(exec_table* table) {
+  return 0;
+}
+
+void ASTEnumAssignNode::print() {
 }

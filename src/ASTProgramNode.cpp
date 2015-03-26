@@ -22,10 +22,15 @@ ASTInstructionBlockNode* ASTProgramNode::getInstructions() {
   return this->instructions;
 }
 
-bool ASTProgramNode::analyze() {
-  return this->declarations->analyze() && this->instructions->analyze();
+bool ASTProgramNode::analyze(analyze_table* table) {
+  return
+    this->declarations->analyze(table) &&
+    this->instructions->analyze(table);
 }
-void ASTProgramNode::exec() {
-  this->declarations->exec();
-  this->instructions->exec();
+
+int64_t ASTProgramNode::exec(exec_table* table) {
+  return this->declarations->exec(table) || this->instructions->exec(table);
+}
+
+void ASTProgramNode::print() {
 }

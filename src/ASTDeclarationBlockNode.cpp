@@ -57,9 +57,13 @@ ASTDeclarationBlockNode* ASTDeclarationBlockNode::getPrev() {
   return this->prev;
 }
 
-bool ASTDeclarationBlockNode::analyze() {
+bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
   return true;
 }
 
-void ASTDeclarationBlockNode::exec() {
+int64_t ASTDeclarationBlockNode::exec(exec_table* table) {
+  return 0;
+}
+
+void ASTDeclarationBlockNode::print() {
 }

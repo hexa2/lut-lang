@@ -9,6 +9,9 @@
 #ifndef SRC_ASTENUMASSIGNNODE_H_
 #define SRC_ASTENUMASSIGNNODE_H_
 
+#include <cstdint>
+using std::int64_t;
+
 #include "ASTNode.h"
 #include "ASTNode.h"
 #include "ASTTokenNode.h"
@@ -44,8 +47,9 @@ class ASTEnumAssignNode : public ASTNode {
    */
   ASTEnumAssignNode* getPrev();
 
-  virtual bool analyze();
-  virtual void exec();
+  virtual bool analyze(analyze_table* table);
+  virtual int64_t exec(exec_table* table);
+  virtual void print();
 
  private:
   ASTTokenNode* identifier;

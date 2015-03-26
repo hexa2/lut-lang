@@ -16,9 +16,13 @@ ASTEnumDeclNode* ASTEnumDeclNode::getPrev() {
   return this->prev;
 }
 
-bool ASTEnumDeclNode::analyze() {
+bool ASTEnumDeclNode::analyze(analyze_table* table) {
   return true;
 }
 
-void ASTEnumDeclNode::exec() {
+int64_t ASTEnumDeclNode::exec(exec_table* table) {
+  return 0;
+}
+
+void ASTEnumDeclNode::print() {
 }
