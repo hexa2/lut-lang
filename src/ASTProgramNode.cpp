@@ -23,14 +23,34 @@ ASTInstructionBlockNode* ASTProgramNode::getInstructions() {
 }
 
 bool ASTProgramNode::analyze(analyze_table* table) {
-  return
-    this->declarations->analyze(table) &&
-    this->instructions->analyze(table);
+  bool declarationsOutput = true;
+  bool instructionsOutput = true;
+  if(this->declarations != NULL) {
+    declarationsOutput = this->declarations->analyze(table);
+  }
+  if(this->instructions != NULL) {
+    instructionsOutput = this->instructions->analyze(table);
+  }
+  return declarationsOutput && instructionsOutput;
 }
 
 int64_t ASTProgramNode::exec(exec_table* table) {
-  return this->declarations->exec(table) || this->instructions->exec(table);
+  int64_t declarationsOutput = 0;
+  int64_t instructionsOutput = 0;
+  if(this->declarations != NULL) {
+    declarationsOutput = this->declarations->exec(table);
+  }
+  if(this->instructions != NULL) {
+    instructionsOutput = this->instructions->exec(table);
+  }
+  return declarationsOutput || instructionsOutput;
 }
 
 void ASTProgramNode::print() {
+  if(this->declarations != NULL) {
+    declarationsOutput = this->declarations->print();
+  }
+  if(this->instructions != NULL) {
+    instructionsOutput = this->instructions->print();
+  }
 }
