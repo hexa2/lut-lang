@@ -22,7 +22,10 @@ using std::map;
 using std::stack;
 using std::string;
 
-
+/**
+ * @class
+ * Defines an enumeration of variable declarations
+ */
 class Automaton {
  public:
    /**
@@ -38,8 +41,12 @@ class Automaton {
     void decalage(ASTTokenNode* t, State* s);
 
     stack<ASTTokenNode*> *getStackASTTokenNodes();
-    stack<State*> *getStackStates();
-    void setAccepted(bool acc);
+
+   stack<State*> *getStackStates();
+   
+   void setAccepted(bool acc);
+  
+   void reduce( ASTTokenNode tokenToReduce, int redNb);
 
  protected:
   stack<ASTTokenNode*> stackASTTokenNodes;

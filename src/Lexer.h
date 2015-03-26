@@ -16,18 +16,33 @@
 
 using std::string;
 
+/**
+ * @class
+ * Defines an enumeration of variable declarations
+ */
 class Lexer {
  public:
-  // Sets the input source to be a stream
+  /**
+   * @constructor
+   * @param inString The string that will be parsed
+   */
   explicit Lexer(string inString);
 
-  // Returns true if there is something else to read with next(&type)
+  /**
+   * @return Returns true if there is something else to read in the string
+   *
+   */
   bool has_next();
 
-  // Returns the next token
+  /**
+   * @return the last token parsed
+   *
+   */
   ASTTokenNode* top();
 
-  // Moves to the next token
+  /**
+   * Moves to the next token
+   */
   void shift();
 
 

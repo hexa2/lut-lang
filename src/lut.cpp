@@ -3,18 +3,14 @@
 #include <string>
 #include "Automaton.h"
 
-#define OPT_TRANSFORM "-o"
-#define OPT_PRINT "-p"
-#define OPT_STATIC "-a"
-#define OPT_EXEC "-e"
+#include "CLIParser.h"
 
-using std::string;
 using std::cout;
-using std::cerr;
 using std::endl;
 
-int main(int argc, char* argv[]) {
-    
+
+void test()
+{
     
     //Test affectation variable
     Automaton *automate = new Automaton ("var b; b:=8;");
@@ -85,7 +81,7 @@ int main(int argc, char* argv[]) {
         cout<<"Marche pas"<<endl;
     }
     delete automate;
-  
+    
     //Test affectation variable avec expression
     automate = new Automaton ("b := 4+2;");
     cout << " // Test affectation variable avec expression : ";
@@ -95,53 +91,26 @@ int main(int argc, char* argv[]) {
         cout<<"Marche pas"<<endl;
     }
     delete automate;
-    
-  bool transformEnabled = false;
-  bool printEnabled = false;
-  bool staticEnabled = false;
-  bool execEnabled = false;
-  string* fileName = NULL;
 
+}
+int main(int argc, char* argv[]) {
 
-  for (int i = 1; i < argc; i++) {
-    string* arg = new string(argv[i]);
-    if (arg->compare(OPT_TRANSFORM) == 0) {
-      transformEnabled = true;
-      delete arg;
-    } else if (arg->compare(OPT_PRINT) == 0) {
-      printEnabled = true;
-      delete arg;
-    } else if (arg->compare(OPT_STATIC) == 0) {
-      staticEnabled = true;
-      delete arg;
-    } else if (arg->compare(OPT_EXEC) == 0) {
-      execEnabled = true;
-      delete arg;
-    } else {
-      fileName = arg;
-    }
-  }
+  CLIParser* cliParser = new CLIParser(argc, argv);
+  string inputFile = cliParser->getInputFile();
 
-  if (fileName == NULL) {
-    cerr << "No input file provided" << endl;
-    return 1;
-  }
-
-  // LEXER
-  // PARSER
-  if (transformEnabled) {
+  if (cliParser->transformIsEnabled()) {
     cout << "Transform (optimize) input" << endl;
     // TRANSFORM
   }
-  if (printEnabled) {
+  if (cliParser->printIsEnabled()) {
     cout << "Print (transformed?) input" << endl;
     // PRINT
   }
-  if (staticEnabled) {
+  if (cliParser->staticIsEnabled()) {
     cout << "Analyze statically" << endl;
     // STATIC
   }
-  if (execEnabled) {
+  if (cliParser->execIsEnabled()) {
     cout << "Execute" << endl;
     // EXEC
   }

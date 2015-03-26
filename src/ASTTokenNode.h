@@ -8,12 +8,12 @@
 using std::string;
 
 class ASTTokenNode : public ASTNode {
- private:
+private:
   TokenType type;
   string value;
- public:
+public:
   explicit ASTTokenNode(TokenType type, string value = "");
-
+  
   bool analyze(/* TODO: define the data-struct to pass */);
   void exec(/* TODO: define the data-struct to pass */);
   TokenType getTokenType();
