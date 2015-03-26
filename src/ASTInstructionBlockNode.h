@@ -23,30 +23,30 @@ class ASTInstructionBlockNode : public ASTNode {
    * @constructor
    * Write expression constructor
    * @param expression The expression to write
-   * @param next The next instruction
+   * @param prev The prev instruction
    */
   ASTInstructionBlockNode(ASTFirstLevelExpressionNode* expression,
-                          ASTInstructionBlockNode* next = NULL);
+                          ASTInstructionBlockNode* prev = NULL);
 
   /**
    * @constructor
    * Read variable constructor
    * @param identifier The variable identifier
-   * @param next The next instruction
+   * @param prev The prev instruction
    */
   ASTInstructionBlockNode(ASTTokenNode* identifier,
-                          ASTInstructionBlockNode* next = NULL);
+                          ASTInstructionBlockNode* prev = NULL);
 
   /**
    * @constructor
    * Assignment constructor
    * @param expression The expression to assign
    * @param identifier The variable identifier to be assigned
-   * @param next The next instruction
+   * @param prev The prev instruction
    */
   ASTInstructionBlockNode(ASTFirstLevelExpressionNode* expression,
                           ASTTokenNode* identifier,
-                          ASTInstructionBlockNode* next = NULL);
+                          ASTInstructionBlockNode* prev = NULL);
 
   /**
    * @return An expression used for either assignment or output or Null
@@ -59,9 +59,9 @@ class ASTInstructionBlockNode : public ASTNode {
   ASTTokenNode* getIdentifier();
 
   /**
-   * @return The next instruction or Null
+   * @return The prev instruction or Null
    */
-  ASTInstructionBlockNode* getNext();
+  ASTInstructionBlockNode* getPrev();
 
   virtual bool analyze();
   virtual void exec();
@@ -69,7 +69,7 @@ class ASTInstructionBlockNode : public ASTNode {
  private:
   ASTFirstLevelExpressionNode* expression;
   ASTTokenNode* identifier;
-  ASTInstructionBlockNode* next;
+  ASTInstructionBlockNode* prev;
 };
 
 #endif  // SRC_ASTINSTRUCTIONBLOCKNODE_H_

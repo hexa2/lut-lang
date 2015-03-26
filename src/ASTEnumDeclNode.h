@@ -15,10 +15,10 @@ class ASTEnumDeclNode : public ASTNode {
   /**
    * @constructor
    * @param identifier The variable identifier
-   * @param next The next declaration in the enum
+   * @param prev The prev declaration in the enum
    */
   explicit ASTEnumDeclNode(ASTTokenNode* identifier,
-                           ASTEnumDeclNode* next = NULL);
+                           ASTEnumDeclNode* prev = NULL);
 
   /**
    * @return The variable identifier
@@ -26,16 +26,16 @@ class ASTEnumDeclNode : public ASTNode {
   ASTTokenNode* getIdentifier();
 
   /**
-   * @return Next enum element or Null
+   * @return prev enum element or Null
    */
-  ASTEnumDeclNode* getNext();
+  ASTEnumDeclNode* getPrev();
 
   virtual bool analyze();
   virtual void exec();
 
  private:
   ASTTokenNode* identifier;
-  ASTEnumDeclNode* next;
+  ASTEnumDeclNode* prev;
 };
 
 

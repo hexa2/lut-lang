@@ -23,11 +23,11 @@ class ASTEnumAssignNode : public ASTNode {
    * @constructor
    * @param identifier The const identifier
    * @param value The assigned value
-   * @param next The next declaration in the enum
+   * @param prev The prev declaration in the enum
    */
   explicit ASTEnumAssignNode(ASTTokenNode* identifier,
                              ASTTokenNode* value,
-                             ASTEnumAssignNode* next = NULL);
+                             ASTEnumAssignNode* prev = NULL);
 
   /**
    * @return The variable identifier
@@ -40,9 +40,9 @@ class ASTEnumAssignNode : public ASTNode {
   ASTTokenNode* getValue();
 
   /**
-   * @return Next enum element or Null
+   * @return prev enum element or Null
    */
-  ASTEnumAssignNode* getNext();
+  ASTEnumAssignNode* getPrev();
 
   virtual bool analyze();
   virtual void exec();
@@ -50,7 +50,7 @@ class ASTEnumAssignNode : public ASTNode {
  private:
   ASTTokenNode* identifier;
   ASTTokenNode* value;
-  ASTEnumAssignNode* next;
+  ASTEnumAssignNode* prev;
 };
 
 #endif  // SRC_ASTENUMASSIGNNODE_H_
