@@ -3,15 +3,24 @@
 
 #include <string>
 
-ASTTokenNode::ASTTokenNode(string matchedRegex, string symbol) {
-  this->matchedRegex = matchedRegex;
-  this->symbol = symbol;
+
+ASTTokenNode::ASTTokenNode(TokenType type, string value ) {
+  this->type = type;
+  this->value = value;
 }
 
-string ASTTokenNode::getMatchedRegex() {
-  return this->matchedRegex;
+bool ASTTokenNode::analyze() {
+  return true;  // noop
 }
 
-string ASTTokenNode::getSymbol() {
-  return this->symbol;
+void ASTTokenNode::exec() {
+  // noop
+}
+
+TokenType ASTTokenNode::getTokenType() {
+  return this->type;
+}
+
+string ASTTokenNode::getValue() {
+  return this->value;
 }

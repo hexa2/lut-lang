@@ -2,4 +2,4 @@ test:
   override:
     - make
     # - make test
-    - python cpplint.py src/*
+    #- python cpplint.py src/* src/states/*
