@@ -50,7 +50,7 @@ stack<ASTTokenNode*> *Automaton::getStackASTTokenNodes() {
 }
 
 
-void Automaton::reduce( ASTTokenNode tokenToReduce, int redNb) {
+void Automaton::reduce(ASTTokenNode tokenToReduce, int redNb) {
       for ( int i = 0 ; i < 1 ; i++ ) {
         this->getStackASTTokenNodes()->pop();
         this->getStackStates()->pop();

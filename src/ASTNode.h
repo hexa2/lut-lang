@@ -3,7 +3,9 @@
 #define SRC_ASTNODE_H_
 
 #include <iostream>
+#include <string>
 #include "TokenType.h"
+
 using std::string;
 /**
  * @class
@@ -19,13 +21,13 @@ class ASTNode {
    * @todo define the data-struct to pass
    */
   virtual bool analyze() = 0;
-  
+
   /**
    * Executes the program
    * @todo define the data-struct to pass
    */
   virtual void exec() = 0;
-  
+
   TokenType getTokenType();
   string getValue();
 };

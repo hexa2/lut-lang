@@ -133,7 +133,7 @@ bool Lexer::analyze(string s, smatch &m) {
 }
 
 
-void test() {
+void test_lexer() {
   Lexer a = Lexer("const a = 5.34  ; \n const b = -2.5 ; ç const b = 5");
   while ( a.has_next() ) {
     a.shift();
