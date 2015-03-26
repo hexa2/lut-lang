@@ -8,6 +8,8 @@
 
 #include "ASTDeclarationBlockNode.h"
 
+#include <tuple>
+
 ASTDeclarationBlockNode::ASTDeclarationBlockNode(
     ASTTokenNode* varIdentifier,
     ASTEnumDeclNode* enumVars,
@@ -58,6 +60,36 @@ ASTDeclarationBlockNode* ASTDeclarationBlockNode::getPrev() {
 }
 
 bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
+  if (this->prev != NULL && !this->prev->analyze(table)) {
+    return false;
+  }
+
+  if (this->varIdentifier != NULL) {  // Var assignments case
+    if (table->count(this->varIdentifier->getSymbol()) > 0) {
+      return false;
+    }
+
+    table->emplace(this->varIdentifier->getSymbol(),
+                   std::make_tuple(false, false));
+
+    if (this->enumVars != NULL && !this->enumVars->analyze(table)) {
+      return false;
+    }
+  }
+
+  if (this->constIdentifier != NULL) {  // Const assignments case
+    if (table->count(this->constIdentifier->getSymbol()) > 0) {
+      return false;
+    }
+
+    table->emplace(this->varIdentifier->getSymbol(),
+                   std::make_tuple(true, true));
+
+    if (this->enumConsts != NULL && !this->enumConsts->analyze(table)) {
+      return false;
+    }
+  }
+
   return true;
 }
 
