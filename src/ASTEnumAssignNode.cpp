@@ -10,7 +10,8 @@
 
 ASTEnumAssignNode::ASTEnumAssignNode(ASTTokenNode* identifier,
                                      ASTTokenNode* value,
-                                     ASTEnumAssignNode* prev) {
+                                     ASTEnumAssignNode* prev,
+                                     TokenType type) : ASTNode(type) {
   this->identifier = identifier;
   this->value = value;
   this->prev = prev;

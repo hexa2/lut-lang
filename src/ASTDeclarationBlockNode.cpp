@@ -11,7 +11,8 @@
 ASTDeclarationBlockNode::ASTDeclarationBlockNode(
     ASTTokenNode* varIdentifier,
     ASTEnumDeclNode* enumVars,
-    ASTDeclarationBlockNode* prev) {
+    ASTDeclarationBlockNode* prev,
+                                                 TokenType type ) : ASTNode(type) {
   this->varIdentifier = varIdentifier;
   this->enumVars = enumVars;
   this->constIdentifier = NULL;
@@ -24,7 +25,8 @@ ASTDeclarationBlockNode::ASTDeclarationBlockNode(
     ASTTokenNode* constIdentifier,
     ASTTokenNode* constValue,
     ASTEnumAssignNode* enumConsts,
-    ASTDeclarationBlockNode* prev) {
+    ASTDeclarationBlockNode* prev,
+                                                 TokenType type ) : ASTNode(type) {
   this->varIdentifier = NULL;
   this->enumVars = NULL;
   this->constIdentifier = constIdentifier;

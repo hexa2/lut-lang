@@ -9,25 +9,27 @@
 #include "ASTInstructionBlockNode.h"
 
 ASTInstructionBlockNode::ASTInstructionBlockNode(
-    ASTFirstLevelExpressionNode* expression,
-    ASTInstructionBlockNode* prev) {
+                                                 ASTFirstLevelExpressionNode* expression,
+                                                 ASTInstructionBlockNode* prev,
+                                                 TokenType type) : ASTNode(type){
   this->expression = expression;
   this->identifier = NULL;
   this->prev = prev;
 }
 
 ASTInstructionBlockNode::ASTInstructionBlockNode(
-    ASTTokenNode* identifier,
-    ASTInstructionBlockNode* prev) {
+                                                 ASTTokenNode* identifier,
+                                                 ASTInstructionBlockNode* prev,
+                                                 TokenType type) : ASTNode(type){
   this->expression = NULL;
   this->identifier = identifier;
   this->prev = prev;
 }
 
-ASTInstructionBlockNode::ASTInstructionBlockNode(
-    ASTFirstLevelExpressionNode* expression,
-    ASTTokenNode* identifier,
-    ASTInstructionBlockNode* prev) {
+ASTInstructionBlockNode::ASTInstructionBlockNode(ASTFirstLevelExpressionNode* expression,
+                                                 ASTTokenNode* identifier,
+                                                 ASTInstructionBlockNode* prev,
+                                                 TokenType type) : ASTNode(type){
   this->expression = expression;
   this->identifier = identifier;
   this->prev = prev;

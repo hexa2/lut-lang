@@ -22,7 +22,7 @@ class ASTMultiplicativeOperation : public ASTNode {
    * @constructor
    * @param symbol The multiplication symbol
    */
-  explicit ASTMultiplicativeOperation(ASTTokenNode* symbol);
+  explicit ASTMultiplicativeOperation(ASTTokenNode* symbol, TokenType type);
 
   /**
    * @return The operation symbol

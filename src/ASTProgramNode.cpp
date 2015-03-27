@@ -9,7 +9,8 @@
 #include "ASTProgramNode.h"
 
 ASTProgramNode::ASTProgramNode(ASTDeclarationBlockNode* declarations,
-                               ASTInstructionBlockNode* instructions) {
+                               ASTInstructionBlockNode* instructions,
+                               TokenType type) : ASTNode(type) {
   this->declarations = declarations;
   this->instructions = instructions;
 }

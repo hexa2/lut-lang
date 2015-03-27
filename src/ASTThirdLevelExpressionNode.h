@@ -22,13 +22,15 @@ class ASTThirdLevelExpressionNode : public ASTNode {
    * @constructor
    * @param identifier A variable identifier or a value
    */
-  explicit ASTThirdLevelExpressionNode(ASTTokenNode* identifierOrValue);
+  explicit ASTThirdLevelExpressionNode(ASTTokenNode* identifierOrValue,
+                                       TokenType type = TokenType::F);
 
   /**
    * @constructor
    * @param expression A first level expression
    */
-  explicit ASTThirdLevelExpressionNode(ASTFirstLevelExpressionNode* expression);
+  explicit ASTThirdLevelExpressionNode(ASTFirstLevelExpressionNode* expression,
+                                       TokenType type = TokenType::F);
 
   /**
    * @return The variable identifier or a value or Null

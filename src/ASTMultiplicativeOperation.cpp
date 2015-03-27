@@ -8,7 +8,7 @@
 
 #include "ASTMultiplicativeOperation.h"
 
-ASTMultiplicativeOperation::ASTMultiplicativeOperation(ASTTokenNode* symbol) {
+ASTMultiplicativeOperation::ASTMultiplicativeOperation(ASTTokenNode* symbol, TokenType type) : ASTNode(type){
   this->symbol = symbol;
 }
 

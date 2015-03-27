@@ -22,7 +22,8 @@ class ASTAdditiveOperation : public ASTNode {
    * @constructor
    * @param symbol The addition symbol
    */
-  explicit ASTAdditiveOperation(ASTTokenNode* symbol);
+  explicit ASTAdditiveOperation(ASTTokenNode* symbol,
+                                TokenType type);
 
   /**
    * @return The operation symbol

@@ -14,8 +14,8 @@ using std::string;
 class ASTNode {
  private:
   TokenType type;
-  string value;
  public:
+  explicit ASTNode(TokenType type);
   /**
    * Analyzes statically the validity of the program
    * @todo define the data-struct to pass
@@ -29,6 +29,5 @@ class ASTNode {
   virtual void exec() = 0;
 
   TokenType getTokenType();
-  string getValue();
 };
 #endif  // SRC_ASTNODE_H_

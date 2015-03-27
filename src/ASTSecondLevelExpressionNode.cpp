@@ -11,14 +11,16 @@
 ASTSecondLevelExpressionNode::ASTSecondLevelExpressionNode(
     ASTSecondLevelExpressionNode* leftExpression,
     ASTMultiplicativeOperation* mulOp,
-    ASTThirdLevelExpressionNode* rightExpression) {
+    ASTThirdLevelExpressionNode* rightExpression,
+                                                           TokenType type) : ASTNode(type) {
   this->leftExpression = leftExpression;
   this->mulOp = mulOp;
   this->rightExpression = rightExpression;
 }
 
 ASTSecondLevelExpressionNode::ASTSecondLevelExpressionNode(
-    ASTThirdLevelExpressionNode* rightExpression) {
+    ASTThirdLevelExpressionNode* rightExpression,
+                                                           TokenType type) : ASTNode(type){
   this->leftExpression = NULL;
   this->mulOp = NULL;
   this->rightExpression = rightExpression;
