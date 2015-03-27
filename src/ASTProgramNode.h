@@ -22,8 +22,7 @@ class ASTProgramNode : public ASTNode {
    */
   ASTProgramNode(ASTDeclarationBlockNode* declarations = NULL,
                  ASTInstructionBlockNode* instructions = NULL,
-                 TokenType type = TokenType::P
-                 );
+                 TokenType type = TokenType::P);
 
   /**
    * @return The declaration block

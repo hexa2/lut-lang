@@ -8,19 +8,17 @@
 
 #include "ASTSecondLevelExpressionNode.h"
 
-ASTSecondLevelExpressionNode::ASTSecondLevelExpressionNode(
-    ASTSecondLevelExpressionNode* leftExpression,
-    ASTMultiplicativeOperation* mulOp,
-    ASTThirdLevelExpressionNode* rightExpression,
+ASTSecondLevelExpressionNode::ASTSecondLevelExpressionNode(ASTSecondLevelExpressionNode* leftExpression,
+                                                           ASTMultiplicativeOperation* mulOp,
+                                                           ASTThirdLevelExpressionNode* rightExpression,
                                                            TokenType type) : ASTNode(type) {
   this->leftExpression = leftExpression;
   this->mulOp = mulOp;
   this->rightExpression = rightExpression;
 }
 
-ASTSecondLevelExpressionNode::ASTSecondLevelExpressionNode(
-    ASTThirdLevelExpressionNode* rightExpression,
-                                                           TokenType type) : ASTNode(type){
+ASTSecondLevelExpressionNode::ASTSecondLevelExpressionNode(ASTThirdLevelExpressionNode* rightExpression,
+                                                           TokenType type) : ASTNode(type) {
   this->leftExpression = NULL;
   this->mulOp = NULL;
   this->rightExpression = rightExpression;

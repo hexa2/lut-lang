@@ -15,7 +15,7 @@ class ASTTokenNode : public ASTNode {
 
   bool analyze(/* TODO: define the data-struct to pass */);
   void exec(/* TODO: define the data-struct to pass */);
-  
+
   string getValue();
 };
 #endif  // SRC_ASTTOKENNODE_H_

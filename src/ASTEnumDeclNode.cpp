@@ -4,7 +4,7 @@
 
 ASTEnumDeclNode::ASTEnumDeclNode(ASTTokenNode* identifier,
                                  ASTEnumDeclNode* prev,
-                                 TokenType type) : ASTNode(type){
+                                 TokenType type) : ASTNode(type) {
   this->identifier = identifier;
   this->prev = prev;
 }

@@ -15,7 +15,6 @@ E0::E0() : State() { }
 
 bool E0::transition(Automaton *automaton, ASTNode *t) {
   ASTDeclarationBlockNode token = ASTDeclarationBlockNode(NULL);
-  
   switch ( t->getTokenType() ) {
     case TokenType::D:
       automaton->decalage(t, new E1());

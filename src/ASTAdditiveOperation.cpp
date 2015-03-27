@@ -9,7 +9,7 @@
 #include "ASTAdditiveOperation.h"
 
 ASTAdditiveOperation::ASTAdditiveOperation(ASTTokenNode* symbol,
-                                           TokenType type) : ASTNode(type){
+                                           TokenType type) : ASTNode(type) {
   this->symbol = symbol;
 }
 

@@ -14,7 +14,6 @@ E24::E24() : State() { }
 
 bool E24::transition(Automaton *automaton, ASTNode *t) {
   ASTDeclarationBlockNode token = ASTDeclarationBlockNode(NULL);
-  
   switch ( t->getTokenType() ) {
     case TokenType::ADD :
     case TokenType::MUL :

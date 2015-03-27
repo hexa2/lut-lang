@@ -4,9 +4,9 @@
 #include <string>
 
 
-ASTNode::ASTNode(TokenType type) : type(type){
+ASTNode::ASTNode(TokenType type) : type(type) {
 }
 
-TokenType ASTNode::getTokenType(){
+TokenType ASTNode::getTokenType() {
   return this->type;
 }

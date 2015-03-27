@@ -33,8 +33,7 @@ class ASTFirstLevelExpressionNode : public ASTNode {
    * @constructor
    * @param rightExpression Right part, goes to the 2nd lvl expr
    */
-  explicit ASTFirstLevelExpressionNode(
-      ASTSecondLevelExpressionNode* rightExpression,
+  explicit ASTFirstLevelExpressionNode(ASTSecondLevelExpressionNode* rightExpression,
                                        TokenType type = TokenType::E);
 
   /**
