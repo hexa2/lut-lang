@@ -49,14 +49,6 @@ stack<ASTNode*> *Automaton::getStackASTNodes() {
   return &this->stackASTTokenNodes;
 }
 
-
-//void Automaton::reduce(ASTTokenNode tokenToReduce, int redNb) {
-//      for ( int i = 0 ; i < 1 ; i++ ) {
-//        this->getStackASTTokenNodes()->pop();
-//        this->getStackStates()->pop();
-//      }
-//}
-
 /**
  * @Accepted is set to true when the end transition is runned.
  */

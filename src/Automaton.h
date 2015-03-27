@@ -46,8 +46,6 @@ class Automaton {
 
   void setAccepted(bool acc);
 
-  void reduce(ASTNode tokenToReduce, int redNb);
-
  protected:
   stack<ASTNode*> stackASTTokenNodes;
   stack<State*> stackStates;
