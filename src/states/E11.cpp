@@ -8,11 +8,11 @@
 #include "E11.h"
 #include "../State.h"
 #include "../TokenType.h"
-
+#include "../ASTThirdLevelExpressionNode.h"
 E11::E11() : State() { }
 
-bool E11::transition(Automaton *automaton, ASTTokenNode *t) {
-  ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E11::transition(Automaton *automaton, ASTNode *t) {
+  ASTThirdLevelExpressionNode token = ASTThirdLevelExpressionNode();
   switch ( t->getTokenType() ) {
     case TokenType::VAR:
     case TokenType::CONST:
@@ -33,14 +33,12 @@ bool E11::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
       //  Reduction N°17 - 1 Level pop - "F->id"
-      token = ASTTokenNode(TokenType::F);
-
       automaton->reduce(token, 1);
 
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, &token)) return false;
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, t)) return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+        return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, t))
+        return false;
       return true;
     default:
       return false;

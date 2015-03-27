@@ -40,7 +40,7 @@ class Automaton {
    */
   void decalage(ASTNode* t, State* s);
 
-  stack<ASTNode*> *getStackASTTokenNodes();
+  stack<ASTNode*> *getStackASTNodes();
 
   stack<State*> *getStackStates();
 

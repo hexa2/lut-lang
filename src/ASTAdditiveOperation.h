@@ -23,7 +23,7 @@ class ASTAdditiveOperation : public ASTNode {
    * @param symbol The addition symbol
    */
   explicit ASTAdditiveOperation(ASTTokenNode* symbol,
-                                TokenType type);
+                                TokenType type = TokenType::opA);
 
   /**
    * @return The operation symbol

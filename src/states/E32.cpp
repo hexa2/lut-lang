@@ -8,11 +8,11 @@
 #include "E32.h"
 #include "../State.h"
 #include "../TokenType.h"
-
+#include "../ASTDeclarationBlockNode.h"
 E32::E32() : State() { }
 
-bool E32::transition(Automaton *automaton, ASTTokenNode *t) {
-    ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E32::transition(Automaton *automaton, ASTNode *t) {
+    ASTDeclarationBlockNode token = ASTDeclarationBlockNode(NULL);
     switch ( t->getTokenType() ) {
         case TokenType::VAR:
         case TokenType::CONST:
@@ -34,14 +34,13 @@ bool E32::transition(Automaton *automaton, ASTTokenNode *t) {
         case TokenType::ENDOFFILE :
             //  Reduction N°3 - 7 Level Pop - "D->D const id eq val L2 pv"
           for ( int i = 0 ; i < 7 ; i++ ) {
-            automaton->getStackASTTokenNodes()->pop();
+            automaton->getStackASTNodes()->pop();
             automaton->getStackStates()->pop();
           }
-          token = ASTTokenNode(TokenType::D);
-          if ( !automaton->getStackStates()->top()->transition(
-            automaton, &token)) return false;
-          if ( !automaton->getStackStates()->top()->transition(
-            automaton, t)) return false;
+          if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+            return false;
+          if ( !automaton->getStackStates()->top()->transition(automaton, t))
+            return false;
           return true;
         default:
             return false;

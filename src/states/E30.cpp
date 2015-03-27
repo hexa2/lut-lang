@@ -8,11 +8,11 @@
 #include "E30.h"
 #include "E31.h"
 #include "../TokenType.h"
-
+#include "../ASTEnumAssignNode.h"
 E30::E30() : State() { }
 
-bool E30::transition(Automaton *automaton, ASTTokenNode *t) {
-  ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E30::transition(Automaton *automaton, ASTNode *t) {
+  ASTEnumAssignNode token = ASTEnumAssignNode(NULL, NULL);
   switch ( t->getTokenType() ) {
     case TokenType::L2:
       automaton->decalage(t, new E31());
@@ -36,11 +36,10 @@ bool E30::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
       //  Reduction N°8 - 0 Level pop - "L2->."
-      token = ASTTokenNode(TokenType::L2);
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, &token)) return false;
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, t)) return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+        return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, t))
+        return false;
       return true;
     default:
         return false;

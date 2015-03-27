@@ -10,13 +10,13 @@
 #ifndef SRC_STATE_H_
 #define SRC_STATE_H_
 
-#include "ASTTokenNode.h"
+#include "ASTNode.h"
 class Automaton;
 
 class State {
  public:
     State() { }
-    virtual bool transition(Automaton *automaton, ASTTokenNode * t) = 0;
+    virtual bool transition(Automaton *automaton, ASTNode * t) = 0;
     virtual int stateNumber() = 0;
 };
 

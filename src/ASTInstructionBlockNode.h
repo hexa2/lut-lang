@@ -25,7 +25,7 @@ class ASTInstructionBlockNode : public ASTNode {
    * @param expression The expression to write
    * @param prev The prev instruction
    */
-  ASTInstructionBlockNode(ASTFirstLevelExpressionNode* expression,
+  ASTInstructionBlockNode(ASTFirstLevelExpressionNode* expression = NULL,
                           ASTInstructionBlockNode* prev = NULL,
                           TokenType type = TokenType::I);
 

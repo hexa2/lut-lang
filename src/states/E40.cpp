@@ -7,11 +7,11 @@
 
 #include "E40.h"
 #include "../TokenType.h"
-
+#include "../ASTInstructionBlockNode.h"
 E40::E40() : State() { }
 
-bool E40::transition(Automaton *automaton, ASTTokenNode *t) {
-  ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E40::transition(Automaton *automaton, ASTNode *t) {
+  ASTInstructionBlockNode token = ASTInstructionBlockNode();
   switch ( t->getTokenType() ) {
     case TokenType::VAR:
     case TokenType::CONST:
@@ -33,14 +33,14 @@ bool E40::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::ENDOFFILE :
       //  Reduction N°11 - 5 Level Pop - "I->I id af E pv"
       for ( int i = 0 ; i < 5 ; i++ ) {
-        automaton->getStackASTTokenNodes()->pop();
+        automaton->getStackASTNodes()->pop();
         automaton->getStackStates()->pop();
       }
-      token = ASTTokenNode(TokenType::I);
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, &token)) return false;
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, t)) return false;
+
+      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+        return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, t))
+        return false;
       return true;
     default:
         return false;

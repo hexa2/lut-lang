@@ -8,11 +8,12 @@
 #include "E26.h"
 #include "../State.h"
 #include "../TokenType.h"
+#include "../ASTEnumDeclNode.h"
 
 E26::E26() : State() { }
 
-bool E26::transition(Automaton *automaton, ASTTokenNode *t) {
-    ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E26::transition(Automaton *automaton, ASTNode *t) {
+    ASTEnumDeclNode token = ASTEnumDeclNode(NULL);
     switch ( t->getTokenType() ) {
         case TokenType::VAR:
         case TokenType::CONST:
@@ -34,14 +35,13 @@ bool E26::transition(Automaton *automaton, ASTTokenNode *t) {
         case TokenType::ENDOFFILE :
           //  Reduction N°5 - 3 Level pop - "L1->L1 v id"
           for ( int i = 0 ; i < 3 ; i++ ) {
-            automaton->getStackASTTokenNodes()->pop();
+            automaton->getStackASTNodes()->pop();
             automaton->getStackStates()->pop();
           }
-          token = ASTTokenNode(TokenType::L1);
-          if ( !automaton->getStackStates()->top()->transition(
-            automaton, &token)) return false;
-          if ( !automaton->getStackStates()->top()->transition(
-            automaton, t)) return false;
+          if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+            return false;
+          if ( !automaton->getStackStates()->top()->transition(automaton, t))
+            return false;
           return true;
         default:
             return false;

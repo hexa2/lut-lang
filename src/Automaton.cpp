@@ -45,7 +45,7 @@ stack<State*> *Automaton::getStackStates() {
   return &this->stackStates;
 }
 
-stack<ASTNode*> *Automaton::getStackASTTokenNodes() {
+stack<ASTNode*> *Automaton::getStackASTNodes() {
   return &this->stackASTTokenNodes;
 }
 

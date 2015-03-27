@@ -8,11 +8,13 @@
 #include "E24.h"
 #include "../State.h"
 #include "../TokenType.h"
+#include "../ASTDeclarationBlockNode.h"
 
 E24::E24() : State() { }
 
-bool E24::transition(Automaton *automaton, ASTTokenNode *t) {
-  ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E24::transition(Automaton *automaton, ASTNode *t) {
+  ASTDeclarationBlockNode token = ASTDeclarationBlockNode(NULL);
+  
   switch ( t->getTokenType() ) {
     case TokenType::ADD :
     case TokenType::MUL :
@@ -33,14 +35,13 @@ bool E24::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::WRITE :
       //  Reduction N°2 - 4 Level pop - "D->D var id L1 pv"
       for ( int i = 0 ; i < 5 ; i++ ) {
-        automaton->getStackASTTokenNodes()->pop();
+        automaton->getStackASTNodes()->pop();
         automaton->getStackStates()->pop();
       }
-      token = ASTTokenNode(TokenType::D);
-      if (!automaton->getStackStates()->top()->transition(
-        automaton, &token)) return false;
-      if (!automaton->getStackStates()->top()->transition(
-        automaton, t)) return false;
+      if (!automaton->getStackStates()->top()->transition(automaton, &token))
+        return false;
+      if (!automaton->getStackStates()->top()->transition(automaton, t))
+        return false;
       return true;
     default:
       return false;

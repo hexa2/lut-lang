@@ -8,11 +8,11 @@
 #include "E36.h"
 #include "../State.h"
 #include "../TokenType.h"
-
+#include "../ASTEnumAssignNode.h"
 E36::E36() : State() { }
 
-bool E36::transition(Automaton *automaton, ASTTokenNode *t) {
-  ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E36::transition(Automaton *automaton, ASTNode *t) {
+  ASTEnumAssignNode token = ASTEnumAssignNode(NULL, NULL);
   switch ( t->getTokenType() ) {
     case TokenType::VAR:
     case TokenType::CONST:
@@ -34,14 +34,13 @@ bool E36::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::ENDOFFILE :
       //  Reduction N°7 - 5 Level Pop - "L2->L2 v id eq val"
       for ( int i = 0 ; i < 5 ; i++ ) {
-        automaton->getStackASTTokenNodes()->pop();
+        automaton->getStackASTNodes()->pop();
         automaton->getStackStates()->pop();
       }
-      token = ASTTokenNode(TokenType::L2);
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, &token)) return false;
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, t)) return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+        return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, t))
+        return false;
       return true;
     default:
         return false;
