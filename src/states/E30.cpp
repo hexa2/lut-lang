@@ -14,7 +14,11 @@ E30::E30() : State() { }
 bool E30::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::L2:
-      automaton->decalage(t, new E31());
+      if ( dynamic_cast<ASTTokenNode*>( t ) == NULL ) {
+        automaton->decalage(t, new E31());
+      } else {
+        automaton->decalage(NULL, new E31());
+      }
       return true;
     case TokenType::VAR:
     case TokenType::CONST:
@@ -36,7 +40,7 @@ bool E30::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::ENDOFFILE :
     {
       //  Reduction N°8 - 0 Level pop - "L2->."
-      ASTEnumAssignNode *token = new ASTEnumAssignNode(NULL, NULL);
+      ASTTokenNode *token = new ASTTokenNode(TokenType::L2);
 
       if ( !automaton->getStackStates()->top()->transition(automaton, token))
         return false;
