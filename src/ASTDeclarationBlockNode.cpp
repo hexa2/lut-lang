@@ -11,6 +11,7 @@
 #include <tuple>
 #include <iostream>
 #include <utility>
+#include <string>
 
 using std::cout;
 using std::endl;

@@ -8,6 +8,11 @@
 
 #include "ASTInstructionBlockNode.h"
 
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 ASTInstructionBlockNode::ASTInstructionBlockNode(ASTFirstLevelExpressionNode* expression,
                                                  ASTInstructionBlockNode* prev,
                                                  TokenType type) : ASTNode(type) {
@@ -54,4 +59,16 @@ int64_t ASTInstructionBlockNode::exec(exec_table* table) {
 }
 
 void ASTInstructionBlockNode::print() {
+  if (this->expression != NULL && this->identifier != NULL) {  // Assignment
+    this->identifier->print();
+    cout << " := ";
+    this->expression->print();
+  } else if (this->expression != NULL) {  // Write
+    cout << "ecrire ";
+    this->expression->print();
+  } else if (this->identifier != NULL) {  // Read
+    cout << "lire ";
+    this->identifier->print();
+  }
+  cout << ";" << endl;
 }

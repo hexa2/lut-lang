@@ -8,6 +8,11 @@
 
 #include "ASTThirdLevelExpressionNode.h"
 
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 ASTThirdLevelExpressionNode::ASTThirdLevelExpressionNode(ASTTokenNode* identifierOrValue,
                                                          TokenType type) : ASTNode(type) {
   this->identifierOrValue = identifierOrValue;
@@ -37,4 +42,11 @@ int64_t ASTThirdLevelExpressionNode::exec(exec_table* table) {
 }
 
 void ASTThirdLevelExpressionNode::print() {
+  if (this->identifierOrValue != NULL) {
+    this->identifierOrValue->print();
+  } else {
+    cout << "(";
+    this->expression->print();
+    cout << ")";
+  }
 }

@@ -8,6 +8,11 @@
 
 #include "ASTFirstLevelExpressionNode.h"
 
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 ASTFirstLevelExpressionNode::ASTFirstLevelExpressionNode(ASTFirstLevelExpressionNode* leftExpression,
                                                          ASTAdditiveOperation* addOp,
                                                          ASTSecondLevelExpressionNode* rightExpression,
@@ -46,4 +51,9 @@ int64_t ASTFirstLevelExpressionNode::exec(exec_table* table) {
 }
 
 void ASTFirstLevelExpressionNode::print() {
+  if (this->leftExpression != NULL) {
+    this->leftExpression->print();
+    this->addOp->print();
+  }
+  this->rightExpression->print();
 }
