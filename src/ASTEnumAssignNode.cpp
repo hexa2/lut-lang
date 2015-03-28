@@ -8,6 +8,11 @@
 
 #include "ASTEnumAssignNode.h"
 
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 ASTEnumAssignNode::ASTEnumAssignNode(ASTTokenNode* identifier,
                                      ASTTokenNode* value,
                                      ASTEnumAssignNode* prev,
@@ -18,11 +23,11 @@ ASTEnumAssignNode::ASTEnumAssignNode(ASTTokenNode* identifier,
 }
 
 ASTTokenNode* ASTEnumAssignNode::getIdentifier() {
-  return this->value;
+  return this->identifier;
 }
 
 ASTTokenNode* ASTEnumAssignNode::getValue() {
-  return this->identifier;
+  return this->value;
 }
 
 ASTEnumAssignNode* ASTEnumAssignNode::getPrev() {
@@ -38,4 +43,11 @@ int64_t ASTEnumAssignNode::exec(exec_table* table) {
 }
 
 void ASTEnumAssignNode::print() {
+  if (this->prev != NULL) {
+    this->prev->print();
+  }
+  cout << ", ";
+  this->identifier->print();
+  cout << " = ";
+  this->value->print();
 }

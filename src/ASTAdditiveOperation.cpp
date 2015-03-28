@@ -8,6 +8,11 @@
 
 #include "ASTAdditiveOperation.h"
 
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 ASTAdditiveOperation::ASTAdditiveOperation(ASTTokenNode* symbol,
                                            TokenType type) : ASTNode(type) {
   this->symbol = symbol;
@@ -26,4 +31,5 @@ int64_t ASTAdditiveOperation::exec(exec_table* table) {
 }
 
 void ASTAdditiveOperation::print() {
+  this->symbol->print();
 }

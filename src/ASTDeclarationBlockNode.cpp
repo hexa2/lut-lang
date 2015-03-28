@@ -9,6 +9,10 @@
 #include "ASTDeclarationBlockNode.h"
 
 #include <tuple>
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 ASTDeclarationBlockNode::ASTDeclarationBlockNode(ASTTokenNode* varIdentifier,
                                                  ASTEnumDeclNode* enumVars,
@@ -98,4 +102,28 @@ int64_t ASTDeclarationBlockNode::exec(exec_table* table) {
 }
 
 void ASTDeclarationBlockNode::print() {
+  if (this->prev != NULL) {
+    this->prev->print();
+  }
+
+  if (this->varIdentifier != NULL) {  // Var assignments case
+    cout << "var ";
+    this->varIdentifier->print();
+
+    if (this->enumVars != NULL) {
+      this->enumVars->print();
+    }
+  }
+
+  if (this->constIdentifier != NULL) {  // Const assignments case
+    cout << "const ";
+    this->constIdentifier->print();
+    cout << " = ";
+    this->constValue->print();
+
+    if (this->enumConsts != NULL) {
+      this->enumConsts->print();
+    }
+  }
+  cout << ";" << endl;
 }

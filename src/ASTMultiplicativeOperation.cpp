@@ -26,4 +26,5 @@ int64_t ASTMultiplicativeOperation::exec(exec_table* table) {
 }
 
 void ASTMultiplicativeOperation::print() {
+  this->symbol->print();
 }
