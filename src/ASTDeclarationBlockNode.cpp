@@ -13,6 +13,7 @@
 
 using std::cout;
 using std::endl;
+using std::pair;
 
 ASTDeclarationBlockNode::ASTDeclarationBlockNode(ASTTokenNode* varIdentifier,
                                                  ASTEnumDeclNode* enumVars,
@@ -73,8 +74,8 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
       return false;
     }
 
-    table->emplace(this->varIdentifier->getValue(),
-                   std::make_tuple(false, false));
+    table->insert(pair<string, tuple<bool, bool>>(this->varIdentifier->getValue(),
+                                                 std::make_tuple(false, false)));
 
     if (this->enumVars != NULL && !this->enumVars->analyze(table)) {
       return false;
@@ -86,8 +87,8 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
       return false;
     }
 
-    table->emplace(this->varIdentifier->getValue(),
-                   std::make_tuple(true, true));
+    table->insert(pair<string, tuple<bool, bool>>(this->varIdentifier->getValue(),
+                                                  std::make_tuple(true, true)));
 
     if (this->enumConsts != NULL && !this->enumConsts->analyze(table)) {
       return false;
