@@ -9,6 +9,9 @@
 #ifndef SRC_ASTINSTRUCTIONBLOCKNODE_H_
 #define SRC_ASTINSTRUCTIONBLOCKNODE_H_
 
+#include <cstdint>
+using std::int64_t;
+
 #include "ASTNode.h"
 #include "ASTFirstLevelExpressionNode.h"
 #include "ASTTokenNode.h"
@@ -66,8 +69,9 @@ class ASTInstructionBlockNode : public ASTNode {
    */
   ASTInstructionBlockNode* getPrev();
 
-  virtual bool analyze();
-  virtual void exec();
+  virtual bool analyze(analyze_table* table);
+  virtual int64_t exec(exec_table* table);
+  virtual void print();
 
  private:
   ASTFirstLevelExpressionNode* expression;

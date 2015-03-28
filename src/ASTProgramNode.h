@@ -9,6 +9,9 @@
 #ifndef SRC_ASTPROGRAMNODE_H_
 #define SRC_ASTPROGRAMNODE_H_
 
+#include <cstdint>
+using std::int64_t;
+
 #include "ASTNode.h"
 #include "ASTDeclarationBlockNode.h"
 #include "ASTInstructionBlockNode.h"
@@ -34,8 +37,9 @@ class ASTProgramNode : public ASTNode {
    */
   ASTInstructionBlockNode* getInstructions();
 
-  virtual bool analyze();
-  virtual void exec();
+  virtual bool analyze(analyze_table* table);
+  virtual int64_t exec(exec_table* table);
+  virtual void print();
 
  private:
   ASTDeclarationBlockNode* declarations;

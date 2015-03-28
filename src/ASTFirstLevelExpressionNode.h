@@ -9,6 +9,9 @@
 #ifndef SRC_ASTFIRSTLEVELEXPRESSIONNODE_H_
 #define SRC_ASTFIRSTLEVELEXPRESSIONNODE_H_
 
+#include <cstdint>
+using std::int64_t;
+
 #include "ASTNode.h"
 #include "ASTAdditiveOperation.h"
 #include "ASTSecondLevelExpressionNode.h"
@@ -51,8 +54,9 @@ class ASTFirstLevelExpressionNode : public ASTNode {
    */
   ASTSecondLevelExpressionNode* getRightExpression();
 
-  virtual bool analyze();
-  virtual void exec();
+  virtual bool analyze(analyze_table* table);
+  virtual int64_t exec(exec_table* table);
+  virtual void print();
 
  private:
   ASTFirstLevelExpressionNode* leftExpression;
