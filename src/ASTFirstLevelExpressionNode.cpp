@@ -37,9 +37,13 @@ ASTSecondLevelExpressionNode*
   return this->rightExpression;
 }
 
-bool ASTFirstLevelExpressionNode::analyze() {
+bool ASTFirstLevelExpressionNode::analyze(analyze_table* table) {
   return true;
 }
 
-void ASTFirstLevelExpressionNode::exec() {
+int64_t ASTFirstLevelExpressionNode::exec(exec_table* table) {
+  return 0;
+}
+
+void ASTFirstLevelExpressionNode::print() {
 }

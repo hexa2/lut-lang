@@ -17,9 +17,13 @@ ASTTokenNode* ASTAdditiveOperation::getSymbol() {
   return this->symbol;
 }
 
-bool ASTAdditiveOperation::analyze() {
+bool ASTAdditiveOperation::analyze(analyze_table* table) {
   return true;
 }
 
-void ASTAdditiveOperation::exec() {
+int64_t ASTAdditiveOperation::exec(exec_table* table) {
+  return 0;
+}
+
+void ASTAdditiveOperation::print() {
 }

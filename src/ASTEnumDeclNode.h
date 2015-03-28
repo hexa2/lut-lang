@@ -6,6 +6,9 @@
 #include "ASTNode.h"
 #include "ASTTokenNode.h"
 
+#include <cstdint>
+using std::int64_t;
+
 /**
  * @class
  * Defines an enumeration of variable declarations
@@ -31,8 +34,9 @@ class ASTEnumDeclNode : public ASTNode {
    */
   ASTEnumDeclNode* getPrev();
 
-  virtual bool analyze();
-  virtual void exec();
+  virtual bool analyze(analyze_table* table);
+  virtual int64_t exec(exec_table* table);
+  virtual void print();
 
  private:
   ASTTokenNode* identifier;
