@@ -8,6 +8,15 @@
 
 #include "ASTDeclarationBlockNode.h"
 
+#include <tuple>
+#include <iostream>
+#include <utility>
+#include <string>
+
+using std::cout;
+using std::endl;
+using std::pair;
+
 ASTDeclarationBlockNode::ASTDeclarationBlockNode(ASTTokenNode* varIdentifier,
                                                  ASTEnumDeclNode* enumVars,
                                                  ASTDeclarationBlockNode* prev,
@@ -57,9 +66,67 @@ ASTDeclarationBlockNode* ASTDeclarationBlockNode::getPrev() {
   return this->prev;
 }
 
-bool ASTDeclarationBlockNode::analyze() {
+bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
+  if (this->prev != NULL && !this->prev->analyze(table)) {
+    return false;
+  }
+
+  if (this->varIdentifier != NULL) {  // Var assignments case
+    if (table->count(this->varIdentifier->getValue()) > 0) {
+      return false;
+    }
+
+    table->insert(pair<string, tuple<bool, bool>>(this->varIdentifier->getValue(),
+                                                 std::make_tuple(false, false)));
+
+    if (this->enumVars != NULL && !this->enumVars->analyze(table)) {
+      return false;
+    }
+  }
+
+  if (this->constIdentifier != NULL) {  // Const assignments case
+    if (table->count(this->constIdentifier->getValue()) > 0) {
+      return false;
+    }
+
+    table->insert(pair<string, tuple<bool, bool>>(this->varIdentifier->getValue(),
+                                                  std::make_tuple(true, true)));
+
+    if (this->enumConsts != NULL && !this->enumConsts->analyze(table)) {
+      return false;
+  }
+}
+
   return true;
 }
 
-void ASTDeclarationBlockNode::exec() {
+int64_t ASTDeclarationBlockNode::exec(exec_table* table) {
+  return 0;
+}
+
+void ASTDeclarationBlockNode::print() {
+  if (this->prev != NULL) {
+    this->prev->print();
+  }
+
+  if (this->varIdentifier != NULL) {  // Var assignments case
+    cout << "var ";
+    this->varIdentifier->print();
+
+    if (this->enumVars != NULL) {
+      this->enumVars->print();
+    }
+  }
+
+  if (this->constIdentifier != NULL) {  // Const assignments case
+    cout << "const ";
+    this->constIdentifier->print();
+    cout << " = ";
+    this->constValue->print();
+
+    if (this->enumConsts != NULL) {
+      this->enumConsts->print();
+    }
+  }
+  cout << ";" << endl;
 }

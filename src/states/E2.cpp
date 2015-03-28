@@ -24,15 +24,15 @@ bool E2::transition(Automaton *automaton, ASTNode *t ) {
       for ( int i = 0 ; i < 2 ; i++ ) {
         automaton->getStackStates()->pop();
       }
-      
+
       ASTInstructionBlockNode *instructions = (ASTInstructionBlockNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
       ASTDeclarationBlockNode *declarations = (ASTDeclarationBlockNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
-      
+
       ASTProgramNode *token = new ASTProgramNode(declarations, instructions);
       automaton->getStackASTNodes()->push(token);
-      
+
       return true;
     }
     case TokenType::ID:

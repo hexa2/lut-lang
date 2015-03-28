@@ -2,6 +2,11 @@
 
 #include "ASTEnumDeclNode.h"
 
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 ASTEnumDeclNode::ASTEnumDeclNode(ASTTokenNode* identifier,
                                  ASTEnumDeclNode* prev,
                                  TokenType type) : ASTNode(type) {
@@ -17,9 +22,18 @@ ASTEnumDeclNode* ASTEnumDeclNode::getPrev() {
   return this->prev;
 }
 
-bool ASTEnumDeclNode::analyze() {
+bool ASTEnumDeclNode::analyze(analyze_table* table) {
   return true;
 }
 
-void ASTEnumDeclNode::exec() {
+int64_t ASTEnumDeclNode::exec(exec_table* table) {
+  return 0;
+}
+
+void ASTEnumDeclNode::print() {
+  if (this->prev != NULL) {
+    this->prev->print();
+  }
+  cout << ", ";
+  this->identifier->print();
 }

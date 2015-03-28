@@ -13,8 +13,9 @@ class ASTTokenNode : public ASTNode {
  public:
   explicit ASTTokenNode(TokenType type, string value = "");
 
-  bool analyze(/* TODO: define the data-struct to pass */);
-  void exec(/* TODO: define the data-struct to pass */);
+  bool analyze(analyze_table* table);
+  int64_t exec(exec_table* table);
+  void print();
 
   string getValue();
 };

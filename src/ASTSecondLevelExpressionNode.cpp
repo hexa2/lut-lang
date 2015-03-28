@@ -8,6 +8,11 @@
 
 #include "ASTSecondLevelExpressionNode.h"
 
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 ASTSecondLevelExpressionNode::ASTSecondLevelExpressionNode(ASTSecondLevelExpressionNode* leftExpression,
                                                            ASTMultiplicativeOperation* mulOp,
                                                            ASTThirdLevelExpressionNode* rightExpression,
@@ -38,9 +43,18 @@ ASTThirdLevelExpressionNode*
   return this->rightExpression;
 }
 
-bool ASTSecondLevelExpressionNode::analyze() {
+bool ASTSecondLevelExpressionNode::analyze(analyze_table* table) {
   return true;
 }
 
-void ASTSecondLevelExpressionNode::exec() {
+int64_t ASTSecondLevelExpressionNode::exec(exec_table* table) {
+  return 0;
+}
+
+void ASTSecondLevelExpressionNode::print() {
+  if (this->leftExpression != NULL) {
+    this->leftExpression->print();
+    this->mulOp->print();
+  }
+  this->rightExpression->print();
 }

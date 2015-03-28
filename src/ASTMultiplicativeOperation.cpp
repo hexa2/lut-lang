@@ -17,9 +17,14 @@ ASTTokenNode* ASTMultiplicativeOperation::getSymbol() {
   return this->symbol;
 }
 
-bool ASTMultiplicativeOperation::analyze() {
+bool ASTMultiplicativeOperation::analyze(analyze_table* table) {
   return true;
 }
 
-void ASTMultiplicativeOperation::exec() {
+int64_t ASTMultiplicativeOperation::exec(exec_table* table) {
+  return 0;
+}
+
+void ASTMultiplicativeOperation::print() {
+  this->symbol->print();
 }
