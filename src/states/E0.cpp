@@ -26,8 +26,8 @@ bool E0::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::ENDOFFILE :
     {
       //  Reduction N°4 - 0 Level Pop - D->.
-      ASTDeclarationBlockNode token = ASTDeclarationBlockNode(NULL);
-      if (!automaton->getStackStates()->top()->transition(automaton, &token))
+      ASTDeclarationBlockNode *token = new ASTDeclarationBlockNode(NULL);
+      if (!automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if (!automaton->getStackStates()->top()->transition(automaton, t))
         return false;

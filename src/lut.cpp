@@ -11,7 +11,7 @@ using std::endl;
 
 void test() {
   // Test affectation variable
-  Automaton *automate = new Automaton ("var b; b:=8;");
+  Automaton *automate = new Automaton ("var b; b:=8; ecrire b;");
   cout << " // Test affectation variable : ";
   if (automate->analyze()) {
     cout << "Ca marche" << endl;

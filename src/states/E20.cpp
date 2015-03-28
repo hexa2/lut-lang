@@ -43,8 +43,8 @@ bool E20::transition(Automaton *automaton, ASTNode *t) {
       ASTInstructionBlockNode *prev = (ASTInstructionBlockNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
 
-      ASTInstructionBlockNode token = ASTInstructionBlockNode(identifier, prev);
-      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+      ASTInstructionBlockNode *token = new ASTInstructionBlockNode(identifier, prev);
+      if ( !automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if ( !automaton->getStackStates()->top()->transition(automaton, t))
         return false;

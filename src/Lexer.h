@@ -48,7 +48,7 @@ class Lexer {
 
  protected :
   std::string inputString;
-  ASTTokenNode currentToken;
+  ASTTokenNode *currentToken;
 
   bool analyze(string s, std::smatch &m);
   inline string& ltrim(string& s, const char* t = " \t\n\r\f\v") {

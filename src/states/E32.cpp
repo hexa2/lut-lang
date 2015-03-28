@@ -49,9 +49,9 @@ bool E32::transition(Automaton *automaton, ASTNode *t) {
       ASTDeclarationBlockNode *prev = (ASTDeclarationBlockNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
 
-      ASTDeclarationBlockNode token = ASTDeclarationBlockNode(constIdentifier, constValue, enumConsts, prev);
+      ASTDeclarationBlockNode *token = new ASTDeclarationBlockNode(constIdentifier, constValue, enumConsts, prev);
 
-      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+      if ( !automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if ( !automaton->getStackStates()->top()->transition(automaton, t))
         return false;

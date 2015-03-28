@@ -36,9 +36,9 @@ bool E30::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::ENDOFFILE :
     {
       //  Reduction N°8 - 0 Level pop - "L2->."
-      ASTEnumAssignNode token = ASTEnumAssignNode(NULL, NULL);
+      ASTEnumAssignNode *token = new ASTEnumAssignNode(NULL, NULL);
 
-      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+      if ( !automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if ( !automaton->getStackStates()->top()->transition(automaton, t))
         return false;

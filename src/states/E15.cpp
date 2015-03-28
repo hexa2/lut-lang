@@ -50,9 +50,9 @@ bool E15::transition(Automaton *automaton, ASTNode *t) {
 
       ASTSecondLevelExpressionNode *second = (ASTSecondLevelExpressionNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
-      ASTFirstLevelExpressionNode token = ASTFirstLevelExpressionNode(second);
+      ASTFirstLevelExpressionNode *token = new ASTFirstLevelExpressionNode(second);
 
-      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+      if ( !automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if ( !automaton->getStackStates()->top()->transition(automaton, t))
         return false;

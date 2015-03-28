@@ -35,8 +35,8 @@ bool E22::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::WRITE :
     {
       //  Reduction N°6 - 0 Level Pop - "L1->."
-      ASTEnumDeclNode token = ASTEnumDeclNode(NULL);
-      if (!automaton->getStackStates()->top()->transition(automaton, &token))
+      ASTEnumDeclNode *token = new ASTEnumDeclNode(NULL);
+      if (!automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if (!automaton->getStackStates()->top()->transition(automaton, t))
         return false;

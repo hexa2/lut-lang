@@ -32,8 +32,8 @@ const std::regex single_operators(single_operators_str);
 const std::regex affectation(affectation_str);
 
 
-Lexer::Lexer(string inString) : inputString(inString),
-currentToken(TokenType::INVALID_SYMBOL) {
+Lexer::Lexer(string inString) : inputString(inString) {
+  this->currentToken = new ASTTokenNode(TokenType::INVALID_SYMBOL);
 }
 
 bool Lexer::has_next() {
@@ -41,14 +41,14 @@ bool Lexer::has_next() {
   // we remove left spaces and not right to handle cases like "const "
   ltrim(inputString);
   if ( inputString.length() <= 0 ) {
-    currentToken = ASTTokenNode(TokenType::ENDOFFILE);
+    currentToken = new ASTTokenNode(TokenType::ENDOFFILE);
     return false;
   }
   return true;
 }
 
 ASTTokenNode* Lexer::top() {
-  return &currentToken;
+  return currentToken;
 }
 
 void Lexer::shift() {
@@ -58,7 +58,7 @@ void Lexer::shift() {
   std::smatch m;
   if ( !analyze(inputString, m) ) {
     cout <<"cant shift" <<endl;
-    currentToken = ASTTokenNode(TokenType::INVALID_SYMBOL);
+    currentToken = new ASTTokenNode(TokenType::INVALID_SYMBOL);
     inputString.erase(0, 1);    // not sure
     return;
   }
@@ -71,61 +71,61 @@ bool Lexer::analyze(string s, smatch &m) {
     std::string currentTokenValue = m.str();
     switch (currentTokenValue[0]) {
       case 'c':
-        currentToken = ASTTokenNode(TokenType::CONST);
+        currentToken = new ASTTokenNode(TokenType::CONST);
         break;
       case 'v':
-        currentToken = ASTTokenNode(TokenType::VAR);
+        currentToken = new ASTTokenNode(TokenType::VAR);
         break;
       case 'e':
-        currentToken = ASTTokenNode(TokenType::WRITE);
+        currentToken = new ASTTokenNode(TokenType::WRITE);
         break;
       case 'l':
-        currentToken = ASTTokenNode(TokenType::READ);
+        currentToken = new ASTTokenNode(TokenType::READ);
         break;
       default:
         return false;
     }
   } else if ( std::regex_search(inputString, m, identifier) ) {
     std::string currentTokenValue = m.str();
-    currentToken = ASTTokenNode(TokenType::ID, currentTokenValue);
+    currentToken = new ASTTokenNode(TokenType::ID, currentTokenValue);
   } else if ( std::regex_search(inputString, m, number) ) {
     std::string currentTokenValue = m.str();
-    currentToken = ASTTokenNode(TokenType::VAL, currentTokenValue);
+    currentToken = new ASTTokenNode(TokenType::VAL, currentTokenValue);
   } else if ( std::regex_search(inputString, m, single_operators) ) {
     std::string currentTokenValue = m.str();
     switch (currentTokenValue[0]) {
       case '+':
-        currentToken = ASTTokenNode(TokenType::ADD);
+        currentToken = new ASTTokenNode(TokenType::ADD);
         break;
       case '-':
-        currentToken = ASTTokenNode(TokenType::SUB);
+        currentToken = new ASTTokenNode(TokenType::SUB);
         break;
       case '*':
-        currentToken = ASTTokenNode(TokenType::MUL);
+        currentToken = new ASTTokenNode(TokenType::MUL);
         break;
       case '/':
-        currentToken = ASTTokenNode(TokenType::DIV);
+        currentToken = new ASTTokenNode(TokenType::DIV);
         break;
       case '(':
-        currentToken = ASTTokenNode(TokenType::PO);
+        currentToken = new ASTTokenNode(TokenType::PO);
         break;
       case ')':
-        currentToken = ASTTokenNode(TokenType::PF);
+        currentToken = new ASTTokenNode(TokenType::PF);
         break;
       case ';':
-        currentToken = ASTTokenNode(TokenType::PV);
+        currentToken = new ASTTokenNode(TokenType::PV);
         break;
       case '=':
-        currentToken = ASTTokenNode(TokenType::EQ);
+        currentToken = new ASTTokenNode(TokenType::EQ);
         break;
       case ',':
-        currentToken = ASTTokenNode(TokenType::V);
+        currentToken = new ASTTokenNode(TokenType::V);
         break;
       default:
         return false;
     }
   } else if ( std::regex_search(inputString, m, affectation) ) {
-    currentToken = ASTTokenNode(TokenType::AFF);
+    currentToken = new ASTTokenNode(TokenType::AFF);
   } else {
     return false;
   }

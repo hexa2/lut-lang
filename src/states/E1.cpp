@@ -15,7 +15,6 @@
 E1::E1() : State() { }
 
 bool E1::transition(Automaton *automaton, ASTNode *t ) {
-  ASTInstructionBlockNode token = ASTInstructionBlockNode();
   switch ( t->getTokenType() ) {
     case TokenType::I:
       automaton->decalage(t, new E2());
@@ -35,13 +34,15 @@ bool E1::transition(Automaton *automaton, ASTNode *t ) {
     case TokenType::ENDOFFILE:
     case TokenType::WRITE:
     case TokenType::READ:
+    {
       //  Reduction N°12 - 0 Level Pop - "I->."
-      token = ASTInstructionBlockNode();
-      if (!automaton->getStackStates()->top()->transition(automaton, &token))
+      ASTInstructionBlockNode *token = new ASTInstructionBlockNode();
+      if (!automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if (!automaton->getStackStates()->top()->transition(automaton, t))
         return false;
       return true;
+    }
     default:
       return false;
   }
