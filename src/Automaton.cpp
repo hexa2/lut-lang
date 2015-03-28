@@ -9,6 +9,7 @@
 #include <stack>
 #include "Automaton.h"
 #include "states/E0.h"
+#include "ASTProgramNode.h"
 using std::string;
 
 Automaton::Automaton(string inputString) {
@@ -38,6 +39,10 @@ bool Automaton::analyze() {
   }
   if ( stackStates.empty() ) return false;
 
+  if (accepted) {
+    ASTProgramNode *program = (ASTProgramNode *) stackASTTokenNodes.top();
+    program->print();
+  }
   return accepted;
 }
 
