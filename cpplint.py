@@ -241,7 +241,7 @@ _ERROR_CATEGORIES = [
     'whitespace/todo',
     ]
 
-# These error categories are no int64_ter enforced by cpplint, but for backwards-
+# These error categories are no longer enforced by cpplint, but for backwards-
 # compatibility they may still appear in NOLINT comments.
 _LEGACY_ERROR_CATEGORIES = [
     'readability/streams',
@@ -254,8 +254,8 @@ _LEGACY_ERROR_CATEGORIES = [
 _DEFAULT_FILTERS = ['-build/include_alpha']
 
 # We used to check for high-bit characters, but after much discussion we
-# decided those were OK, as int64_t as they were in UTF-8 and didn't represent
-# hard-coded international strings, which beint64_t in a separate i18n file.
+# decided those were OK, as long as they were in UTF-8 and didn't represent
+# hard-coded international strings, which belong in a separate i18n file.
 
 # C++ headers
 _CPP_HEADERS = frozenset([
@@ -1362,8 +1362,8 @@ class CleansedLines(object):
                 #
                 # There is no special handling for floating point here, because
                 # the integer/fractional/exponent parts would all be parsed
-                # correctly as int64_t as there are digits on both sides of the
-                # separator.  So we are fine as int64_t as we don't see something
+                # correctly as long as there are digits on both sides of the
+                # separator.  So we are fine as long as we don't see something
                 # like "0.'3" (gcc 4.9.0 will not allow this literal).
                 if Search(r'\b(?:0[bBxX]?|[1-9])[0-9a-fA-F]*$', head):
                     match_literal = Match(r'^((?:\'?[0-9a-zA-Z_])*)(.*)$', "'" + tail)
@@ -1846,7 +1846,7 @@ def CheckForMultilineCommentsAndStrings(filename, clean_lines, linenum, error):
   /* ... */ comments are legit inside macros, for one line.
   Otherwise, we prefer // comments, so it's ok to warn about the
   other.  Likewise, it's ok for strings to extend across multiple
-  lines, as int64_t as a line continuation character (backslash)
+  lines, as long as a line continuation character (backslash)
   terminates each line. Although not currently prohibited by the C++
   style guide, it's ugly and unnecessary. We don't do well with either
   in this lint program, so we warn about both.
@@ -2371,7 +2371,7 @@ class NestingState(object):
                 # TODO(unknown): unexpected #endif, issue warning?
                 pass
 
-    # TODO(unknown): Update() is too int64_t, but we will refactor later.
+    # TODO(unknown): Update() is too long, but we will refactor later.
     def Update(self, filename, clean_lines, linenum, error):
         """Update nesting state with current line.
 
@@ -2620,9 +2620,9 @@ def CheckForNonStandardConstructs(filename, clean_lines, linenum,
     # For the rest, work with both comments and strings removed.
     line = clean_lines.elided[linenum]
 
-    if Search(r'\b(const|volatile|void|char|short|int|int64_t'
+    if Search(r'\b(const|volatile|void|char|short|int|long'
               r'|float|double|signed|unsigned'
-              r'|schar|u?int8|u?int16|u?int32|u?int64_t)'
+              r'|schar|u?int8|u?int16|u?int32|u?int64)'
               r'\s+(register|static|extern|typedef)\b',
               line):
         error(filename, linenum, 'build/storage_class', 5,
@@ -2841,7 +2841,7 @@ def CheckForNamespaceIndentation(filename, nesting_state, clean_lines, line,
 
 def CheckForFunctionLengths(filename, clean_lines, linenum,
                             function_state, error):
-    """Reports for int64_t function bodies.
+    """Reports for long function bodies.
 
   For an overview why this is done, see:
   http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml#Write_Short_Functions
@@ -3078,7 +3078,7 @@ def CheckSpacing(filename, clean_lines, linenum, nesting_state, error):
                 error(filename, linenum, 'whitespace/blank_line', 2,
                       'Redundant blank line at the start of a code block '
                       'should be deleted.')
-        # Ignore blank lines at the end of a block in a int64_t if-else
+        # Ignore blank lines at the end of a block in a long if-else
         # chain, like this:
         #   if (condition1) {
         #     // Something followed by a blank line
@@ -3469,7 +3469,7 @@ def IsRValueType(typenames, clean_lines, nesting_state, linenum, column):
     #   int& Function()
     if (match.group(2) in typenames or
                 match.group(2) in ['char', 'char16_t', 'char32_t', 'wchar_t', 'bool',
-                                   'short', 'int', 'int64_t', 'signed', 'unsigned',
+                                   'short', 'int', 'long', 'signed', 'unsigned',
                                    'float', 'double', 'void', 'auto', '>', '*', '&']):
         return True
 
@@ -4273,7 +4273,7 @@ def CheckCheck(filename, clean_lines, linenum, error):
             # Unparenthesized operand.  Instead of appending to lhs one character
             # at a time, we do another regular expression match to consume several
             # characters at once if possible.  Trivial benchmark shows that this
-            # is more efficient when the operands are int64_ter than a single
+            # is more efficient when the operands are longer than a single
             # character, which is generally the case.
             matched = Match(r'^([^-=!<>()&|]+)(.*)$', expression)
             if not matched:
@@ -4309,7 +4309,7 @@ def CheckCheck(filename, clean_lines, linenum, error):
         #   Consider using CHECK_EQ instead of CHECK(a == b)
         #
         # We are still keeping the less descriptive message because if lhs
-        # or rhs gets int64_t, the error message might become unreadable.
+        # or rhs gets long, the error message might become unreadable.
         error(filename, linenum, 'readability/check', 2,
               'Consider using %s instead of %s(a %s b)' % (
                   _CHECK_REPLACEMENT[check_macro][operator],
@@ -4437,13 +4437,13 @@ def CheckStyle(filename, clean_lines, linenum, file_extension, nesting_state,
                 line.startswith('#define %s' % cppvar) or
                 line.startswith('#endif  // %s' % cppvar)):
             is_header_guard = True
-    # #include lines and header guards can be int64_t, since there's no clean way to
+    # #include lines and header guards can be long, since there's no clean way to
     # split them.
     #
-    # URLs can be int64_t too.  It's possible to split these, but it makes them
+    # URLs can be long too.  It's possible to split these, but it makes them
     # harder to cut&paste.
     #
-    # The "$Id:...$" comment may also get very int64_t without it being the
+    # The "$Id:...$" comment may also get very long without it being the
     # developers fault.
     if (not line.startswith('#include') and not is_header_guard and
             not Match(r'^\s*//.*http(s?)://\S*$', line) and
@@ -4452,11 +4452,11 @@ def CheckStyle(filename, clean_lines, linenum, file_extension, nesting_state,
         extended_length = int((_line_length * 1.25))
         if line_width > extended_length:
             error(filename, linenum, 'whitespace/line_length', 4,
-                  'Lines should very rarely be int64_ter than %i characters' %
+                  'Lines should very rarely be longer than %i characters' %
                   extended_length)
         elif line_width > _line_length:
             error(filename, linenum, 'whitespace/line_length', 2,
-                  'Lines should be <= %i characters int64_t' % _line_length)
+                  'Lines should be <= %i characters long' % _line_length)
 
     if (cleansed_line.count(';') > 1 and
         # for loops are allowed two ;'s (and may run over two lines).
@@ -4815,10 +4815,10 @@ def CheckLanguage(filename, clean_lines, linenum, file_extension,
             error(filename, linenum, 'runtime/int', 4,
                   'Use "unsigned short" for ports, not "short"')
     else:
-        match = Search(r'\b(short)\b', line)
+        match = Search(r'\b(short|long(?! +double)|long long)\b', line)
         if match:
             error(filename, linenum, 'runtime/int', 4,
-                  'Use int16/int64_t/etc, rather than the C type %s' % match.group(1))
+                  'Use int16/int64/etc, rather than the C type %s' % match.group(1))
 
     # Check if some verboten operator overloading is going on
     # TODO(unknown): catch out-of-line unary operator&:
@@ -4842,7 +4842,7 @@ def CheckLanguage(filename, clean_lines, linenum, file_extension,
     # TODO(unknown): Catch the following case. Need to change the calling
     # convention of the whole function to process multiple line to handle it.
     #   printf(
-    #       boy_this_is_a_really_int64_t_variable_that_cannot_fit_on_the_prev_line);
+    #       boy_this_is_a_really_long_variable_that_cannot_fit_on_the_prev_line);
     printf_args = _GetTextInside(line, r'(?i)\b(string)?printf\s*\(')
     if printf_args:
         match = Match(r'([\w.\->()]+)$', printf_args)
@@ -5108,14 +5108,14 @@ def CheckForNonConstReference(filename, clean_lines, linenum,
     if IsOutOfLineMethodDefinition(clean_lines, linenum):
         return
 
-    # int64_t type names may be broken across multiple lines, usually in one
+    # Long type names may be broken across multiple lines, usually in one
     # of these forms:
-    #   int64_tType
-    #       ::int64_tTypeContinued &identifier
-    #   int64_tType::
-    #       int64_tTypeContinued &identifier
-    #   int64_tType<
-    #       ...>::int64_tTypeContinued &identifier
+    #   LongType
+    #       ::LongTypeContinued &identifier
+    #   LongType::
+    #       LongTypeContinued &identifier
+    #   LongType<
+    #       ...>::LongTypeContinued &identifier
     #
     # If we detected a type split across two lines, join the previous
     # line to current line so that we can match const references
@@ -5232,7 +5232,7 @@ def CheckCasts(filename, clean_lines, linenum, error):
     # probably a member operator declaration or default constructor.
     match = Search(
         r'(\bnew\s+|\S<\s*(?:const\s+)?)?\b'
-        r'(int|float|double|bool|char|int32|uint32|int64_t|uint64_t)'
+        r'(int|float|double|bool|char|int32|uint32|int64|uint64)'
         r'(\([^)].*)', line)
     expecting_function = ExpectingFunctionArgs(clean_lines, linenum)
     if match and not expecting_function:
@@ -5519,23 +5519,23 @@ for _header, _templates in _HEADERS_CONTAINING_TEMPLATES:
              _header))
 
 
-def FilesBeint64_tToSameModule(filename_cc, filename_h):
-    """Check if these two filenames beint64_t to the same module.
+def FilesBelongToSameModule(filename_cc, filename_h):
+    """Check if these two filenames belong to the same module.
 
   The concept of a 'module' here is a as follows:
-  foo.h, foo-inl.h, foo.cc, foo_test.cc and foo_unittest.cc beint64_t to the
+  foo.h, foo-inl.h, foo.cc, foo_test.cc and foo_unittest.cc belong to the
   same 'module' if they are in the same directory.
   some/path/public/xyzzy and some/path/internal/xyzzy are also considered
-  to beint64_t to the same module here.
+  to belong to the same module here.
 
-  If the filename_cc contains a int64_ter path than the filename_h, for example,
+  If the filename_cc contains a longer path than the filename_h, for example,
   '/absolute/path/to/base/sysinfo.cc', and this file would include
   'base/sysinfo.h', this function also produces the prefix needed to open the
   header. This is used by the caller of this function to more robustly open the
   header file. We don't have access to the real include paths in this context,
   so we need this guesswork here.
 
-  Known bugs: tools/base/bar.cc and base/bar.h beint64_t to the same module
+  Known bugs: tools/base/bar.cc and base/bar.h belong to the same module
   according to this implementation. Because of this, this function gives
   some false positives. This should be sufficiently rare in practice.
 
@@ -5545,7 +5545,7 @@ def FilesBeint64_tToSameModule(filename_cc, filename_h):
 
   Returns:
     Tuple with a bool and a string:
-    bool: True if filename_cc and filename_h beint64_t to the same module.
+    bool: True if filename_cc and filename_h belong to the same module.
     string: the additional prefix needed to open the header file.
   """
 
@@ -5567,11 +5567,11 @@ def FilesBeint64_tToSameModule(filename_cc, filename_h):
     filename_h = filename_h.replace('/public/', '/')
     filename_h = filename_h.replace('/internal/', '/')
 
-    files_beint64_t_to_same_module = filename_cc.endswith(filename_h)
+    files_belong_to_same_module = filename_cc.endswith(filename_h)
     common_path = ''
-    if files_beint64_t_to_same_module:
+    if files_belong_to_same_module:
         common_path = filename_cc[:-len(filename_h)]
-    return files_beint64_t_to_same_module, common_path
+    return files_belong_to_same_module, common_path
 
 
 def UpdateIncludeState(filename, include_dict, io=codecs):
@@ -5673,7 +5673,7 @@ def CheckForIncludeWhatYouUse(filename, clean_lines, include_state, error,
     # the keys.
     header_keys = include_dict.keys()
     for header in header_keys:
-        (same_module, common_path) = FilesBeint64_tToSameModule(abs_filename, header)
+        (same_module, common_path) = FilesBelongToSameModule(abs_filename, header)
         fullpath = common_path + header
         if same_module and UpdateIncludeState(fullpath, include_dict, io):
             header_found = True
