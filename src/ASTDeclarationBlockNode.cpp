@@ -65,11 +65,11 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
   }
 
   if (this->varIdentifier != NULL) {  // Var assignments case
-    if (table->count(this->varIdentifier->getSymbol()) > 0) {
+    if (table->count(this->varIdentifier->getValue()) > 0) {
       return false;
     }
 
-    table->emplace(this->varIdentifier->getSymbol(),
+    table->emplace(this->varIdentifier->getValue(),
                    std::make_tuple(false, false));
 
     if (this->enumVars != NULL && !this->enumVars->analyze(table)) {
@@ -78,11 +78,11 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
   }
 
   if (this->constIdentifier != NULL) {  // Const assignments case
-    if (table->count(this->constIdentifier->getSymbol()) > 0) {
+    if (table->count(this->constIdentifier->getValue()) > 0) {
       return false;
     }
 
-    table->emplace(this->varIdentifier->getSymbol(),
+    table->emplace(this->varIdentifier->getValue(),
                    std::make_tuple(true, true));
 
     if (this->enumConsts != NULL && !this->enumConsts->analyze(table)) {
