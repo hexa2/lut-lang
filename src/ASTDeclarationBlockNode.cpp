@@ -8,10 +8,10 @@
 
 #include "ASTDeclarationBlockNode.h"
 
-ASTDeclarationBlockNode::ASTDeclarationBlockNode(
-    ASTTokenNode* varIdentifier,
-    ASTEnumDeclNode* enumVars,
-    ASTDeclarationBlockNode* prev) {
+ASTDeclarationBlockNode::ASTDeclarationBlockNode(ASTTokenNode* varIdentifier,
+                                                 ASTEnumDeclNode* enumVars,
+                                                 ASTDeclarationBlockNode* prev,
+                                                 TokenType type) : ASTNode(type) {
   this->varIdentifier = varIdentifier;
   this->enumVars = enumVars;
   this->constIdentifier = NULL;
@@ -20,11 +20,11 @@ ASTDeclarationBlockNode::ASTDeclarationBlockNode(
   this->prev = prev;
 }
 
-ASTDeclarationBlockNode::ASTDeclarationBlockNode(
-    ASTTokenNode* constIdentifier,
-    ASTTokenNode* constValue,
-    ASTEnumAssignNode* enumConsts,
-    ASTDeclarationBlockNode* prev) {
+ASTDeclarationBlockNode::ASTDeclarationBlockNode(ASTTokenNode* constIdentifier,
+                                                 ASTTokenNode* constValue,
+                                                 ASTEnumAssignNode* enumConsts,
+                                                 ASTDeclarationBlockNode* prev,
+                                                 TokenType type) : ASTNode(type) {
   this->varIdentifier = NULL;
   this->enumVars = NULL;
   this->constIdentifier = constIdentifier;

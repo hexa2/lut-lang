@@ -16,8 +16,7 @@
 
 E7::E7() : State() { }
 
-bool E7::transition(Automaton *automaton, ASTTokenNode *t) {
-  ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E7::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::T:
       automaton->decalage(t, new E8());

@@ -27,7 +27,8 @@ class ASTEnumAssignNode : public ASTNode {
    */
   explicit ASTEnumAssignNode(ASTTokenNode* identifier,
                              ASTTokenNode* value,
-                             ASTEnumAssignNode* prev = NULL);
+                             ASTEnumAssignNode* prev = NULL,
+                             TokenType type = TokenType::L2);
 
   /**
    * @return The variable identifier

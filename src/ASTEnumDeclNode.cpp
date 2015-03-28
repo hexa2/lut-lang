@@ -3,7 +3,8 @@
 #include "ASTEnumDeclNode.h"
 
 ASTEnumDeclNode::ASTEnumDeclNode(ASTTokenNode* identifier,
-                                 ASTEnumDeclNode* prev) {
+                                 ASTEnumDeclNode* prev,
+                                 TokenType type) : ASTNode(type) {
   this->identifier = identifier;
   this->prev = prev;
 }

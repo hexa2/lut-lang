@@ -26,14 +26,15 @@ class ASTSecondLevelExpressionNode : public ASTNode {
    */
   ASTSecondLevelExpressionNode(ASTSecondLevelExpressionNode* leftExpression,
                                ASTMultiplicativeOperation* mulOp,
-                               ASTThirdLevelExpressionNode* rightExpression);
+                               ASTThirdLevelExpressionNode* rightExpression,
+                               TokenType type = TokenType::T);
 
   /**
    * @constructor
    * @param rightExpression Right part, goes to the 3rd lvl expr
    */
-  explicit ASTSecondLevelExpressionNode(
-      ASTThirdLevelExpressionNode* rightExpression);
+  explicit ASTSecondLevelExpressionNode(ASTThirdLevelExpressionNode* rightExpression,
+                                        TokenType type = TokenType::T);
 
   /**
    * @return The left expression or Null

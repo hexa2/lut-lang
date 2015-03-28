@@ -8,11 +8,10 @@
 #include "E20.h"
 #include "../State.h"
 #include "../TokenType.h"
-
+#include "../ASTInstructionBlockNode.h"
 E20::E20() : State() { }
 
-bool E20::transition(Automaton *automaton, ASTTokenNode *t) {
-  ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E20::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::VAR:
     case TokenType::CONST:
@@ -30,17 +29,27 @@ bool E20::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::READ :
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
+    {
       //  Reduction N°10 - 4 Level pop - "I->I li id pv"
       for ( int i = 0 ; i < 4 ; i++ ) {
-        automaton->getStackASTTokenNodes()->pop();
         automaton->getStackStates()->pop();
       }
-      token = ASTTokenNode(TokenType::I);
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, &token)) return false;
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, t)) return false;
+
+      automaton->getStackASTNodes()->pop();
+      ASTTokenNode *identifier = (ASTTokenNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+      // ASTTokenNode *read = (ASTTokenNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+      ASTInstructionBlockNode *prev = (ASTInstructionBlockNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+
+      ASTInstructionBlockNode token = ASTInstructionBlockNode(identifier, prev);
+      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+        return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, t))
+        return false;
       return true;
+    }
     default:
       return false;
   }

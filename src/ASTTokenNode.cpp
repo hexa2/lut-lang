@@ -4,8 +4,7 @@
 #include <string>
 
 
-ASTTokenNode::ASTTokenNode(TokenType type, string value ) {
-  this->type = type;
+ASTTokenNode::ASTTokenNode(TokenType type, string value) : ASTNode(type) {
   this->value = value;
 }
 
@@ -15,10 +14,6 @@ bool ASTTokenNode::analyze() {
 
 void ASTTokenNode::exec() {
   // noop
-}
-
-TokenType ASTTokenNode::getTokenType() {
-  return this->type;
 }
 
 string ASTTokenNode::getValue() {

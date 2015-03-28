@@ -9,13 +9,13 @@
 #define SRC_STATES_E14_H_
 
 #include "../State.h"
-#include "../ASTTokenNode.h"
+#include "../ASTNode.h"
 #include "../Automaton.h"
 
 class E14 : public State {
  public :
     E14();
-    bool transition(Automaton *automaton, ASTTokenNode *t);
+    bool transition(Automaton *automaton, ASTNode *t);
     inline int stateNumber(){return 14;}
 };
 

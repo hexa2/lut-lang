@@ -9,13 +9,13 @@
 #define SRC_STATES_E38_H_
 
 #include "../State.h"
-#include "../ASTTokenNode.h"
+#include "../ASTNode.h"
 #include "../Automaton.h"
 
 class E38 : public State {
  public :
     E38();
-    bool transition(Automaton *automaton, ASTTokenNode *t);
+    bool transition(Automaton *automaton, ASTNode *t);
     inline int stateNumber(){return 38;}
 };
 

@@ -14,7 +14,7 @@
 #include <map>
 #include <stack>
 #include <string>
-#include "ASTTokenNode.h"
+#include "ASTNode.h"
 #include "Lexer.h"
 #include "State.h"
 
@@ -38,18 +38,16 @@ class Automaton {
    * @param ASTTokenNode t push t in Automaton stackToken
    * @param State s push s in Automaton stackState
    */
-  void decalage(ASTTokenNode* t, State* s);
+  void decalage(ASTNode* t, State* s);
 
-  stack<ASTTokenNode*> *getStackASTTokenNodes();
+  stack<ASTNode*> *getStackASTNodes();
 
   stack<State*> *getStackStates();
 
   void setAccepted(bool acc);
 
-  void reduce(ASTTokenNode tokenToReduce, int redNb);
-
  protected:
-  stack<ASTTokenNode*> stackASTTokenNodes;
+  stack<ASTNode*> stackASTTokenNodes;
   stack<State*> stackStates;
   bool accepted;
   Lexer * lexer;

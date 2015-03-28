@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 H4314. All rights reserved.
 
 #include "../TokenType.h"
+#include "../ASTInstructionBlockNode.h"
 #include "E1.h"
 #include "E21.h"
 #include "E27.h"
@@ -13,8 +14,8 @@
 
 E1::E1() : State() { }
 
-bool E1::transition(Automaton *automaton, ASTTokenNode *t ) {
-  ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E1::transition(Automaton *automaton, ASTNode *t ) {
+  ASTInstructionBlockNode token = ASTInstructionBlockNode();
   switch ( t->getTokenType() ) {
     case TokenType::I:
       automaton->decalage(t, new E2());
@@ -35,11 +36,11 @@ bool E1::transition(Automaton *automaton, ASTTokenNode *t ) {
     case TokenType::WRITE:
     case TokenType::READ:
       //  Reduction N°12 - 0 Level Pop - "I->."
-      token = ASTTokenNode(TokenType::I);
-      if (!automaton->getStackStates()->top()->transition(
-        automaton, &token)) return false;
-      if (!automaton->getStackStates()->top()->transition(
-        automaton, t)) return false;
+      token = ASTInstructionBlockNode();
+      if (!automaton->getStackStates()->top()->transition(automaton, &token))
+        return false;
+      if (!automaton->getStackStates()->top()->transition(automaton, t))
+        return false;
       return true;
     default:
       return false;

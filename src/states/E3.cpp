@@ -11,6 +11,6 @@
 
 E3::E3() : State() { }
 
-bool E3::transition(Automaton *automaton, ASTTokenNode *t) {
+bool E3::transition(Automaton *automaton, ASTNode *t) {
     return true;
 }

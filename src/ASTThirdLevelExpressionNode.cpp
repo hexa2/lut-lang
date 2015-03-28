@@ -8,14 +8,14 @@
 
 #include "ASTThirdLevelExpressionNode.h"
 
-ASTThirdLevelExpressionNode::ASTThirdLevelExpressionNode(
-    ASTTokenNode* identifierOrValue) {
+ASTThirdLevelExpressionNode::ASTThirdLevelExpressionNode(ASTTokenNode* identifierOrValue,
+                                                         TokenType type) : ASTNode(type) {
   this->identifierOrValue = identifierOrValue;
   this->expression = NULL;
 }
 
-ASTThirdLevelExpressionNode::ASTThirdLevelExpressionNode(
-    ASTFirstLevelExpressionNode* expression) {
+ASTThirdLevelExpressionNode::ASTThirdLevelExpressionNode(ASTFirstLevelExpressionNode* expression,
+                                                         TokenType type) : ASTNode(type) {
   this->identifierOrValue = NULL;
   this->expression = expression;
 }

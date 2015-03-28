@@ -18,7 +18,8 @@ class ASTEnumDeclNode : public ASTNode {
    * @param prev The prev declaration in the enum
    */
   explicit ASTEnumDeclNode(ASTTokenNode* identifier,
-                           ASTEnumDeclNode* prev = NULL);
+                           ASTEnumDeclNode* prev = NULL,
+                           TokenType type = TokenType::L1);
 
   /**
    * @return The variable identifier

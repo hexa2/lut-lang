@@ -25,8 +25,9 @@ class ASTInstructionBlockNode : public ASTNode {
    * @param expression The expression to write
    * @param prev The prev instruction
    */
-  ASTInstructionBlockNode(ASTFirstLevelExpressionNode* expression,
-                          ASTInstructionBlockNode* prev = NULL);
+  ASTInstructionBlockNode(ASTFirstLevelExpressionNode* expression = NULL,
+                          ASTInstructionBlockNode* prev = NULL,
+                          TokenType type = TokenType::I);
 
   /**
    * @constructor
@@ -35,7 +36,8 @@ class ASTInstructionBlockNode : public ASTNode {
    * @param prev The prev instruction
    */
   ASTInstructionBlockNode(ASTTokenNode* identifier,
-                          ASTInstructionBlockNode* prev = NULL);
+                          ASTInstructionBlockNode* prev = NULL,
+                          TokenType type = TokenType::I);
 
   /**
    * @constructor
@@ -46,7 +48,8 @@ class ASTInstructionBlockNode : public ASTNode {
    */
   ASTInstructionBlockNode(ASTFirstLevelExpressionNode* expression,
                           ASTTokenNode* identifier,
-                          ASTInstructionBlockNode* prev = NULL);
+                          ASTInstructionBlockNode* prev = NULL,
+                          TokenType type = TokenType::I);
 
   /**
    * @return An expression used for either assignment or output or Null

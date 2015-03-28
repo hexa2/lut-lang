@@ -12,7 +12,7 @@
 
 E19::E19() : State() { }
 
-bool E19::transition(Automaton *automaton, ASTTokenNode *t) {
+bool E19::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::PV:
       automaton->decalage(t, new E20());

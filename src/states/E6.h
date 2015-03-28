@@ -9,13 +9,13 @@
 #define SRC_STATES_E6_H_
 
 #include "../State.h"
-#include "../ASTTokenNode.h"
+#include "../ASTNode.h"
 #include "../Automaton.h"
 
 class E6 : public State {
  public :
     E6();
-    bool transition(Automaton *automaton, ASTTokenNode *t);
+    bool transition(Automaton *automaton, ASTNode *t);
     inline int stateNumber(){return 6;}
 };
 

@@ -7,11 +7,11 @@
 
 #include "E43.h"
 #include "../TokenType.h"
-
+#include "../ASTMultiplicativeOperation.h"
+#include "../ASTTokenNode.h"
 E43::E43() : State() { }
 
-bool E43::transition(Automaton *automaton, ASTTokenNode *t) {
-  ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E43::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::VAR:
     case TokenType::CONST:
@@ -31,17 +31,23 @@ bool E43::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::READ :
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
+    {
       //  Reduction N°22 - 1 Level Pop - "opM->MUL"
       for ( int i = 0 ; i < 1 ; i++ ) {
-        automaton->getStackASTTokenNodes()->pop();
         automaton->getStackStates()->pop();
       }
-      token = ASTTokenNode(TokenType::opM);
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, &token)) return false;
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, t)) return false;
+
+      ASTTokenNode *operation = (ASTTokenNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+
+      ASTMultiplicativeOperation token = ASTMultiplicativeOperation(operation);
+
+      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+        return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, t))
+        return false;
       return true;
+    }
     default:
         return false;
     }

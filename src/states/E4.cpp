@@ -17,7 +17,7 @@
 
 E4::E4() : State() { }
 
-bool E4::transition(Automaton *automaton, ASTTokenNode *t) {
+bool E4::transition(Automaton *automaton, ASTNode *t) {
     switch ( t->getTokenType() ) {
         case TokenType::D:
             return true;

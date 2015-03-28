@@ -7,11 +7,10 @@
 
 #include "E41.h"
 #include "../TokenType.h"
-
+#include "../ASTAdditiveOperation.h"
 E41::E41() : State() { }
 
-bool E41::transition(Automaton *automaton, ASTTokenNode *t) {
-  ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E41::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::VAR:
     case TokenType::CONST:
@@ -31,17 +30,23 @@ bool E41::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::READ :
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
+    {
       //  Reduction N°20 - 1 Level Pop - "opA->ADD"
       for ( int i = 0 ; i < 1 ; i++ ) {
-        automaton->getStackASTTokenNodes()->pop();
         automaton->getStackStates()->pop();
       }
-      token = ASTTokenNode(TokenType::opA);
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, &token)) return false;
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, t)) return false;
+
+      ASTTokenNode *operation = (ASTTokenNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+
+      ASTAdditiveOperation token = ASTAdditiveOperation(operation);
+
+      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+        return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, t))
+        return false;
       return true;
+    }
     default:
         return false;
     }

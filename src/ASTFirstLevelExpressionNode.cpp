@@ -8,17 +8,17 @@
 
 #include "ASTFirstLevelExpressionNode.h"
 
-ASTFirstLevelExpressionNode::ASTFirstLevelExpressionNode(
-    ASTFirstLevelExpressionNode* leftExpression,
-    ASTAdditiveOperation* addOp,
-    ASTSecondLevelExpressionNode* rightExpression) {
+ASTFirstLevelExpressionNode::ASTFirstLevelExpressionNode(ASTFirstLevelExpressionNode* leftExpression,
+                                                         ASTAdditiveOperation* addOp,
+                                                         ASTSecondLevelExpressionNode* rightExpression,
+                                                         TokenType type) : ASTNode(type) {
   this->leftExpression = leftExpression;
   this->addOp = addOp;
   this->rightExpression = rightExpression;
 }
 
-ASTFirstLevelExpressionNode::ASTFirstLevelExpressionNode(
-    ASTSecondLevelExpressionNode* rightExpression) {
+ASTFirstLevelExpressionNode::ASTFirstLevelExpressionNode(ASTSecondLevelExpressionNode* rightExpression,
+                                                         TokenType type) : ASTNode(type) {
   this->leftExpression = NULL;
   this->addOp = NULL;
   this->rightExpression = rightExpression;

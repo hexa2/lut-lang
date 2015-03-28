@@ -11,7 +11,7 @@
 #include "E22.h"
 E21::E21() : State() { }
 
-bool E21::transition(Automaton *automaton, ASTTokenNode *t) {
+bool E21::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::ID:
       automaton->decalage(t, new E22());

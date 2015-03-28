@@ -16,7 +16,7 @@
 
 E38::E38() : State() { }
 
-bool E38::transition(Automaton *automaton, ASTTokenNode *t) {
+bool E38::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::E:
       automaton->decalage(t, new E39());

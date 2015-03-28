@@ -20,7 +20,7 @@ Automaton::Automaton(string inputString) {
 /**
  * Push token and states on the stack : Decalage case
  */
-void Automaton::decalage(ASTTokenNode* t, State* s) {
+void Automaton::decalage(ASTNode* t, State* s) {
   stackStates.push(s);
   stackASTTokenNodes.push(t);
 }
@@ -45,16 +45,8 @@ stack<State*> *Automaton::getStackStates() {
   return &this->stackStates;
 }
 
-stack<ASTTokenNode*> *Automaton::getStackASTTokenNodes() {
+stack<ASTNode*> *Automaton::getStackASTNodes() {
   return &this->stackASTTokenNodes;
-}
-
-
-void Automaton::reduce(ASTTokenNode tokenToReduce, int redNb) {
-      for ( int i = 0 ; i < 1 ; i++ ) {
-        this->getStackASTTokenNodes()->pop();
-        this->getStackStates()->pop();
-      }
 }
 
 /**

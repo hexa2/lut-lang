@@ -11,7 +11,7 @@
 
 E37::E37() : State() { }
 
-bool E37::transition(Automaton *automaton, ASTTokenNode *t) {
+bool E37::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::AFF:
       automaton->decalage(t, new E38());

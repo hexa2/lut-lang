@@ -21,7 +21,8 @@ class ASTProgramNode : public ASTNode {
    * @param instructions The instruction block
    */
   ASTProgramNode(ASTDeclarationBlockNode* declarations = NULL,
-                 ASTInstructionBlockNode* instructions = NULL);
+                 ASTInstructionBlockNode* instructions = NULL,
+                 TokenType type = TokenType::P);
 
   /**
    * @return The declaration block

@@ -8,11 +8,10 @@
 #include "E11.h"
 #include "../State.h"
 #include "../TokenType.h"
-
+#include "../ASTThirdLevelExpressionNode.h"
 E11::E11() : State() { }
 
-bool E11::transition(Automaton *automaton, ASTTokenNode *t) {
-  ASTTokenNode token = ASTTokenNode(TokenType::D);
+bool E11::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::VAR:
     case TokenType::CONST:
@@ -32,16 +31,23 @@ bool E11::transition(Automaton *automaton, ASTTokenNode *t) {
     case TokenType::READ :
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
+    {
       //  Reduction N°17 - 1 Level pop - "F->id"
-      token = ASTTokenNode(TokenType::F);
+      for ( int i = 0 ; i < 1 ; i++ ) {
+        automaton->getStackStates()->pop();
+      }
 
-      automaton->reduce(token, 1);
+      ASTTokenNode *identifier = (ASTTokenNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
 
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, &token)) return false;
-      if ( !automaton->getStackStates()->top()->transition(
-        automaton, t)) return false;
+      ASTThirdLevelExpressionNode token = ASTThirdLevelExpressionNode(identifier);
+
+      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+        return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, t))
+        return false;
       return true;
+    }
     default:
       return false;
 }

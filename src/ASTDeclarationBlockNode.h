@@ -28,7 +28,8 @@ class ASTDeclarationBlockNode : public ASTNode {
    */
   explicit ASTDeclarationBlockNode(ASTTokenNode* varIdentifier,
                                    ASTEnumDeclNode* enumVars = NULL,
-                                   ASTDeclarationBlockNode* prev = NULL);
+                                   ASTDeclarationBlockNode* prev = NULL,
+                                   TokenType type = TokenType::D);
 
   /**
    * @constructor
@@ -40,7 +41,8 @@ class ASTDeclarationBlockNode : public ASTNode {
   explicit ASTDeclarationBlockNode(ASTTokenNode* constIdentifier,
                                    ASTTokenNode* constValue,
                                    ASTEnumAssignNode* enumConsts = NULL,
-                                   ASTDeclarationBlockNode* prev = NULL);
+                                   ASTDeclarationBlockNode* prev = NULL,
+                                   TokenType type = TokenType::D);
 
   /**
    * @return The variable identifier or Null
