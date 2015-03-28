@@ -11,7 +11,6 @@
 E12::E12() : State() { }
 
 bool E12::transition(Automaton *automaton, ASTNode *t) {
-  ASTThirdLevelExpressionNode token = ASTThirdLevelExpressionNode();
   switch ( t->getTokenType() ) {
     case TokenType::VAR:
     case TokenType::CONST:
@@ -31,16 +30,23 @@ bool E12::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::READ :
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
+    {
       //  Reduction N°18 - 1 Level pop - "F->val"
       for ( int i = 0 ; i < 1 ; i++ ) {
-        automaton->getStackASTNodes()->pop();
         automaton->getStackStates()->pop();
       }
+
+      ASTTokenNode *value = (ASTTokenNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+
+      ASTThirdLevelExpressionNode token = ASTThirdLevelExpressionNode(value);
+
       if ( !automaton->getStackStates()->top()->transition(automaton, &token))
         return false;
       if ( !automaton->getStackStates()->top()->transition(automaton, t))
         return false;
       return true;
+    }
     default:
       return false;
 }

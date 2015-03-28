@@ -13,7 +13,6 @@
 E24::E24() : State() { }
 
 bool E24::transition(Automaton *automaton, ASTNode *t) {
-  ASTDeclarationBlockNode token = ASTDeclarationBlockNode(NULL);
   switch ( t->getTokenType() ) {
     case TokenType::ADD :
     case TokenType::MUL :
@@ -32,16 +31,29 @@ bool E24::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::PF :
     case TokenType::READ :
     case TokenType::WRITE :
+    {
       //  Reduction N°2 - 4 Level pop - "D->D var id L1 pv"
       for ( int i = 0 ; i < 5 ; i++ ) {
-        automaton->getStackASTNodes()->pop();
         automaton->getStackStates()->pop();
       }
+
+      automaton->getStackASTNodes()->pop();
+      ASTEnumDeclNode *l1 = (ASTEnumDeclNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+      ASTTokenNode *identifier = (ASTTokenNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+      automaton->getStackASTNodes()->pop();
+      ASTDeclarationBlockNode *prev = (ASTDeclarationBlockNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+
+      ASTDeclarationBlockNode token = ASTDeclarationBlockNode(identifier, l1, prev);
+
       if (!automaton->getStackStates()->top()->transition(automaton, &token))
         return false;
       if (!automaton->getStackStates()->top()->transition(automaton, t))
         return false;
       return true;
+    }
     default:
       return false;
   }

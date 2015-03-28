@@ -12,7 +12,6 @@
 E6::E6() : State() { }
 
 bool E6::transition(Automaton *automaton, ASTNode *t) {
-  ASTInstructionBlockNode token = ASTInstructionBlockNode();
   switch ( t->getTokenType() ) {
     case TokenType::VAR:
     case TokenType::CONST:
@@ -32,16 +31,27 @@ bool E6::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::READ :
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
+    {
       //  Reduction N°9 - 4 Level pop - "I->IeEpv"
       for ( int i = 0 ; i < 4 ; i++ ) {
-        automaton->getStackASTNodes()->pop();
         automaton->getStackStates()->pop();
       }
+      automaton->getStackASTNodes()->pop();
+      ASTFirstLevelExpressionNode *expression = (ASTFirstLevelExpressionNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+      // ASTTokenNode *write = (ASTTokenNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+      ASTInstructionBlockNode *prev = (ASTInstructionBlockNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+
+      ASTInstructionBlockNode token = ASTInstructionBlockNode(expression, prev);
+
       if (!automaton->getStackStates()->top()->transition(automaton, &token))
         return false;
       if (!automaton->getStackStates()->top()->transition(automaton, t))
         return false;
       return true;
+    }
     default:
       return false;
   }

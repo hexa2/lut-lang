@@ -16,7 +16,6 @@
 E15::E15() : State() { }
 
 bool E15::transition(Automaton *automaton, ASTNode *t) {
-  ASTFirstLevelExpressionNode token = ASTFirstLevelExpressionNode(NULL);
   switch ( t->getTokenType() ) {
     case TokenType::opM:
       automaton->decalage(t, new E9());
@@ -43,16 +42,22 @@ bool E15::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::READ :
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
+    {
       //  Reduction N°14 - 1 Level pop - "E->T"
       for ( int i = 0 ; i < 1 ; i++ ) {
-        automaton->getStackASTNodes()->pop();
         automaton->getStackStates()->pop();
       }
+
+      ASTSecondLevelExpressionNode *second = (ASTSecondLevelExpressionNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+      ASTFirstLevelExpressionNode token = ASTFirstLevelExpressionNode(second);
+
       if ( !automaton->getStackStates()->top()->transition(automaton, &token))
         return false;
       if ( !automaton->getStackStates()->top()->transition(automaton, t))
         return false;
       return true;
+    }
     default:
       return false;
   }

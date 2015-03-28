@@ -12,7 +12,6 @@
 E43::E43() : State() { }
 
 bool E43::transition(Automaton *automaton, ASTNode *t) {
-  ASTMultiplicativeOperation token = ASTMultiplicativeOperation(new ASTTokenNode(TokenType::MUL));
   switch ( t->getTokenType() ) {
     case TokenType::VAR:
     case TokenType::CONST:
@@ -32,16 +31,23 @@ bool E43::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::READ :
     case TokenType::INVALID_SYMBOL:
     case TokenType::ENDOFFILE :
+    {
       //  Reduction N°22 - 1 Level Pop - "opM->MUL"
       for ( int i = 0 ; i < 1 ; i++ ) {
-        automaton->getStackASTNodes()->pop();
         automaton->getStackStates()->pop();
       }
+
+      ASTTokenNode *operation = (ASTTokenNode *) automaton->getStackASTNodes()->top();
+      automaton->getStackASTNodes()->pop();
+
+      ASTMultiplicativeOperation token = ASTMultiplicativeOperation(operation);
+
       if ( !automaton->getStackStates()->top()->transition(automaton, &token))
         return false;
       if ( !automaton->getStackStates()->top()->transition(automaton, t))
         return false;
       return true;
+    }
     default:
         return false;
     }

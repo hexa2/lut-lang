@@ -12,7 +12,6 @@
 E22::E22() : State() { }
 
 bool E22::transition(Automaton *automaton, ASTNode *t) {
-  ASTEnumDeclNode token = ASTEnumDeclNode(NULL);
   switch ( t->getTokenType() ) {
     case TokenType::L1:
       automaton->decalage(t, new E23());
@@ -34,12 +33,15 @@ bool E22::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::PF :
     case TokenType::READ :
     case TokenType::WRITE :
+    {
       //  Reduction N°6 - 0 Level Pop - "L1->."
+      ASTEnumDeclNode token = ASTEnumDeclNode(NULL);
       if (!automaton->getStackStates()->top()->transition(automaton, &token))
         return false;
       if (!automaton->getStackStates()->top()->transition(automaton, t))
         return false;
       return true;
+    }
     default:
       return false;
   }
