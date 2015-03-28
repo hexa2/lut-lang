@@ -41,7 +41,7 @@ bool E42::transition(Automaton *automaton, ASTNode *t) {
 
       ASTAdditiveOperation *token = new ASTAdditiveOperation(operation);
 
-      if ( !automaton->getStackStates()->top()->transition(automaton, token)) 
+      if ( !automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if ( !automaton->getStackStates()->top()->transition(automaton, t))
         return false;

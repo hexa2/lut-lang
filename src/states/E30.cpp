@@ -14,7 +14,7 @@ E30::E30() : State() { }
 bool E30::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::L2:
-      if ( dynamic_cast<ASTTokenNode*>( t ) == NULL ) {
+      if (dynamic_cast<ASTTokenNode*>(t) == NULL) {
         automaton->decalage(t, new E31());
       } else {
         automaton->decalage(NULL, new E31());

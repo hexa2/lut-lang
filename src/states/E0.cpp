@@ -16,8 +16,8 @@ E0::E0() : State() { }
 bool E0::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::D:
-      if ( dynamic_cast<ASTTokenNode*>( t ) == NULL ) {
-        //It's a real type
+      if (dynamic_cast<ASTTokenNode*>(t) == NULL) {
+        // It's a real type
         automaton->decalage(t, new E1());
       } else {
         automaton->decalage(NULL, new E1());
