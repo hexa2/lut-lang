@@ -41,9 +41,9 @@ bool E8::transition(Automaton *automaton, ASTNode *t) {
       ASTFirstLevelExpressionNode *prev = (ASTFirstLevelExpressionNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
 
-      ASTFirstLevelExpressionNode token = ASTFirstLevelExpressionNode(prev, operation, second);
+      ASTFirstLevelExpressionNode *token = new ASTFirstLevelExpressionNode(prev, operation, second);
 
-      if (!automaton->getStackStates()->top()->transition(automaton, &token))
+      if (!automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if (!automaton->getStackStates()->top()->transition(automaton, t))
         return false;

@@ -39,10 +39,12 @@ bool E42::transition(Automaton *automaton, ASTNode *t) {
       ASTTokenNode *operation = (ASTTokenNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
 
-      ASTAdditiveOperation token = ASTAdditiveOperation(operation);
+      ASTAdditiveOperation *token = new ASTAdditiveOperation(operation);
 
-      if ( !automaton->getStackStates()->top()->transition(automaton, &token)) return false;
-      if ( !automaton->getStackStates()->top()->transition(automaton, t)) return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, token))
+        return false;
+      if ( !automaton->getStackStates()->top()->transition(automaton, t))
+        return false;
       return true;
     }
     default:

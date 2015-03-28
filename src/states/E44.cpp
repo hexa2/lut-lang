@@ -40,9 +40,9 @@ bool E44::transition(Automaton *automaton, ASTNode *t) {
       ASTTokenNode *operation = (ASTTokenNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
 
-      ASTMultiplicativeOperation token = ASTMultiplicativeOperation(operation);
+      ASTMultiplicativeOperation *token = new ASTMultiplicativeOperation(operation);
 
-      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+      if ( !automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if ( !automaton->getStackStates()->top()->transition(automaton, t))
         return false;

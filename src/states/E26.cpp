@@ -44,9 +44,9 @@ bool E26::transition(Automaton *automaton, ASTNode *t) {
       ASTEnumDeclNode *prev = (ASTEnumDeclNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
 
-      ASTEnumDeclNode token = ASTEnumDeclNode(identifier, prev);
+      ASTEnumDeclNode *token = new ASTEnumDeclNode(identifier, prev);
 
-      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+      if ( !automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if ( !automaton->getStackStates()->top()->transition(automaton, t))
         return false;

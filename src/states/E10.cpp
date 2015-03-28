@@ -44,9 +44,9 @@ bool E10::transition(Automaton *automaton, ASTNode *t) {
       ASTSecondLevelExpressionNode *prev = (ASTSecondLevelExpressionNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
 
-      ASTSecondLevelExpressionNode token = ASTSecondLevelExpressionNode(prev, operation, second);
+      ASTSecondLevelExpressionNode *token = new ASTSecondLevelExpressionNode(prev, operation, second);
 
-      if (!automaton->getStackStates()->top()->transition(automaton, &token))
+      if (!automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if (!automaton->getStackStates()->top()->transition(automaton, t))
         return false;

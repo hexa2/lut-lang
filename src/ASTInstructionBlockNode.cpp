@@ -59,6 +59,9 @@ int64_t ASTInstructionBlockNode::exec(exec_table* table) {
 }
 
 void ASTInstructionBlockNode::print() {
+  if (this->prev != NULL) {
+    this->prev->print();
+  }
   if (this->expression != NULL && this->identifier != NULL) {  // Assignment
     this->identifier->print();
     cout << " := ";

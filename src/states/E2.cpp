@@ -30,8 +30,8 @@ bool E2::transition(Automaton *automaton, ASTNode *t ) {
       ASTDeclarationBlockNode *declarations = (ASTDeclarationBlockNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
 
-      ASTProgramNode token = ASTProgramNode(declarations, instructions);
-      automaton->getStackASTNodes()->push(&token);
+      ASTProgramNode *token = new ASTProgramNode(declarations, instructions);
+      automaton->getStackASTNodes()->push(token);
 
       return true;
     }
@@ -56,8 +56,8 @@ bool E2::transition(Automaton *automaton, ASTNode *t ) {
       ASTDeclarationBlockNode *declarations = (ASTDeclarationBlockNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
 
-      ASTProgramNode token = ASTProgramNode(declarations, instructions);
-      if (!automaton->getStackStates()->top()->transition(automaton, &token))
+      ASTProgramNode *token = new ASTProgramNode(declarations, instructions);
+      if (!automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if (!automaton->getStackStates()->top()->transition(automaton, t))
         return false;

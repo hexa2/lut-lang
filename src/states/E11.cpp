@@ -40,9 +40,9 @@ bool E11::transition(Automaton *automaton, ASTNode *t) {
       ASTTokenNode *identifier = (ASTTokenNode *) automaton->getStackASTNodes()->top();
       automaton->getStackASTNodes()->pop();
 
-      ASTThirdLevelExpressionNode token = ASTThirdLevelExpressionNode(identifier);
+      ASTThirdLevelExpressionNode *token = new ASTThirdLevelExpressionNode(identifier);
 
-      if ( !automaton->getStackStates()->top()->transition(automaton, &token))
+      if ( !automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if ( !automaton->getStackStates()->top()->transition(automaton, t))
         return false;

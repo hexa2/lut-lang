@@ -16,7 +16,12 @@ E0::E0() : State() { }
 bool E0::transition(Automaton *automaton, ASTNode *t) {
   switch ( t->getTokenType() ) {
     case TokenType::D:
-      automaton->decalage(t, new E1());
+      if (dynamic_cast<ASTTokenNode*>(t) == NULL) {
+        // It's a real type
+        automaton->decalage(t, new E1());
+      } else {
+        automaton->decalage(NULL, new E1());
+      }
       return true;
     case TokenType::WRITE:
     case TokenType::READ :
@@ -26,8 +31,8 @@ bool E0::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::ENDOFFILE :
     {
       //  Reduction N°4 - 0 Level Pop - D->.
-      ASTDeclarationBlockNode token = ASTDeclarationBlockNode(NULL);
-      if (!automaton->getStackStates()->top()->transition(automaton, &token))
+      ASTTokenNode *token = new ASTTokenNode(TokenType::D);
+      if (!automaton->getStackStates()->top()->transition(automaton, token))
         return false;
       if (!automaton->getStackStates()->top()->transition(automaton, t))
         return false;
