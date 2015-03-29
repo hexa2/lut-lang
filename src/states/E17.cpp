@@ -20,6 +20,8 @@ bool E17::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::V:
     case TokenType::AFF:
     case TokenType::EQ:
+    case TokenType::MUL:
+    case TokenType::DIV:
     case TokenType::ADD:
     case TokenType::SUB:
     case TokenType::PO:

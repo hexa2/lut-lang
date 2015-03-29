@@ -21,7 +21,7 @@ using std ::smatch;
 // Regexs
 const char keyword_str[] = "^(const |var |ecrire |lire )";
 const char identifier_str[] = "^([a-zA-Z][a-zA-Z0-9]*)";
-const char number_str[] =  "^([-+]?[0-9]*\\.?[0-9]+)";
+const char number_str[] =  "^([0-9]*\\.?[0-9]+)";
 const char single_operators_str[] = "^(\\+|-|\\*|\\/|\\(|\\)|;|=|,)";
 const char affectation_str[] = "^(:=)";
 

@@ -61,7 +61,7 @@ void test() {
   delete automate;
 
   // Test ecriture complexe
-  automate = new Automaton ("ecrire (4/2)*b;");
+  automate = new Automaton ("ecrire ((4-2)+b);");
   cout << " // Test ecriture complexe : ";
   if (automate->analyze()) {
     cout << "Ca marche" << endl;
@@ -81,7 +81,7 @@ void test() {
   delete automate;
 
   // Test affectation variable avec expression
-  automate = new Automaton ("b := 4+2;");
+  automate = new Automaton ("b := (4+2);");
   cout << " // Test affectation variable avec expression : ";
   if (automate->analyze()) {
     cout << "Ca marche" << endl;

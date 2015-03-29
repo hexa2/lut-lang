@@ -25,7 +25,7 @@ bool E16::transition(Automaton *automaton, ASTNode *t) {
     case TokenType::SUB:
       automaton->decalage(t, new E42());
       return true;
-    case TokenType::PO:
+    case TokenType::PF:
       automaton->decalage(t, new E17());
       return true;
     default:
