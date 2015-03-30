@@ -9,9 +9,11 @@
 #include "ASTFirstLevelExpressionNode.h"
 
 #include <iostream>
+#include <sstream>
 
 using std::cout;
 using std::endl;
+using std::stringstream;
 
 ASTFirstLevelExpressionNode::ASTFirstLevelExpressionNode(ASTFirstLevelExpressionNode* leftExpression,
                                                          ASTAdditiveOperation* addOp,

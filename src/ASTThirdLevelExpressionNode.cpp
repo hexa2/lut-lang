@@ -59,8 +59,11 @@ bool ASTThirdLevelExpressionNode::analyze(analyze_table* table) {
 
 int64_t ASTThirdLevelExpressionNode::exec(exec_table* table) {
   if (this->identifierOrValue != NULL) {
-    if (this->identifierOrValue->getTokenType() == TokenType::ID) {
+    if (this->identifierOrValue->getTokenType() == TokenType::ID &&
+        table->count(this->identifierOrValue->getValue()) > 0) {
       return std::get<0>((*table)[this->identifierOrValue->getValue()]);
+    } else if(this->identifierOrValue->getTokenType() == TokenType::ID) {
+      throw std::logic_error("does not exist");
     } else {
       stringstream ss;
       ss << this->identifierOrValue->getValue();
