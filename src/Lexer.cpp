@@ -31,9 +31,43 @@ const std::regex number(number_str);
 const std::regex single_operators(single_operators_str);
 const std::regex affectation(affectation_str);
 
+int Lexer::find_first_not_of(string str) {
+  string::iterator it;
+  int index = 0;
+  for (it = str.begin(); it < str.end(); it++, index++) {
+    switch ( str.at(index) ) {
+      case ' ':
+        this->column++;
+        break;
+      case '\t':
+        break;
+      case '\n':
+        this->line++;
+        this->column = 0;
+        break;
+      case '\r':
+        break;
+      case '\f':
+        break;
+      case '\v':
+      default:
+        return index;
+        break;
+    }
+  }
+  return -1;
+}
+string& Lexer::ltrim(string& s) {
+  s.erase(0, find_first_not_of(s));
+  return s;
+}
+
 
 Lexer::Lexer(string inString) : inputString(inString) {
   this->currentToken = new ASTTokenNode(TokenType::INVALID_SYMBOL);
+  this->line = 0;
+  this->column = 0;
+  this->column_next_incrementation = 0;
 }
 
 bool Lexer::has_next() {
@@ -55,6 +89,8 @@ void Lexer::shift() {
   if ( !has_next() )
     return;
 
+  this->column += this->column_next_incrementation;
+
   std::smatch m;
   if ( !analyze(inputString, m) ) {
 #warning "symbole non reconnu (deja fait avant, a vous de choisir ou le mettre"
@@ -63,6 +99,7 @@ void Lexer::shift() {
     inputString.erase(0, 1);    // not sure
     return;
   }
+  this->column_next_incrementation = (int)m.length();
   inputString  = m.suffix().str();
 }
 
@@ -137,11 +174,9 @@ return true;
 }
 
 
-void test_lexer() {
-  Lexer a = Lexer("const a = 5.34  ; \n const b = -2.5 ; ç const b = 5");
-  while ( a.has_next() ) {
-    a.shift();
-    if ( a.top() ) {
-    }
-  }
+int Lexer::getLine() {
+  return this->line;
+}
+int Lexer::getColumn() {
+  return this->column;
 }

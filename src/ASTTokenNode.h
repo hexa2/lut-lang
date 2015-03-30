@@ -13,9 +13,10 @@ class ASTTokenNode : public ASTNode {
  public:
   explicit ASTTokenNode(TokenType type, string value = "");
 
-  bool analyze(analyze_table* table);
-  int64_t exec(exec_table* table);
-  void print();
+  virtual bool analyze(analyze_table* table);
+  virtual int64_t exec(exec_table* table);
+  virtual void print();
+  virtual void transform(exec_table* table);
 
   string getValue();
 };

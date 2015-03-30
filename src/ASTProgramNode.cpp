@@ -55,3 +55,12 @@ void ASTProgramNode::print() {
     this->instructions->print();
   }
 }
+
+void ASTProgramNode::transform(exec_table* table) {
+  if (this->declarations != NULL) {
+    this->declarations->transform(table);
+  }
+  if (this->instructions != NULL) {
+    this->instructions->transform(table);
+  }
+}

@@ -120,7 +120,7 @@ int64_t ASTDeclarationBlockNode::exec(exec_table* table) {
     ss << this->constValue->getValue();
     int64_t value;
     ss >> value;
-    (*table)[this->constIdentifier->getValue()] = std::make_tuple(value, false);
+    (*table)[this->constIdentifier->getValue()] = std::make_tuple(value, true);
 
     if (this->enumConsts != NULL) {
       this->enumConsts->exec(table);
@@ -137,7 +137,7 @@ void ASTDeclarationBlockNode::print() {
   if (this->varIdentifier != NULL) {  // Var assignments case
     cout << "var ";
     this->varIdentifier->print();
-
+    cout << ";" << endl;
     if (this->enumVars != NULL) {
       this->enumVars->print();
     }
@@ -148,10 +148,32 @@ void ASTDeclarationBlockNode::print() {
     this->constIdentifier->print();
     cout << " = ";
     this->constValue->print();
-
+    cout << ";" << endl;
     if (this->enumConsts != NULL) {
       this->enumConsts->print();
     }
   }
-  cout << ";" << endl;
+}
+
+void ASTDeclarationBlockNode::transform(exec_table* table) {
+  if (this->prev != NULL) {
+    this->prev->transform(table);
+  }
+
+  if (this->constIdentifier != NULL) {
+    stringstream ss;
+    ss << this->constValue->getValue();
+    int64_t value;
+    ss >> value;
+    (*table)[this->constIdentifier->getValue()] = std::make_tuple(value, true);
+
+    if (this->enumConsts != NULL) {
+      this->enumConsts->transform(table);
+    }
+
+    // Suppress values from the tree
+    this->constIdentifier = NULL;
+    this->constValue = NULL;
+    this->enumConsts = NULL;
+  }
 }
