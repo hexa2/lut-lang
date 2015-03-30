@@ -152,8 +152,7 @@ void ASTInstructionBlockNode::transform(exec_table* table) {
       ss << attempt;
       string val = ss.str();
       this->expression = new ASTFirstLevelExpressionNode(new ASTSecondLevelExpressionNode(new ASTThirdLevelExpressionNode(new ASTTokenNode(TokenType::VAL, val), TokenType::PF), TokenType::PF), TokenType::PF);
-    } catch ( const std::exception & e ) {
-      //noop
+    } catch (const std::exception & e) {
     }
   }
 }
