@@ -30,8 +30,7 @@ bool ASTEnumDeclNode::analyze(analyze_table* table) {
     return false;
   }
 
-  table->insert(pair<string, tuple<bool, bool>>(this->identifier->getValue(),
-                                                std::make_tuple(false, false)));
+  (*table)[this->identifier->getValue()] = std::make_tuple(false, false);
 
   return true;
 }
@@ -41,8 +40,7 @@ int64_t ASTEnumDeclNode::exec(exec_table* table) {
     this->prev->exec(table);
   }
 
-  table->insert(pair<string, tuple<bool, bool>>(this->identifier->getValue(),
-                                                std::make_tuple(0, false)));
+  (*table)[this->identifier->getValue()] = std::make_tuple(0, false);
 
   return 0;
 }

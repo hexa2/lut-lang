@@ -43,7 +43,14 @@ ASTSecondLevelExpressionNode*
 }
 
 bool ASTFirstLevelExpressionNode::analyze(analyze_table* table) {
-  return true;
+  if (rightExpression->analyze(table)) {
+    if (this->leftExpression != NULL) {
+        return this->leftExpression->analyze(table) && this->addOp->analyze(table);
+    }
+    return false;
+  } else {
+    return true;
+  }
 }
 
 int64_t ASTFirstLevelExpressionNode::exec(exec_table* table) {

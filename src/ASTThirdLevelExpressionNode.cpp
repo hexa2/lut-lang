@@ -34,6 +34,15 @@ ASTFirstLevelExpressionNode* ASTThirdLevelExpressionNode::getExpression() {
 }
 
 bool ASTThirdLevelExpressionNode::analyze(analyze_table* table) {
+  if (expression != NULL) {
+    return expression->analyze(table);
+  } else {
+    if (identifierOrValue != NULL) {
+      if (identifierOrValue->getValue() != "") {
+        return true;
+      }
+    }
+  }
   return true;
 }
 
