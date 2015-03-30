@@ -41,11 +41,41 @@ bool Automaton::build_program() {
     if ( stackStates.empty() ) return false;
     ASTTokenNode *t = lexer->top();
     if ( t == NULL ) return false;  //  wrong token case
-    if ( !stackStates.top()->transition(this, t) ) return false;
+    if ( !stackStates.top()->transition(this, t) ) return recover_from_error();
   }
   if ( stackStates.empty() ) return false;
 
   return accepted;
+}
+
+bool Automaton::recover_from_error() {
+  //get next line
+  while( lexer->top()->getTokenType() != TokenType::ENDOFFILE && lexer->top()->getTokenType() != TokenType::PV) {
+    lexer->shift();
+  }
+  //flush
+  while(!stackStates.empty()) {
+    stackStates.pop();
+  }
+  while(!stackASTTokenNodes.empty()) {
+    stackASTTokenNodes.pop();
+  }
+  stackStates.push(new E0());
+  
+  while ( lexer->top()->getTokenType() != TokenType::ENDOFFILE ) {
+    lexer->shift();
+    if ( stackStates.empty() ) return false;
+    ASTTokenNode *t = lexer->top();
+    if ( t == NULL ) return false;  //  wrong token case
+    if ( !stackStates.top()->transition(this, t) ) {
+      return recover_from_error();
+    }
+  }
+  if ( stackStates.empty() ) return false;
+  
+  setAccepted(false);
+  
+  return false;
 }
 /**
  * @return The wether or not the program is correct syntaxically

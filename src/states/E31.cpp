@@ -9,6 +9,7 @@
 #include "E32.h"
 #include "E33.h"
 #include "../TokenType.h"
+#include "../ErrorHandler.h"
 
 E31::E31() : State() { }
 
@@ -21,6 +22,7 @@ bool E31::transition(Automaton *automaton, ASTNode *t) {
       automaton->decalage(t, new E32());
       return true;
     default:
+        ErrorHandler::getInstance().SyntaxErrorSymbole(automaton->getLexer()->getLine(), automaton->getLexer()->getColumn(), ", ou ;");
         return false;
   }
   return false;
