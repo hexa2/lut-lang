@@ -5,14 +5,17 @@
 //  Created by Kevin Antoine on 06/03/2015.
 //  Copyright (c) 2015 H4314. All rights reserved.
 //
+#include "Automaton.h"
+
 #include <string>
 #include <stack>
-#include "Automaton.h"
-#include "states/E0.h"
-#include "ASTProgramNode.h"
 #include <map>
 #include <tuple>
 #include <cstdint>
+
+#include "states/E0.h"
+#include "ASTProgramNode.h"
+
 using std::int64_t;
 using std::string;
 using std::tuple;

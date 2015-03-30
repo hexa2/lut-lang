@@ -17,7 +17,6 @@
 using std::cout;
 using std::cin;
 using std::endl;
-using std::istream_iterator;
 using std::stringstream;
 
 ASTInstructionBlockNode::ASTInstructionBlockNode(ASTFirstLevelExpressionNode* expression,
@@ -100,7 +99,6 @@ int64_t ASTInstructionBlockNode::exec(exec_table* table) {
   } else if (this->expression != NULL) {  // Write
     cout << this->expression->exec(table) << endl;
   } else if (this->identifier != NULL) {  // Read
-    cout << ">> " ; 
     string line;
     getline(cin, line);
     stringstream ss;
