@@ -29,7 +29,7 @@ public:
   void DoubleDeclarationConst(string nomConstante);
   void NonDeclared();
   void LexicalError(int line, int col, char character);
-  
+  void SyntaxErrorSymbole(int line, int col, string symbol);
   
   void outputErrors();
 private:

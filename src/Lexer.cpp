@@ -94,7 +94,7 @@ void Lexer::shift() {
 
   std::smatch m;
   if ( !analyze(inputString, m) ) {
-    ErrorHandler::getInstance().LexicalError(this->line+1, this->column+1, inputString.at(0));
+    ErrorHandler::getInstance().LexicalError(this->getLine(), this->getColumn(), inputString.at(0));
     ErrorHandler::getInstance().outputErrors();
     currentToken = new ASTTokenNode(TokenType::INVALID_SYMBOL);
     inputString.erase(0, 1);    // not sure
@@ -176,8 +176,8 @@ return true;
 
 
 int Lexer::getLine() {
-  return this->line;
+  return this->line+1;
 }
 int Lexer::getColumn() {
-  return this->column;
+  return this->column+1;
 }

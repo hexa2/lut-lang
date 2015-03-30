@@ -25,6 +25,10 @@ void ErrorHandler::LexicalError(int line, int col, char character) {
   errorsQueue->push("Erreur lexicale ("+ std::to_string(line) +":"+ std::to_string(col) +") caractere "+ character);
 }
 
+void ErrorHandler::SyntaxErrorSymbole(int line, int col, string symbol) {
+  errorsQueue->push("Erreur syntaxique ("+ std::to_string(line) +":"+ std::to_string(col) +") symbole "+ symbol +" attendu");
+}
+
 void ErrorHandler::outputErrors() {
   while(!errorsQueue->empty()){
     std::cerr << errorsQueue->front() << std::endl;

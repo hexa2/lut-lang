@@ -15,6 +15,7 @@ int main(int argc, char* argv[]) {
 
   Automaton *automaton = new Automaton(inputFile);
   if (!automaton->build_program()) {
+    ErrorHandler::getInstance().outputErrors();
     return 0;
   }
 
