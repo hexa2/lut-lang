@@ -75,3 +75,10 @@ void ASTSecondLevelExpressionNode::print() {
   }
   this->rightExpression->print();
 }
+
+void ASTSecondLevelExpressionNode::transform(exec_table* table) {
+  if (this->leftExpression != NULL) {
+    this->leftExpression->transform(table);
+  }
+  this->rightExpression->transform(table);
+}

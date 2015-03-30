@@ -75,3 +75,16 @@ void ASTThirdLevelExpressionNode::print() {
     cout << ")";
   }
 }
+
+void ASTThirdLevelExpressionNode::transform(exec_table* table) {
+  if (this->identifierOrValue->getTokenType() == TokenType::ID &&
+      table->count(this->identifierOrValue->getValue()) > 0) {
+    std::tuple<int64_t, bool> constTerm = (*table)[this->identifierOrValue->getValue()];
+    if (std::get<1>(constTerm)) {
+      stringstream ss;
+      ss << std::get<0>(constTerm);
+      string val = ss.str();
+      this->identifierOrValue = new ASTTokenNode(TokenType::VAL, val);
+    }
+  }
+}
