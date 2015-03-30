@@ -12,10 +12,12 @@
 #include <iostream>
 #include <utility>
 #include <string>
+#include <sstream>
 
 using std::cout;
 using std::endl;
 using std::pair;
+using std::stringstream;
 
 ASTDeclarationBlockNode::ASTDeclarationBlockNode(ASTTokenNode* varIdentifier,
                                                  ASTEnumDeclNode* enumVars,
@@ -101,6 +103,31 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
 }
 
 int64_t ASTDeclarationBlockNode::exec(exec_table* table) {
+  if (this->prev != NULL) {
+    this->prev->exec(table);
+  }
+
+  if (this->varIdentifier != NULL) {  // Var assignments case
+    table->insert(pair<string, tuple<bool, bool>>(this->varIdentifier->getValue(),
+                                                  std::make_tuple(0, false)));
+
+    if (this->enumVars != NULL) {
+      this->enumVars->exec(table);
+    }
+  }
+
+  if (this->constIdentifier != NULL) {  // Const assignments case
+    stringstream ss;
+    ss << this->constValue->getValue();
+    int64_t value;
+    ss >> value;
+    table->insert(pair<string, tuple<bool, bool>>(this->varIdentifier->getValue(),
+                                                  std::make_tuple(value, false)));
+
+    if (this->enumConsts != NULL) {
+      this->enumConsts->exec(table);
+    }
+  }
   return 0;
 }
 
