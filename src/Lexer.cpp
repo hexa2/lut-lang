@@ -129,9 +129,11 @@ bool Lexer::analyze(string s, smatch &m) {
     }
   } else if ( std::regex_search(inputString, m, affectation) ) {
     currentToken = new ASTTokenNode(TokenType::AFF);
+  } else {
+    return false;
   }
 #warning "symbole non reconnu"
-return false;
+return true;
 }
 
 
