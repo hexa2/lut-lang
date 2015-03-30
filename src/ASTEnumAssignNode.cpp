@@ -65,7 +65,7 @@ int64_t ASTEnumAssignNode::exec(exec_table* table) {
   int64_t value;
   ss >> value;
   table->insert(pair<string, tuple<bool, bool>>(this->identifier->getValue(),
-                                                std::make_tuple(value, false)));
+                                                std::make_tuple(value, true)));
 
   return 0;
 }
@@ -78,4 +78,18 @@ void ASTEnumAssignNode::print() {
   this->identifier->print();
   cout << " = ";
   this->value->print();
+}
+
+void ASTEnumAssignNode::transform(exec_table* table) {
+  if (this->prev != NULL) {
+    this->prev->transform(table);
+  }
+
+  if (this->identifier != NULL) {
+    stringstream ss;
+    ss << this->value->getValue();
+    int64_t value;
+    ss >> value;
+    (*table)[this->identifier->getValue()] = std::make_tuple(value, true);
+  }
 }

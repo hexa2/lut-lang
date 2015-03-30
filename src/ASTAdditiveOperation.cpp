@@ -33,3 +33,7 @@ int64_t ASTAdditiveOperation::exec(exec_table* table) {
 void ASTAdditiveOperation::print() {
   this->symbol->print();
 }
+
+void ASTAdditiveOperation::transform(exec_table* table) {
+}
+

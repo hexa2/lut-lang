@@ -28,3 +28,6 @@ int64_t ASTMultiplicativeOperation::exec(exec_table* table) {
 void ASTMultiplicativeOperation::print() {
   this->symbol->print();
 }
+
+void ASTMultiplicativeOperation::transform(exec_table* table) {
+}

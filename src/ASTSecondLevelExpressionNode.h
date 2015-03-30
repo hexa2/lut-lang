@@ -57,6 +57,7 @@ class ASTSecondLevelExpressionNode : public ASTNode {
   virtual bool analyze(analyze_table* table);
   virtual int64_t exec(exec_table* table);
   virtual void print();
+  virtual void transform(exec_table* table);
 
  private:
   ASTSecondLevelExpressionNode* leftExpression;

@@ -57,3 +57,6 @@ void ASTEnumDeclNode::print() {
   cout << ", ";
   this->identifier->print();
 }
+
+void ASTEnumDeclNode::transform(exec_table* table) {
+}

@@ -28,6 +28,7 @@ typedef map<string, tuple<int64_t, bool>> exec_table;
 class ASTNode {
  private:
   TokenType type;
+
  public:
   explicit ASTNode(TokenType type);
   /**
@@ -39,6 +40,11 @@ class ASTNode {
    * Executes the program
    */
   virtual int64_t exec(exec_table* table) = 0;
+
+  /**
+   * Optimizes the tree
+   */
+  virtual void transform(exec_table* table) = 0;
 
   /**
    * Outputs the program's code
