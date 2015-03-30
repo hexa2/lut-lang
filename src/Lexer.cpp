@@ -9,7 +9,6 @@
 #include "Lexer.h"
 #include <boost/regex.hpp>
 #include <string>
-#include <regex>
 #include <iostream>
 #include "TokenType.h"
 using std::cout;
@@ -91,7 +90,7 @@ void Lexer::shift() {
 
   this->column += this->column_next_incrementation;
 
-  smatch m;
+  boost::smatch m;
   if ( !analyze(inputString, m) ) {
 #warning "symbole non reconnu (deja fait avant, a vous de choisir ou le mettre"
     cout <<"cant shift" <<endl;
@@ -104,7 +103,7 @@ void Lexer::shift() {
 }
 
 
-bool Lexer::analyze(string s, smatch &m) {
+bool Lexer::analyze(std::string s, boost::smatch &m) {
   std::string::const_iterator begin = s.begin(), end = s.end();
   if ( boost::regex_search(begin,end,m,keyword) ) {
     std::string currentTokenValue = m.str();

@@ -10,13 +10,12 @@
 #define SRC_LEXER_H_
 
 #include <stdio.h>
-#include <regex>
+#include <boost/regex.hpp>
 #include <string>
 #include "ASTTokenNode.h"
-#include <boost/regex.hpp>
 
 using std::string;
-using boost::smatch;
+
 /**
  * @class
  * Defines an enumeration of variable declarations
@@ -56,7 +55,7 @@ class Lexer {
   std::string inputString;
   ASTTokenNode *currentToken;
 
-  bool analyze(string s, smatch &m);
+  bool analyze(string s, boost::smatch &m);
   int find_first_not_of(string str);
   string& ltrim(string& s);
 };
