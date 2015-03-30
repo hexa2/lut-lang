@@ -45,8 +45,11 @@ bool ASTEnumAssignNode::analyze(analyze_table* table) {
     return false;
   }
 
-  table->insert(pair<string, tuple<bool, bool>>(this->identifier->getValue(),
-                                                std::make_tuple(true, true)));
+  if (table->count(this->identifier->getValue()) > 0) {
+    return false;
+  }
+
+  (*table)[this->identifier->getValue()] = std::make_tuple(true, true);
 
   return true;
 }

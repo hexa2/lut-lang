@@ -78,8 +78,7 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
       return false;
     }
 
-    table->insert(pair<string, tuple<bool, bool>>(this->varIdentifier->getValue(),
-                                                 std::make_tuple(false, false)));
+    (*table)[this->varIdentifier->getValue()] = std::make_tuple(false, false);
 
     if (this->enumVars != NULL && !this->enumVars->analyze(table)) {
       return false;
@@ -91,8 +90,7 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
       return false;
     }
 
-    table->insert(pair<string, tuple<bool, bool>>(this->varIdentifier->getValue(),
-                                                  std::make_tuple(true, true)));
+    (*table)[this->varIdentifier->getValue()] = std::make_tuple(true, true);
 
     if (this->enumConsts != NULL && !this->enumConsts->analyze(table)) {
       return false;
@@ -108,8 +106,7 @@ int64_t ASTDeclarationBlockNode::exec(exec_table* table) {
   }
 
   if (this->varIdentifier != NULL) {  // Var assignments case
-    table->insert(pair<string, tuple<bool, bool>>(this->varIdentifier->getValue(),
-                                                  std::make_tuple(0, false)));
+    (*table)[this->varIdentifier->getValue()] = std::make_tuple(0, false);
 
     if (this->enumVars != NULL) {
       this->enumVars->exec(table);
@@ -121,8 +118,7 @@ int64_t ASTDeclarationBlockNode::exec(exec_table* table) {
     ss << this->constValue->getValue();
     int64_t value;
     ss >> value;
-    table->insert(pair<string, tuple<bool, bool>>(this->varIdentifier->getValue(),
-                                                  std::make_tuple(value, false)));
+    (*table)[this->varIdentifier->getValue()] = std::make_tuple(value, false);
 
     if (this->enumConsts != NULL) {
       this->enumConsts->exec(table);
