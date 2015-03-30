@@ -23,7 +23,7 @@ ASTTokenNode* ASTAdditiveOperation::getSymbol() {
 }
 
 bool ASTAdditiveOperation::analyze(analyze_table* table) {
-  return true;
+  return symbol->getValue() != "";
 }
 
 int64_t ASTAdditiveOperation::exec(exec_table* table) {

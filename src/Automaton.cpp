@@ -5,12 +5,20 @@
 //  Created by Kevin Antoine on 06/03/2015.
 //  Copyright (c) 2015 H4314. All rights reserved.
 //
+#include "Automaton.h"
+
 #include <string>
 #include <stack>
-#include "Automaton.h"
+#include <map>
+#include <tuple>
+#include <cstdint>
+
 #include "states/E0.h"
 #include "ASTProgramNode.h"
+
+using std::int64_t;
 using std::string;
+using std::tuple;
 
 Automaton::Automaton(string inputString) {
   lexer = new Lexer(inputString);
@@ -30,6 +38,7 @@ void Automaton::decalage(ASTNode* t, State* s) {
  * @return The wether or not the program is correct syntaxically
  */
 bool Automaton::analyze() {
+  setAccepted(false);
   while ( lexer->top()->getTokenType() != TokenType::ENDOFFILE ) {
     lexer->shift();
     if ( stackStates.empty() ) return false;
@@ -41,9 +50,28 @@ bool Automaton::analyze() {
 
   if (accepted) {
     ASTProgramNode *program = (ASTProgramNode *) stackASTTokenNodes.top();
-    program->print();
+    map<string, tuple<bool, bool>> *table = new map<string, tuple<bool, bool>>();
+    return program->analyze(table);
   }
   return accepted;
+}
+
+bool Automaton::print() {
+  if (accepted) {
+    ASTProgramNode *program = (ASTProgramNode *) stackASTTokenNodes.top();
+    program->print();
+    return true;
+  }
+  return false;
+}
+
+int64_t Automaton::execute() {
+  if (accepted) {
+    map<string, tuple<int64_t, bool>> *table = new map<string, tuple<int64_t, bool>>();
+    ASTProgramNode *program = (ASTProgramNode *) stackASTTokenNodes.top();
+    return program->exec(table);
+  }
+  return 1;
 }
 
 stack<State*> *Automaton::getStackStates() {

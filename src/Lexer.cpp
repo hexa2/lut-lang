@@ -57,6 +57,7 @@ void Lexer::shift() {
 
   std::smatch m;
   if ( !analyze(inputString, m) ) {
+#warning "symbole non reconnu (deja fait avant, a vous de choisir ou le mettre"
     cout <<"cant shift" <<endl;
     currentToken = new ASTTokenNode(TokenType::INVALID_SYMBOL);
     inputString.erase(0, 1);    // not sure
@@ -83,6 +84,7 @@ bool Lexer::analyze(string s, smatch &m) {
         currentToken = new ASTTokenNode(TokenType::READ);
         break;
       default:
+#warning "symbole non reconnu"
         return false;
     }
   } else if ( std::regex_search(inputString, m, identifier) ) {
@@ -122,6 +124,7 @@ bool Lexer::analyze(string s, smatch &m) {
         currentToken = new ASTTokenNode(TokenType::V);
         break;
       default:
+#warning "symbole non reconnu"
         return false;
     }
   } else if ( std::regex_search(inputString, m, affectation) ) {
@@ -129,7 +132,8 @@ bool Lexer::analyze(string s, smatch &m) {
   } else {
     return false;
   }
-  return true;
+#warning "symbole non reconnu"
+return true;
 }
 
 

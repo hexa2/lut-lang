@@ -11,12 +11,13 @@
 #ifndef SRC_AUTOMATON_H_
 #define SRC_AUTOMATON_H_
 
-#include <map>
-#include <stack>
-#include <string>
 #include "ASTNode.h"
 #include "Lexer.h"
 #include "State.h"
+
+#include <map>
+#include <stack>
+#include <string>
 
 using std::map;
 using std::stack;
@@ -34,6 +35,8 @@ class Automaton {
    */
   explicit Automaton(string inputString);
   bool analyze();
+  int64_t execute();
+  bool print();
   /**
    * @param ASTTokenNode t push t in Automaton stackToken
    * @param State s push s in Automaton stackState

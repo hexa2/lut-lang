@@ -44,11 +44,28 @@ ASTThirdLevelExpressionNode*
 }
 
 bool ASTSecondLevelExpressionNode::analyze(analyze_table* table) {
+  if (rightExpression->analyze(table)) {
+    if (this->leftExpression != NULL) {
+      if (!this->leftExpression->analyze(table)) {
+        return true;
+      }
+    }
+    return false;
+  }
   return true;
 }
 
 int64_t ASTSecondLevelExpressionNode::exec(exec_table* table) {
-  return 0;
+  int64_t r = this->rightExpression->exec(table);
+  if (this->leftExpression != NULL) {
+    int64_t l = this->leftExpression->exec(table);
+    if (this->mulOp->getSymbol()->getValue() == "*") {
+      return l * r;
+    } else {
+      return l / r;
+    }
+  }
+  return r;
 }
 
 void ASTSecondLevelExpressionNode::print() {
