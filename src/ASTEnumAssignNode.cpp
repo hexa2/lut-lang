@@ -50,7 +50,7 @@ bool ASTEnumAssignNode::analyze(analyze_table* table) {
     return false;
   }
 
-  (*table)[this->identifier->getValue()] = std::make_tuple(true, true, true);
+  (*table)[this->identifier->getValue()] = std::make_tuple(true, true, false);
 
   return true;
 }
