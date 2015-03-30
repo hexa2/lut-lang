@@ -171,10 +171,5 @@ void ASTDeclarationBlockNode::transform(exec_table* table) {
     if (this->enumConsts != NULL) {
       this->enumConsts->transform(table);
     }
-
-    // Suppress values from the tree
-    this->constIdentifier = NULL;
-    this->constValue = NULL;
-    this->enumConsts = NULL;
   }
 }

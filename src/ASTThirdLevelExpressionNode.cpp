@@ -84,7 +84,10 @@ void ASTThirdLevelExpressionNode::print() {
 }
 
 void ASTThirdLevelExpressionNode::transform(exec_table* table) {
-  if (this->identifierOrValue->getTokenType() == TokenType::ID &&
+  if (this->expression != NULL) {
+    this->expression->transform(table);
+  } else if (this->identifierOrValue != NULL &&
+      this->identifierOrValue->getTokenType() == TokenType::ID &&
       table->count(this->identifierOrValue->getValue()) > 0) {
     std::tuple<int64_t, bool> constTerm = (*table)[this->identifierOrValue->getValue()];
     if (std::get<1>(constTerm)) {
