@@ -94,8 +94,7 @@ stack<ASTNode*> *Automaton::getStackASTNodes() {
   return &this->stackASTTokenNodes;
 }
 
-Lexer* Automaton::getLexer()
-{
+Lexer* Automaton::getLexer() {
   return lexer;
 }
 

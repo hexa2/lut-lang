@@ -36,6 +36,6 @@ int main(int argc, char* argv[]) {
     automaton->execute();
   }
   ErrorHandler::getInstance().outputErrors();
-  
+
   return 0;
 }
