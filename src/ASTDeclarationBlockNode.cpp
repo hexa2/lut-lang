@@ -80,7 +80,7 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
       return false;
     }
 
-    (*table)[this->varIdentifier->getValue()] = std::make_tuple(false, false);
+    (*table)[this->varIdentifier->getValue()] = std::make_tuple(false, false, false);
 
     if (this->enumVars != NULL && !this->enumVars->analyze(table)) {
       return false;
@@ -93,7 +93,7 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
       return false;
     }
 
-    (*table)[this->constIdentifier->getValue()] = std::make_tuple(true, true);
+    (*table)[this->constIdentifier->getValue()] = std::make_tuple(true, true, false);
 
     if (this->enumConsts != NULL && !this->enumConsts->analyze(table)) {
       return false;

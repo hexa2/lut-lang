@@ -15,6 +15,7 @@
 #include <sstream>
 
 using std::cout;
+using std::cerr;
 using std::endl;
 using std::pair;
 using std::stringstream;
@@ -42,10 +43,16 @@ ASTFirstLevelExpressionNode* ASTThirdLevelExpressionNode::getExpression() {
 bool ASTThirdLevelExpressionNode::analyze(analyze_table* table) {
   if (expression != NULL && !expression->analyze(table)) {
     return false;
-  } else if (this->identifierOrValue->getTokenType() == TokenType::ID &&
-             table->count(this->identifierOrValue->getValue()) < 1) {
-#warning "variable identifier non assignee"
+  } else if (this->identifierOrValue != NULL &&
+             this->identifierOrValue->getTokenType() == TokenType::ID &&
+             (table->count(this->identifierOrValue->getValue()) < 1 ||
+              !std::get<0>((*table)[this->identifierOrValue->getValue()]))) {
+    cerr << "variable non affectee : " << this->identifierOrValue->getValue() << endl;
     return false;
+  } else if (this->identifierOrValue != NULL &&
+             this->identifierOrValue->getTokenType() == TokenType::ID) {
+    bool isConst = std::get<1>((*table)[this->identifierOrValue->getValue()]);
+    (*table)[this->identifierOrValue->getValue()] = std::make_tuple(true, isConst, true);
   }
   return true;
 }

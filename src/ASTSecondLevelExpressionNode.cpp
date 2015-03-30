@@ -44,12 +44,10 @@ ASTThirdLevelExpressionNode*
 }
 
 bool ASTSecondLevelExpressionNode::analyze(analyze_table* table) {
-  if (rightExpression->analyze(table)) {
-    if (this->leftExpression != NULL) {
-      if (!this->leftExpression->analyze(table)) {
-        return true;
-      }
-    }
+  if (this->leftExpression != NULL && !this->leftExpression->analyze(table)) {
+    return false;
+  }
+  if (this->rightExpression != NULL && !this->rightExpression->analyze(table)) {
     return false;
   }
   return true;

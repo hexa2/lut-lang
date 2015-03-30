@@ -9,11 +9,11 @@
 #include "ErrorHandler.h"
 #include <iostream>
 
-void ErrorHandler::DoubleDeclaration(string nomVariable){
+void ErrorHandler::DoubleDeclaration(string nomVariable) {
   errorsQueue->push("la variable " + nomVariable + " est deja declaree");
 }
 
-void ErrorHandler::DoubleDeclarationConst(string nomConstante){
+void ErrorHandler::DoubleDeclarationConst(string nomConstante) {
   errorsQueue->push("la constante " + nomConstante + " est deja declaree");
 }
 
@@ -30,7 +30,7 @@ void ErrorHandler::SyntaxErrorSymbole(int line, int col, string symbol) {
 }
 
 void ErrorHandler::outputErrors() {
-  while(!errorsQueue->empty()){
+  while (!errorsQueue->empty()) {
     std::cerr << errorsQueue->front() << std::endl;
     errorsQueue->pop();
   }

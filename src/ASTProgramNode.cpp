@@ -8,6 +8,11 @@
 
 #include "ASTProgramNode.h"
 
+#include <iostream>
+
+using std::cerr;
+using std::endl;
+
 ASTProgramNode::ASTProgramNode(ASTDeclarationBlockNode* declarations,
                                ASTInstructionBlockNode* instructions,
                                TokenType type) : ASTNode(type) {
@@ -26,13 +31,25 @@ ASTInstructionBlockNode* ASTProgramNode::getInstructions() {
 bool ASTProgramNode::analyze(analyze_table* table) {
   bool declarationsOutput = true;
   bool instructionsOutput = true;
+  bool finalAnalysis = true;
   if (this->declarations != NULL) {
     declarationsOutput = this->declarations->analyze(table);
   }
   if (this->instructions != NULL) {
     instructionsOutput = this->instructions->analyze(table);
   }
-  return declarationsOutput && instructionsOutput;
+  // Look for unassigned vars
+  for (analyze_table::iterator iter = table->begin(); iter != table->end(); iter++) {
+    if (!std::get<0>(iter->second)) {
+      cerr << "variable non affectee : " << iter->first << endl;
+      finalAnalysis = false;
+    }
+    if (!std::get<2>(iter->second)) {
+      cerr << "variable non utilisee : " << iter->first << endl;
+      finalAnalysis = false;
+    }
+  }
+  return declarationsOutput && instructionsOutput && finalAnalysis;
 }
 
 int64_t ASTProgramNode::exec(exec_table* table) {

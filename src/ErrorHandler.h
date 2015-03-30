@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Karim Benhmida. All rights reserved.
 //
 
-#ifndef __lut_lang__ErrorHandler__
-#define __lut_lang__ErrorHandler__
+#ifndef SRC_ERRORHANDLER_H_
+#define SRC_ERRORHANDLER_H_
 
 #include <stdio.h>
 #include <queue>
@@ -17,25 +17,26 @@ using std::queue;
 
 
 class ErrorHandler{
-public:
-  static ErrorHandler& getInstance()
-  {
-    static ErrorHandler instance; // Guaranteed to be destroyed.
+ public:
+  static ErrorHandler& getInstance() {
+    static ErrorHandler instance;  // Guaranteed to be destroyed.
     // Instantiated on first use.
     return instance;
   }
-  
+
   void DoubleDeclaration(string nomVariable);
   void DoubleDeclarationConst(string nomConstante);
   void NonDeclared();
   void LexicalError(int line, int col, char character);
   void SyntaxErrorSymbole(int line, int col, string symbol);
-  
+
   void outputErrors();
-private:
-  ErrorHandler() { this->errorsQueue = new queue<string>(); };
+
+ private:
+  ErrorHandler() {
+    this->errorsQueue = new queue<string>();
+  }
   queue<string> *errorsQueue;
-  
 };
 
-#endif /* defined(__lut_lang__ErrorHandler__) */
+#endif  // SRC_ERRORHANDLER_H_
