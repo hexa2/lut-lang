@@ -63,7 +63,8 @@ int64_t ASTThirdLevelExpressionNode::exec(exec_table* table) {
         table->count(this->identifierOrValue->getValue()) > 0) {
       return std::get<0>((*table)[this->identifierOrValue->getValue()]);
     } else if (this->identifierOrValue->getTokenType() == TokenType::ID) {
-      throw std::logic_error("does not exist");
+      throw std::exception();
+      return false;
     } else {
       stringstream ss;
       ss << this->identifierOrValue->getValue();
