@@ -1,7 +1,7 @@
 # gcc settings
 CC = g++
 CFLAGS = -DDEBUG -g -Wall -O3 -std=c++0x -lboost_regex
-LNFLAGS =
+LNFLAGS = -lboost_regex
 
 # src
 BIN_SRC = lut.cpp
