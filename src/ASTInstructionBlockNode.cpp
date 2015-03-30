@@ -8,10 +8,17 @@
 
 #include "ASTInstructionBlockNode.h"
 
+#include <tuple>
 #include <iostream>
+#include <utility>
+#include <string>
+#include <sstream>
 
 using std::cout;
+using std::cin;
 using std::endl;
+using std::istream_iterator;
+using std::stringstream;
 
 ASTInstructionBlockNode::ASTInstructionBlockNode(ASTFirstLevelExpressionNode* expression,
                                                  ASTInstructionBlockNode* prev,
@@ -51,10 +58,55 @@ ASTInstructionBlockNode* ASTInstructionBlockNode::getPrev() {
 }
 
 bool ASTInstructionBlockNode::analyze(analyze_table* table) {
+  if (this->prev != NULL) {
+    this->prev->analyze(table);
+  }
+
+  if (this->expression != NULL) {
+    this->expression->analyze(table);
+  }
+
+  if (this->identifier != NULL) {
+    if (table->count(this->identifier->getValue()) < 1) {
+      return false;
+    }
+
+    if (std::get<1>((*table)[this->identifier->getValue()])) {
+      return false;
+    }
+  }
+
   return true;
 }
 
 int64_t ASTInstructionBlockNode::exec(exec_table* table) {
+  if (this->prev != NULL) {
+    this->prev->exec(table);
+  }
+
+  if (this->expression != NULL && this->identifier != NULL) {  // Assignment
+    int64_t value = this->expression->exec(table);
+
+    bool isConst = std::get<1>((*table)[this->identifier->getValue()]);
+    if (!isConst) {
+      (*table)[this->identifier->getValue()] = std::make_tuple(value, isConst);
+    }
+  } else if (this->expression != NULL) {  // Write
+    cout << this->expression->exec(table) << endl;
+  } else if (this->identifier != NULL) {  // Read
+    string line;
+    getline(cin, line);
+    stringstream ss;
+    ss << line;
+    int64_t value;
+    ss >> value;
+
+    bool isConst = std::get<1>((*table)[this->identifier->getValue()]);
+    if (!isConst) {
+      (*table)[this->identifier->getValue()] = std::make_tuple(value, isConst);
+    }
+  }
+
   return 0;
 }
 
@@ -62,6 +114,7 @@ void ASTInstructionBlockNode::print() {
   if (this->prev != NULL) {
     this->prev->print();
   }
+
   if (this->expression != NULL && this->identifier != NULL) {  // Assignment
     this->identifier->print();
     cout << " := ";
@@ -73,5 +126,6 @@ void ASTInstructionBlockNode::print() {
     cout << "lire ";
     this->identifier->print();
   }
+
   cout << ";" << endl;
 }
