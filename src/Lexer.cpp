@@ -11,6 +11,7 @@
 #include <regex>
 #include <iostream>
 #include "TokenType.h"
+#include "ErrorHandler.h"
 using std::cout;
 using std::endl;
 using std::smatch;
@@ -93,8 +94,8 @@ void Lexer::shift() {
 
   std::smatch m;
   if ( !analyze(inputString, m) ) {
-#warning "symbole non reconnu (deja fait avant, a vous de choisir ou le mettre"
-    cout <<"cant shift" <<endl;
+    ErrorHandler::getInstance().LexicalError(this->line+1, this->column+1, inputString.at(0));
+    ErrorHandler::getInstance().outputErrors();
     currentToken = new ASTTokenNode(TokenType::INVALID_SYMBOL);
     inputString.erase(0, 1);    // not sure
     return;

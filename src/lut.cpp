@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
 
   Automaton *automaton = new Automaton(inputFile);
   if (!automaton->build_program()) {
-    return 1;
+    return 0;
   }
 
   if (cliParser->transformIsEnabled()) {
@@ -34,6 +34,7 @@ int main(int argc, char* argv[]) {
   if (cliParser->execIsEnabled()) {
     automaton->execute();
   }
+  ErrorHandler::getInstance().outputErrors();
   
   return 0;
 }

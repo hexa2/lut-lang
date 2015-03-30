@@ -28,6 +28,7 @@ public:
   void DoubleDeclaration(string nomVariable);
   void DoubleDeclarationConst(string nomConstante);
   void NonDeclared();
+  void LexicalError(int line, int col, char character);
   
   
   void outputErrors();

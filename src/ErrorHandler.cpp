@@ -21,6 +21,10 @@ void ErrorHandler::NonDeclared() {
   errorsQueue->push("la variable a n'a pas ete declaree.");
 }
 
+void ErrorHandler::LexicalError(int line, int col, char character) {
+  errorsQueue->push("Erreur lexicale ("+ std::to_string(line) +":"+ std::to_string(col) +") caractere "+ character);
+}
+
 void ErrorHandler::outputErrors() {
   while(!errorsQueue->empty()){
     std::cerr << errorsQueue->front() << std::endl;
