@@ -95,16 +95,16 @@ bool Lexer::analyze(string s, smatch &m) {
     std::string currentTokenValue = m.str();
     switch (currentTokenValue[0]) {
       case '+':
-        currentToken = new ASTTokenNode(TokenType::ADD);
+        currentToken = new ASTTokenNode(TokenType::ADD,"+");
         break;
       case '-':
-        currentToken = new ASTTokenNode(TokenType::SUB);
+        currentToken = new ASTTokenNode(TokenType::SUB,"-");
         break;
       case '*':
-        currentToken = new ASTTokenNode(TokenType::MUL);
+        currentToken = new ASTTokenNode(TokenType::MUL,"*");
         break;
       case '/':
-        currentToken = new ASTTokenNode(TokenType::DIV);
+        currentToken = new ASTTokenNode(TokenType::DIV,"/");
         break;
       case '(':
         currentToken = new ASTTokenNode(TokenType::PO);
