@@ -90,8 +90,16 @@ void test() {
   }
   delete automate;
 }
+void test_exec() {
+  Automaton *automate = new Automaton ("const c = 10 ; c := 8; ecrire c; ");
+  if (automate->analyze()) {
+    cout << "cest bon" << endl;
+  };
+  
+}
 int main(int argc, char* argv[]) {
-  test();
+  test_exec();
+  //test();
   CLIParser* cliParser = new CLIParser(argc, argv);
   string inputFile = cliParser->getInputFile();
 
