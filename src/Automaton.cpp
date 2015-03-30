@@ -83,7 +83,7 @@ bool Automaton::recover_from_error() {
 bool Automaton::analyze() {
   if (accepted) {
     ASTProgramNode *program = (ASTProgramNode *) stackASTTokenNodes.top();
-    map<string, tuple<bool, bool>> *table = new map<string, tuple<bool, bool>>();
+    map<string, tuple<bool, bool, bool>> *table = new map<string, tuple<bool, bool, bool>>();
     return program->analyze(table);
   }
   return accepted;
@@ -124,8 +124,7 @@ stack<ASTNode*> *Automaton::getStackASTNodes() {
   return &this->stackASTTokenNodes;
 }
 
-Lexer* Automaton::getLexer()
-{
+Lexer* Automaton::getLexer() {
   return lexer;
 }
 

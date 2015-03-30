@@ -15,6 +15,7 @@
 #include <sstream>
 
 using std::cout;
+using std::cerr;
 using std::endl;
 using std::pair;
 using std::stringstream;
@@ -42,18 +43,28 @@ ASTFirstLevelExpressionNode* ASTThirdLevelExpressionNode::getExpression() {
 bool ASTThirdLevelExpressionNode::analyze(analyze_table* table) {
   if (expression != NULL && !expression->analyze(table)) {
     return false;
-  } else if (this->identifierOrValue->getTokenType() == TokenType::ID &&
-             table->count(this->identifierOrValue->getValue()) < 1) {
-#warning "variable identifier non assignee"
+  } else if (this->identifierOrValue != NULL &&
+             this->identifierOrValue->getTokenType() == TokenType::ID &&
+             (table->count(this->identifierOrValue->getValue()) < 1 ||
+              !std::get<0>((*table)[this->identifierOrValue->getValue()]))) {
+    cerr << "variable non affectee : " << this->identifierOrValue->getValue() << endl;
     return false;
+  } else if (this->identifierOrValue != NULL &&
+             this->identifierOrValue->getTokenType() == TokenType::ID) {
+    bool isConst = std::get<1>((*table)[this->identifierOrValue->getValue()]);
+    (*table)[this->identifierOrValue->getValue()] = std::make_tuple(true, isConst, true);
   }
   return true;
 }
 
 int64_t ASTThirdLevelExpressionNode::exec(exec_table* table) {
   if (this->identifierOrValue != NULL) {
-    if (this->identifierOrValue->getTokenType() == TokenType::ID) {
+    if (this->identifierOrValue->getTokenType() == TokenType::ID &&
+        table->count(this->identifierOrValue->getValue()) > 0) {
       return std::get<0>((*table)[this->identifierOrValue->getValue()]);
+    } else if (this->identifierOrValue->getTokenType() == TokenType::ID) {
+      throw std::exception();
+      return false;
     } else {
       stringstream ss;
       ss << this->identifierOrValue->getValue();
@@ -77,7 +88,10 @@ void ASTThirdLevelExpressionNode::print() {
 }
 
 void ASTThirdLevelExpressionNode::transform(exec_table* table) {
-  if (this->identifierOrValue->getTokenType() == TokenType::ID &&
+  if (this->expression != NULL) {
+    this->expression->transform(table);
+  } else if (this->identifierOrValue != NULL &&
+      this->identifierOrValue->getTokenType() == TokenType::ID &&
       table->count(this->identifierOrValue->getValue()) > 0) {
     std::tuple<int64_t, bool> constTerm = (*table)[this->identifierOrValue->getValue()];
     if (std::get<1>(constTerm)) {

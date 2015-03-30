@@ -9,9 +9,11 @@
 #include "ASTFirstLevelExpressionNode.h"
 
 #include <iostream>
+#include <sstream>
 
 using std::cout;
 using std::endl;
+using std::stringstream;
 
 ASTFirstLevelExpressionNode::ASTFirstLevelExpressionNode(ASTFirstLevelExpressionNode* leftExpression,
                                                          ASTAdditiveOperation* addOp,
@@ -43,12 +45,10 @@ ASTSecondLevelExpressionNode*
 }
 
 bool ASTFirstLevelExpressionNode::analyze(analyze_table* table) {
-  if (rightExpression->analyze(table)) {
-    if (this->leftExpression != NULL) {
-      if (!this->leftExpression->analyze(table)) {
-        return false;
-      }
-    }
+  if (this->leftExpression != NULL && !this->leftExpression->analyze(table)) {
+    return false;
+  }
+  if (this->rightExpression != NULL && !this->rightExpression->analyze(table)) {
     return false;
   }
   return true;

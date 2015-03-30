@@ -35,7 +35,7 @@ bool ASTEnumDeclNode::analyze(analyze_table* table) {
     return false;
   }
 
-  (*table)[this->identifier->getValue()] = std::make_tuple(false, false);
+  (*table)[this->identifier->getValue()] = std::make_tuple(false, false, false);
 
   return true;
 }
