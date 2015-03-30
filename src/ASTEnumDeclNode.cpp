@@ -30,6 +30,11 @@ bool ASTEnumDeclNode::analyze(analyze_table* table) {
     return false;
   }
 
+  if (table->count(this->identifier->getValue()) > 0) {
+#warning "variable deja assignée"
+    return false;
+  }
+
   (*table)[this->identifier->getValue()] = std::make_tuple(false, false);
 
   return true;

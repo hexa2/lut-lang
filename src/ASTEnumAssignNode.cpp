@@ -46,6 +46,7 @@ bool ASTEnumAssignNode::analyze(analyze_table* table) {
   }
 
   if (table->count(this->identifier->getValue()) > 0) {
+#warning "constante deja assignée"
     return false;
   }
 

@@ -72,6 +72,7 @@ bool ASTInstructionBlockNode::analyze(analyze_table* table) {
 
   if (this->identifier != NULL) {
     if (table->count(this->identifier->getValue()) < 1) {
+#warning "variable ou constante non assignee"
       return false;
     }
 

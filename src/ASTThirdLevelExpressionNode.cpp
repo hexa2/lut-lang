@@ -44,6 +44,7 @@ bool ASTThirdLevelExpressionNode::analyze(analyze_table* table) {
     return false;
   } else if (this->identifierOrValue->getTokenType() == TokenType::ID &&
              table->count(this->identifierOrValue->getValue()) < 1) {
+#warning "variable identifier non assignee"
     return false;
   }
   return true;

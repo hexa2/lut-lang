@@ -75,6 +75,7 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
 
   if (this->varIdentifier != NULL) {  // Var assignments case
     if (table->count(this->varIdentifier->getValue()) > 0) {
+#warning "Variable deja assignée"
       return false;
     }
 
@@ -87,6 +88,7 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
 
   if (this->constIdentifier != NULL) {  // Const assignments case
     if (table->count(this->constIdentifier->getValue()) > 0) {
+#warning "Constante deja assignée"
       return false;
     }
 
@@ -94,8 +96,8 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
 
     if (this->enumConsts != NULL && !this->enumConsts->analyze(table)) {
       return false;
+    }
   }
-}
 
   return true;
 }
