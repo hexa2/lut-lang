@@ -134,3 +134,9 @@ void ASTInstructionBlockNode::print() {
 
   cout << ";" << endl;
 }
+
+void ASTInstructionBlockNode::transform(exec_table* table) {
+  if (this->expression != NULL) {
+    this->expression->transform(table);
+  }
+}

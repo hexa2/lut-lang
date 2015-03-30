@@ -27,3 +27,6 @@ int64_t ASTTokenNode::exec(exec_table* table) {
 void ASTTokenNode::print() {
   cout << this->value;
 }
+
+void ASTTokenNode::transform(exec_table* table) {
+}
