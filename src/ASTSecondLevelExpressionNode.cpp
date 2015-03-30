@@ -49,13 +49,21 @@ bool ASTSecondLevelExpressionNode::analyze(analyze_table* table) {
       return this->leftExpression->analyze(table) && this->mulOp->analyze(table);
     }
     return false;
-  } else {
-    return true;
   }
+  return true;
 }
 
 int64_t ASTSecondLevelExpressionNode::exec(exec_table* table) {
-  return 0;
+  int64_t r = this->rightExpression->exec(table);
+  if (this->leftExpression != NULL) {
+    int64_t l = this->leftExpression->exec(table);
+    if (this->mulOp->getSymbol()->getValue() == "*") {
+      return l * r;
+    } else {
+      return l / r;
+    }
+  }
+  return r;
 }
 
 void ASTSecondLevelExpressionNode::print() {

@@ -48,13 +48,21 @@ bool ASTFirstLevelExpressionNode::analyze(analyze_table* table) {
         return this->leftExpression->analyze(table) && this->addOp->analyze(table);
     }
     return false;
-  } else {
-    return true;
   }
+  return true;
 }
 
 int64_t ASTFirstLevelExpressionNode::exec(exec_table* table) {
-  return 0;
+  int64_t r = this->rightExpression->exec(table);
+  if (this->leftExpression != NULL) {
+    int64_t l = this->leftExpression->exec(table);
+    if (this->addOp->getSymbol()->getValue() == "+") {
+      return l + r;
+    } else {
+      return l - r;
+    }
+  }
+  return r;
 }
 
 void ASTFirstLevelExpressionNode::print() {

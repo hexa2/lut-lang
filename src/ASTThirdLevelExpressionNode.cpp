@@ -8,10 +8,16 @@
 
 #include "ASTThirdLevelExpressionNode.h"
 
+#include <tuple>
 #include <iostream>
+#include <utility>
+#include <string>
+#include <sstream>
 
 using std::cout;
 using std::endl;
+using std::pair;
+using std::stringstream;
 
 ASTThirdLevelExpressionNode::ASTThirdLevelExpressionNode(ASTTokenNode* identifierOrValue,
                                                          TokenType type) : ASTNode(type) {
@@ -36,18 +42,27 @@ ASTFirstLevelExpressionNode* ASTThirdLevelExpressionNode::getExpression() {
 bool ASTThirdLevelExpressionNode::analyze(analyze_table* table) {
   if (expression != NULL) {
     return expression->analyze(table);
-  } else {
-    if (identifierOrValue != NULL) {
-      if (identifierOrValue->getValue() != "") {
-        return true;
-      }
-    }
+  } else if (this->identifierOrValue->getTokenType() == TokenType::ID &&
+             table->count(this->identifierOrValue->getValue()) < 1) {
+    return false;
   }
   return true;
 }
 
 int64_t ASTThirdLevelExpressionNode::exec(exec_table* table) {
-  return 0;
+  if (this->identifierOrValue != NULL) {
+    if (this->identifierOrValue->getTokenType() == TokenType::ID) {
+      return std::get<0>((*table)[this->identifierOrValue->getValue()]);
+    } else {
+      stringstream ss;
+      ss << this->identifierOrValue->getValue();
+      int64_t value;
+      ss >> value;
+      return value;
+    }
+  } else {
+    return expression->exec(table);
+  }
 }
 
 void ASTThirdLevelExpressionNode::print() {
