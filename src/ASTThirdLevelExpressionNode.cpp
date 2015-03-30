@@ -59,8 +59,12 @@ bool ASTThirdLevelExpressionNode::analyze(analyze_table* table) {
 
 int64_t ASTThirdLevelExpressionNode::exec(exec_table* table) {
   if (this->identifierOrValue != NULL) {
-    if (this->identifierOrValue->getTokenType() == TokenType::ID) {
+    if (this->identifierOrValue->getTokenType() == TokenType::ID &&
+        table->count(this->identifierOrValue->getValue()) > 0) {
       return std::get<0>((*table)[this->identifierOrValue->getValue()]);
+    } else if (this->identifierOrValue->getTokenType() == TokenType::ID) {
+      throw std::exception();
+      return false;
     } else {
       stringstream ss;
       ss << this->identifierOrValue->getValue();
@@ -84,7 +88,10 @@ void ASTThirdLevelExpressionNode::print() {
 }
 
 void ASTThirdLevelExpressionNode::transform(exec_table* table) {
-  if (this->identifierOrValue->getTokenType() == TokenType::ID &&
+  if (this->expression != NULL) {
+    this->expression->transform(table);
+  } else if (this->identifierOrValue != NULL &&
+      this->identifierOrValue->getTokenType() == TokenType::ID &&
       table->count(this->identifierOrValue->getValue()) > 0) {
     std::tuple<int64_t, bool> constTerm = (*table)[this->identifierOrValue->getValue()];
     if (std::get<1>(constTerm)) {
