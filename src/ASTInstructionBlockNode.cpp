@@ -82,6 +82,11 @@ bool ASTInstructionBlockNode::analyze(analyze_table* table) {
     }
   }
 
+  if (this->expression != NULL && this->identifier != NULL) {
+    // Declare it's assigned
+    (*table)[this->identifier->getValue()] = std::make_tuple(true, false, true);
+  }
+
   return true;
 }
 

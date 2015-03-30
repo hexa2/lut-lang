@@ -15,8 +15,8 @@ using std::string;
 using std::tuple;
 using std::map;
 
-// varname => (has_value, is_const)
-typedef map<string, tuple<bool, bool>> analyze_table;
+// varname => (has_value, is_const, is_affected)
+typedef map<string, tuple<bool, bool, bool>> analyze_table;
 
 // varname => (value, is_const)
 typedef map<string, tuple<int64_t, bool>> exec_table;
