@@ -74,10 +74,11 @@ void ASTEnumAssignNode::print() {
   if (this->prev != NULL) {
     this->prev->print();
   }
-  cout << ", ";
+  cout << "const ";
   this->identifier->print();
   cout << " = ";
   this->value->print();
+  cout << ";" << endl;
 }
 
 void ASTEnumAssignNode::transform(exec_table* table) {

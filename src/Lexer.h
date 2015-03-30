@@ -45,16 +45,19 @@ class Lexer {
    */
   void shift();
 
+  int getLine();
+  int getColumn();
 
  protected :
+  int line;
+  int column;
+  int column_next_incrementation;
   std::string inputString;
   ASTTokenNode *currentToken;
 
   bool analyze(string s, std::smatch &m);
-  inline string& ltrim(string& s, const char* t = " \t\n\r\f\v") {
-    s.erase(0, s.find_first_not_of(t));
-    return s;
-  }
+  int find_first_not_of(string str);
+  string& ltrim(string& s);
 };
 
 #endif  // SRC_LEXER_H_

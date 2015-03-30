@@ -137,7 +137,7 @@ void ASTDeclarationBlockNode::print() {
   if (this->varIdentifier != NULL) {  // Var assignments case
     cout << "var ";
     this->varIdentifier->print();
-
+    cout << ";" << endl;
     if (this->enumVars != NULL) {
       this->enumVars->print();
     }
@@ -148,13 +148,10 @@ void ASTDeclarationBlockNode::print() {
     this->constIdentifier->print();
     cout << " = ";
     this->constValue->print();
-
+    cout << ";" << endl;
     if (this->enumConsts != NULL) {
       this->enumConsts->print();
     }
-  }
-  if (this->varIdentifier != NULL || this->constIdentifier != NULL) {
-    cout << ";" << endl;
   }
 }
 
