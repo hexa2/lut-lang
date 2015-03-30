@@ -34,10 +34,8 @@ void Automaton::decalage(ASTNode* t, State* s) {
   stackASTTokenNodes.push(t);
 }
 
-/**
- * @return The wether or not the program is correct syntaxically
- */
-bool Automaton::analyze() {
+bool Automaton::build_program()
+{
   setAccepted(false);
   while ( lexer->top()->getTokenType() != TokenType::ENDOFFILE ) {
     lexer->shift();
@@ -47,7 +45,13 @@ bool Automaton::analyze() {
     if ( !stackStates.top()->transition(this, t) ) return false;
   }
   if ( stackStates.empty() ) return false;
-
+  
+  return accepted;
+}
+/**
+ * @return The wether or not the program is correct syntaxically
+ */
+bool Automaton::analyze() {
   if (accepted) {
     ASTProgramNode *program = (ASTProgramNode *) stackASTTokenNodes.top();
     map<string, tuple<bool, bool>> *table = new map<string, tuple<bool, bool>>();
@@ -65,6 +69,15 @@ bool Automaton::print() {
   return false;
 }
 
+bool Automaton::transform() {
+  if (accepted) {
+    map<string, tuple<int64_t, bool>> *table = new map<string, tuple<int64_t, bool>>();
+    ASTProgramNode *program = (ASTProgramNode *) stackASTTokenNodes.top();
+    program->transform(table);
+    return true;
+  }
+  return false;
+}
 int64_t Automaton::execute() {
   if (accepted) {
     map<string, tuple<int64_t, bool>> *table = new map<string, tuple<int64_t, bool>>();
