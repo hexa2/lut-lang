@@ -49,19 +49,19 @@ bool Automaton::build_program() {
 }
 
 bool Automaton::recover_from_error() {
-  //get next line
-  while( lexer->top()->getTokenType() != TokenType::ENDOFFILE && lexer->top()->getTokenType() != TokenType::PV) {
+  // get next line
+  while (lexer->top()->getTokenType() != TokenType::ENDOFFILE && lexer->top()->getTokenType() != TokenType::PV) {
     lexer->shift();
   }
-  //flush
-  while(!stackStates.empty()) {
+  // flush
+  while (!stackStates.empty()) {
     stackStates.pop();
   }
-  while(!stackASTTokenNodes.empty()) {
+  while (!stackASTTokenNodes.empty()) {
     stackASTTokenNodes.pop();
   }
   stackStates.push(new E0());
-  
+
   while ( lexer->top()->getTokenType() != TokenType::ENDOFFILE ) {
     lexer->shift();
     if ( stackStates.empty() ) return false;
@@ -72,9 +72,9 @@ bool Automaton::recover_from_error() {
     }
   }
   if ( stackStates.empty() ) return false;
-  
+
   setAccepted(false);
-  
+
   return false;
 }
 /**
