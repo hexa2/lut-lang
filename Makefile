@@ -1,6 +1,6 @@
 # gcc settings
 CC = g++
-CFLAGS = -DDEBUG -g -Wall -O3 -std=c++0x _lboost_regex
+CFLAGS = -DDEBUG -g -Wall -O3 -std=c++0x -lboost_regex
 LNFLAGS =
 
 # src
