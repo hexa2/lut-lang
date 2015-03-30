@@ -59,11 +59,15 @@ ASTInstructionBlockNode* ASTInstructionBlockNode::getPrev() {
 
 bool ASTInstructionBlockNode::analyze(analyze_table* table) {
   if (this->prev != NULL) {
-    this->prev->analyze(table);
+    if (!this->prev->analyze(table)) {
+      return false;
+    }
   }
 
   if (this->expression != NULL) {
-    this->expression->analyze(table);
+    if (!this->expression->analyze(table)) {
+      return false;
+    }
   }
 
   if (this->identifier != NULL) {
@@ -71,7 +75,8 @@ bool ASTInstructionBlockNode::analyze(analyze_table* table) {
       return false;
     }
 
-    if (std::get<1>((*table)[this->identifier->getValue()])) {
+    bool isConst = std::get<1>((*table)[this->identifier->getValue()]);
+    if (isConst) {
       return false;
     }
   }

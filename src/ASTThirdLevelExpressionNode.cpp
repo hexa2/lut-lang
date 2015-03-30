@@ -40,8 +40,8 @@ ASTFirstLevelExpressionNode* ASTThirdLevelExpressionNode::getExpression() {
 }
 
 bool ASTThirdLevelExpressionNode::analyze(analyze_table* table) {
-  if (expression != NULL) {
-    return expression->analyze(table);
+  if (expression != NULL && !expression->analyze(table)) {
+    return false;
   } else if (this->identifierOrValue->getTokenType() == TokenType::ID &&
              table->count(this->identifierOrValue->getValue()) < 1) {
     return false;
