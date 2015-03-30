@@ -94,6 +94,11 @@ stack<ASTNode*> *Automaton::getStackASTNodes() {
   return &this->stackASTTokenNodes;
 }
 
+Lexer* Automaton::getLexer()
+{
+  return lexer;
+}
+
 /**
  * @Accepted is set to true when the end transition is runned.
  */

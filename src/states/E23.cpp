@@ -7,6 +7,7 @@
 #include "E23.h"
 #include "E24.h"
 #include "E25.h"
+#include "../ErrorHandler.h"
 
 E23::E23() : State() { }
 
@@ -19,6 +20,7 @@ bool E23::transition(Automaton *automaton, ASTNode *t) {
     automaton->decalage(t, new E24());
     return true;
   default:
+      ErrorHandler::getInstance().SyntaxErrorSymbole(automaton->getLexer()->getLine(), automaton->getLexer()->getColumn(), ", ou ;");
     return false;
   }
   return false;

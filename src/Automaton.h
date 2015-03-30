@@ -50,6 +50,7 @@ class Automaton {
   stack<State*> *getStackStates();
 
   void setAccepted(bool acc);
+  Lexer* getLexer();
 
  protected:
   stack<ASTNode*> stackASTTokenNodes;
