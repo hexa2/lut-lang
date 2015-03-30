@@ -14,9 +14,15 @@ int main(int argc, char* argv[]) {
   string inputFile = cliParser->getInputFile();
 
   Automaton *automaton = new Automaton(inputFile);
+  if (!automaton->build_program()) {
+    return 1;
+  }
+  automaton->print();
+
   if (cliParser->transformIsEnabled()) {
     cout << "Transform (optimize) input" << endl;
     // TRANSFORM
+    automaton->transform();
   }
   if (cliParser->printIsEnabled()) {
     automaton->print();

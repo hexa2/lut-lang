@@ -34,8 +34,7 @@ const std::regex affectation(affectation_str);
 int Lexer::find_first_not_of(string str) {
   string::iterator it;
   int index = 0;
-  for ( it = str.begin() ; it < str.end(); it++ ,index++)
-  {
+  for (it = str.begin(); it < str.end(); it++, index++) {
     switch ( str.at(index) ) {
       case ' ':
         this->column++;
@@ -66,9 +65,9 @@ string& Lexer::ltrim(string& s) {
 
 Lexer::Lexer(string inString) : inputString(inString) {
   this->currentToken = new ASTTokenNode(TokenType::INVALID_SYMBOL);
-  this->line = 0 ;
+  this->line = 0;
   this->column = 0;
-  this->column_next_incrementation = 0 ;
+  this->column_next_incrementation = 0;
 }
 
 bool Lexer::has_next() {
@@ -90,8 +89,8 @@ void Lexer::shift() {
   if ( !has_next() )
     return;
 
-  this->column += this->column_next_incrementation ;
-  
+  this->column += this->column_next_incrementation;
+
   std::smatch m;
   if ( !analyze(inputString, m) ) {
 #warning "symbole non reconnu (deja fait avant, a vous de choisir ou le mettre"

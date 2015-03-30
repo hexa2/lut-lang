@@ -34,8 +34,7 @@ void Automaton::decalage(ASTNode* t, State* s) {
   stackASTTokenNodes.push(t);
 }
 
-bool Automaton::build_program()
-{
+bool Automaton::build_program() {
   setAccepted(false);
   while ( lexer->top()->getTokenType() != TokenType::ENDOFFILE ) {
     lexer->shift();
@@ -45,7 +44,7 @@ bool Automaton::build_program()
     if ( !stackStates.top()->transition(this, t) ) return false;
   }
   if ( stackStates.empty() ) return false;
-  
+
   return accepted;
 }
 /**
