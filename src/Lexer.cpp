@@ -99,7 +99,7 @@ void Lexer::shift() {
     return;
   }
   this->column_next_incrementation = (int)m.length();
-  inputString  = m.suffix();
+  inputString  = inputString.substr(m.length());
 }
 
 
