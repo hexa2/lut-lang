@@ -6,118 +6,29 @@
 #include "CLIParser.h"
 
 using std::cout;
+using std::cerr;
 using std::endl;
 
-
-void test() {
-  // Test affectation variable
-  Automaton *automate = new Automaton ("var b; b:=8; ecrire b;");
-  cout << " // Test affectation variable : ";
-  if (automate->analyze()) {
-    cout << "Ca marche" << endl;
-  } else {
-    cout << "Marche pas" << endl;
-  }
-  delete automate;
-
-  // Test variables multiples
-  automate = new Automaton ("var b, coucou, micheline;");
-  cout << " // Test variables multiples : ";
-  if (automate->analyze()) {
-    cout << "Ca marche" << endl;
-  } else {
-    cout << "Marche pas" << endl;
-  }
-  delete automate;
-
-  // Test constante et affectation
-  automate = new Automaton ("const coucou=10;");
-  cout << " // Test constante et affectation : ";
-  if (automate->analyze()) {
-    cout << "Ca marche" << endl;
-  } else {
-    cout << "Marche pas" << endl;
-  }
-  delete automate;
-
-  // Test constantes multiples et affectation
-  automate = new Automaton ("const b=2012, coucou=42, micheline=1664;");
-  cout << " // Test constantes multiples et affectations: ";
-  if (automate->analyze()) {
-    cout << "Ca marche" << endl;
-  } else {
-    cout << "Marche pas" << endl;
-  }
-  delete automate;
-
-  // Test ecriture simple
-  automate = new Automaton ("ecrire b;");
-  cout << " // Test ecriture simple : ";
-  if (automate->analyze()) {
-    cout << "Ca marche" << endl;
-  } else {
-    cout << "Marche pas" << endl;
-  }
-  delete automate;
-
-  // Test ecriture complexe
-  automate = new Automaton ("ecrire ((4-2)+b);");
-  cout << " // Test ecriture complexe : ";
-  if (automate->analyze()) {
-    cout << "Ca marche" << endl;
-  } else {
-    cout << "Marche pas" << endl;
-  }
-  delete automate;
-
-  // Test lecture simple
-  automate = new Automaton ("lire b;");
-  cout << " // Test lecture simple : ";
-  if (automate->analyze()) {
-    cout << "Ca marche" << endl;
-  } else {
-    cout << "Marche pas" << endl;
-  }
-  delete automate;
-
-  // Test affectation variable avec expression
-  automate = new Automaton ("b := (4+2);");
-  cout << " // Test affectation variable avec expression : ";
-  if (automate->analyze()) {
-    cout << "Ca marche" << endl;
-  } else {
-    cout << "Marche pas" << endl;
-  }
-  delete automate;
-}
-void test_exec() {
-  Automaton *automate = new Automaton ("const c = 10 ; c := 8; ecrire c; ");
-  if (automate->analyze()) {
-    cout << "cest bon" << endl;
-  };
-  
-}
 int main(int argc, char* argv[]) {
-  test_exec();
-  //test();
   CLIParser* cliParser = new CLIParser(argc, argv);
   string inputFile = cliParser->getInputFile();
 
+  Automaton *automaton = new Automaton(inputFile);
   if (cliParser->transformIsEnabled()) {
     cout << "Transform (optimize) input" << endl;
     // TRANSFORM
   }
   if (cliParser->printIsEnabled()) {
-    cout << "Print (transformed?) input" << endl;
-    // PRINT
+    automaton->print();
   }
   if (cliParser->staticIsEnabled()) {
-    cout << "Analyze statically" << endl;
-    // STATIC
+    if (!automaton->analyze()) {
+#warning add analyze failed message
+      return 1;
+    }
   }
   if (cliParser->execIsEnabled()) {
-    cout << "Execute" << endl;
-    // EXEC
+    automaton->execute();
   }
 
   return 0;
