@@ -7,16 +7,16 @@
 //
 
 #include "Lexer.h"
+#include <boost/regex.hpp>
 #include <string>
 #include <regex>
 #include <iostream>
 #include "TokenType.h"
 using std::cout;
 using std::endl;
-using std::smatch;
 using std::string;
-using std::regex_search;
-using std ::smatch;
+using boost::regex_search;
+using boost::smatch;
 
 // Regexs
 const char keyword_str[] = "^(const |var |ecrire |lire )";
@@ -25,11 +25,11 @@ const char number_str[] =  "^([0-9]*\\.?[0-9]+)";
 const char single_operators_str[] = "^(\\+|-|\\*|\\/|\\(|\\)|;|=|,)";
 const char affectation_str[] = "^(:=)";
 
-const std::regex keyword(keyword_str);
-const std::regex identifier(identifier_str);
-const std::regex number(number_str);
-const std::regex single_operators(single_operators_str);
-const std::regex affectation(affectation_str);
+const boost::regex keyword(keyword_str);
+const boost::regex identifier(identifier_str);
+const boost::regex number(number_str);
+const boost::regex single_operators(single_operators_str);
+const boost::regex affectation(affectation_str);
 
 int Lexer::find_first_not_of(string str) {
   string::iterator it;
@@ -91,7 +91,7 @@ void Lexer::shift() {
 
   this->column += this->column_next_incrementation;
 
-  std::smatch m;
+  smatch m;
   if ( !analyze(inputString, m) ) {
 #warning "symbole non reconnu (deja fait avant, a vous de choisir ou le mettre"
     cout <<"cant shift" <<endl;
@@ -105,7 +105,8 @@ void Lexer::shift() {
 
 
 bool Lexer::analyze(string s, smatch &m) {
-  if ( std::regex_search(inputString, m, keyword) ) {
+  std::string::const_iterator begin = s.begin(), end = s.end();
+  if ( boost::regex_search(begin,end,m,keyword) ) {
     std::string currentTokenValue = m.str();
     switch (currentTokenValue[0]) {
       case 'c':
@@ -124,13 +125,13 @@ bool Lexer::analyze(string s, smatch &m) {
 #warning "symbole non reconnu"
         return false;
     }
-  } else if ( std::regex_search(inputString, m, identifier) ) {
+  } else if ( boost::regex_search(begin,end,m,identifier) ) {
     std::string currentTokenValue = m.str();
     currentToken = new ASTTokenNode(TokenType::ID, currentTokenValue);
-  } else if ( std::regex_search(inputString, m, number) ) {
+  } else if ( boost::regex_search(begin,end,m,number) ) {
     std::string currentTokenValue = m.str();
     currentToken = new ASTTokenNode(TokenType::VAL, currentTokenValue);
-  } else if ( std::regex_search(inputString, m, single_operators) ) {
+  } else if ( boost::regex_search(begin,end,m,single_operators) ) {
     std::string currentTokenValue = m.str();
     switch (currentTokenValue[0]) {
       case '+':
@@ -164,7 +165,7 @@ bool Lexer::analyze(string s, smatch &m) {
 #warning "symbole non reconnu"
         return false;
     }
-  } else if ( std::regex_search(inputString, m, affectation) ) {
+  } else if ( boost::regex_search(begin,end,m,affectation) ) {
     currentToken = new ASTTokenNode(TokenType::AFF);
   } else {
     return false;

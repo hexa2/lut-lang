@@ -13,9 +13,10 @@
 #include <regex>
 #include <string>
 #include "ASTTokenNode.h"
+#include <boost/regex.hpp>
 
 using std::string;
-
+using boost::smatch;
 /**
  * @class
  * Defines an enumeration of variable declarations
@@ -55,7 +56,7 @@ class Lexer {
   std::string inputString;
   ASTTokenNode *currentToken;
 
-  bool analyze(string s, std::smatch &m);
+  bool analyze(string s, smatch &m);
   int find_first_not_of(string str);
   string& ltrim(string& s);
 };
