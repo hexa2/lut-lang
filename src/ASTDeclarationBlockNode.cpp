@@ -7,6 +7,7 @@
 //
 
 #include "ASTDeclarationBlockNode.h"
+#include "ErrorHandler.h"
 
 #include <tuple>
 #include <iostream>
@@ -75,7 +76,7 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
 
   if (this->varIdentifier != NULL) {  // Var assignments case
     if (table->count(this->varIdentifier->getValue()) > 0) {
-#warning "Variable deja assignée"
+      ErrorHandler::getInstance().DoubleDeclaration(this->varIdentifier->getValue());
       return false;
     }
 
@@ -88,7 +89,7 @@ bool ASTDeclarationBlockNode::analyze(analyze_table* table) {
 
   if (this->constIdentifier != NULL) {  // Const assignments case
     if (table->count(this->constIdentifier->getValue()) > 0) {
-#warning "Constante deja assignée"
+      ErrorHandler::getInstance().DoubleDeclarationConst(this->varIdentifier->getValue());
       return false;
     }
 
