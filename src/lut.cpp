@@ -4,7 +4,7 @@
 #include "Automaton.h"
 
 #include "CLIParser.h"
-
+#include "ErrorHandler.h"
 using std::cout;
 using std::cerr;
 using std::endl;
@@ -17,11 +17,9 @@ int main(int argc, char* argv[]) {
   if (!automaton->build_program()) {
     return 1;
   }
-  automaton->print();
 
   if (cliParser->transformIsEnabled()) {
-    cout << "Transform (optimize) input" << endl;
-    // TRANSFORM
+    // TRANSFORM AND OPTIMIZE
     automaton->transform();
   }
   if (cliParser->printIsEnabled()) {
@@ -29,13 +27,13 @@ int main(int argc, char* argv[]) {
   }
   if (cliParser->staticIsEnabled()) {
     if (!automaton->analyze()) {
-#warning add analyze failed message
-      return 1;
+      ErrorHandler::getInstance().outputErrors();
+      return 0;
     }
   }
   if (cliParser->execIsEnabled()) {
     automaton->execute();
   }
-
+  
   return 0;
 }

@@ -121,7 +121,7 @@ bool Lexer::analyze(string s, smatch &m) {
         currentToken = new ASTTokenNode(TokenType::READ);
         break;
       default:
-#warning "symbole non reconnu"
+      #warning "symbole non reconnu"
         return false;
     }
   } else if ( std::regex_search(inputString, m, identifier) ) {
@@ -161,15 +161,15 @@ bool Lexer::analyze(string s, smatch &m) {
         currentToken = new ASTTokenNode(TokenType::V);
         break;
       default:
-#warning "symbole non reconnu"
+        #warning "symbole non reconnu"
         return false;
     }
   } else if ( std::regex_search(inputString, m, affectation) ) {
     currentToken = new ASTTokenNode(TokenType::AFF);
   } else {
+    #warning "symbole non reconnu"
     return false;
   }
-#warning "symbole non reconnu"
 return true;
 }
 
