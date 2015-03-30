@@ -34,6 +34,8 @@ class Automaton {
    */
   explicit Automaton(string inputString);
   bool analyze();
+  int64_t execute();
+  bool print();
   /**
    * @param ASTTokenNode t push t in Automaton stackToken
    * @param State s push s in Automaton stackState
