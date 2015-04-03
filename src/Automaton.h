@@ -34,7 +34,6 @@ class Automaton {
    * @param string String representing the file
    */
   explicit Automaton(string inputString);
-  bool recover_from_error();
   bool build_program();
   bool transform();
   bool analyze();
