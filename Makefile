@@ -25,7 +25,7 @@ tests/lut: bin/lut
 	chmod +x tests/lut
 
 test: tests/lut
-	cd tests; sh mktest.sh
+	cd tests/ && ./mktest.sh
 
 build: $(BIN_OBJ)
 
